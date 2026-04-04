@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>가계부 정리</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+      background: #f5f5f7;
+      color: #1d1d1f;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(160deg, #1d1d1f 0%, #2d2d2f 100%);
+      color: #f5f5f7;
+      padding: 72px 24px 56px;
+      text-align: center;
+    }
+    .hero .date {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #86868b;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #f5f5f7 0%, #a1a1a6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero .subtitle {
+      margin-top: 12px;
+      font-size: 17px;
+      color: #86868b;
+    }
+
+    /* Summary Cards */
+    .summary-bar {
+      display: flex;
+      gap: 16px;
+      max-width: 900px;
+      margin: -28px auto 0;
+      padding: 0 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .summary-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 20px 28px;
+      flex: 1;
+      min-width: 160px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .summary-card .label {
+      font-size: 12px;
+      color: #86868b;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .summary-card .value {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+    }
+    .summary-card.green .value { color: #30d158; }
+    .summary-card.red .value { color: #ff453a; }
+    .summary-card.blue .value { color: #0071e3; }
+
+    /* Content */
+    .content {
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Section */
+    .section {
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .icon-green { background: #d1f5db; }
+    .icon-red { background: #fde8e7; }
+    .icon-yellow { background: #fff3d6; }
+    .icon-blue { background: #dceeff; }
+    .icon-purple { background: #ecdeff; }
+    .icon-teal { background: #d6f5f0; }
+    .icon-orange { background: #ffecd6; }
+    .icon-pink { background: #fde8f5; }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+    }
+    .section-subtitle {
+      font-size: 13px;
+      color: #86868b;
+      margin-top: 2px;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    thead tr {
+      border-bottom: 1.5px solid #e5e5ea;
+    }
+    thead th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #86868b;
+      padding: 0 12px 10px;
+    }
+    tbody tr {
+      border-bottom: 1px solid #f2f2f7;
+      transition: background 0.15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f9f9fb; }
+    tbody td {
+      padding: 12px;
+      color: #1d1d1f;
+    }
+    tbody tr.total-row td {
+      font-weight: 700;
+      color: #0071e3;
+      border-top: 1.5px solid #e5e5ea;
+      padding-top: 14px;
+    }
+
+    /* Note box */
+    .note {
+      background: #f2f2f7;
+      border-left: 3px solid #86868b;
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: #3a3a3c;
+      margin-top: 20px;
+    }
+    .note.info { border-color: #0071e3; background: #f0f6ff; }
+    .note.warning { border-color: #ff9f0a; background: #fffbf0; }
+    .note.success { border-color: #30d158; background: #f0fdf4; }
+
+    /* List */
+    .apple-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .apple-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: #1d1d1f;
+    }
+    .apple-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0071e3;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    /* Step cards */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .step-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px;
+      background: #f9f9fb;
+      border-radius: 14px;
+    }
+    .step-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #0071e3;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-content .step-desc {
+      font-size: 14px;
+      color: #3a3a3c;
+    }
+    .step-badge {
+      margin-left: auto;
+      background: #d1f5db;
+      color: #1c7a3c;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* Priority badge */
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .badge-blue { background: #dceeff; color: #0051a8; }
+    .badge-green { background: #d1f5db; color: #1c7a3c; }
+    .badge-orange { background: #ffecd6; color: #a05000; }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, #0071e3 0%, #005bb5 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-top: 20px;
+    }
+    .highlight-box .hb-label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    .highlight-box .hb-text {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* Sub-section */
+    .sub-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #f2f2f7;
+    }
+    .sub-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Pill grid */
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .pill {
+      background: #f2f2f7;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: #3a3a3c;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 13px;
+      color: #86868b;
+    }
+
+    strong { font-weight: 600; }
+
+    @media (max-width: 600px) {
+      .section { padding: 20px; }
+      .summary-bar { gap: 10px; }
+      .summary-card { padding: 16px 18px; }
+      .step-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <p class="date">2026년 4월 4일</p>
+  <h1>가계부 정리</h1>
+  <p class="subtitle">수입 · 지출 · 대출 상환 · 절세 저축 전략</p>
+</div>
+
+<!-- Summary Bar -->
+<div class="summary-bar">
+  <div class="summary-card green">
+    <div class="label">월 수입</div>
+    <div class="value">750만원</div>
+  </div>
+  <div class="summary-card red">
+    <div class="label">고정 지출</div>
+    <div class="value">△450만원</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">적금</div>
+    <div class="value">△33만원</div>
+  </div>
+  <div class="summary-card blue">
+    <div class="label">가용 생활비</div>
+    <div class="value">약 267만원</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- 1. 수입 현황 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">💰</div>
+      <div>
+        <div class="section-title">1. 수입 현황</div>
+        <div class="section-subtitle">월 평균 약 7,500,000원</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>항목</th><th>금액</th></tr></thead>
+      <tbody>
+        <tr><td>기본 급여</td><td>5,000,000원</td></tr>
+        <tr><td>팀장 수당</td><td>1,000,000원</td></tr>
+        <tr><td>추가 수당 (문수정)</td><td>1,500,000원</td></tr>
+        <tr class="total-row"><td>합계</td><td>7,500,000원</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. 고정 지출 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-red">📋</div>
+      <div>
+        <div class="section-title">2. 고정 지출 내역</div>
+        <div class="section-subtitle">약 4,500,000원</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>항목</th><th>금액</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>인건비 및 용돈</td><td>1,500,000원</td><td>양준모 용돈 및 팀장 수당분 포함</td></tr>
+        <tr><td>주거 관련 비용</td><td>1,000,000원</td><td>전세대출 이자 등</td></tr>
+        <tr><td>자녀 교육비</td><td>1,000,000원</td><td>학원비 등</td></tr>
+        <tr><td>보험료</td><td>500,000~550,000원</td><td></td></tr>
+        <tr><td>관리비</td><td>450,000~500,000원</td><td></td></tr>
+        <tr class="total-row"><td>합계</td><td>약 4,500,000원</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3. 변동 지출 & 저축 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-yellow">📊</div>
+      <div>
+        <div class="section-title">3. 변동 지출 및 저축</div>
+        <div class="section-subtitle">가용 잔액 약 2,670,000원</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>항목</th><th>금액</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>적금</td><td>330,000원</td><td></td></tr>
+        <tr><td>생활비 (잔액)</td><td>약 2,000,000~2,700,000원</td><td>식비, 기름값, 부모님 용돈 등</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4. 체감 여유 부족 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-orange">🔍</div>
+      <div>
+        <div class="section-title">4. 체감 여유 부족 원인</div>
+        <div class="section-subtitle">누락 가능 지출 항목 점검</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>항목</th><th>예상 금액</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>통신비 (휴대폰·인터넷)</td><td>150,000~200,000원</td><td>2인 이상 기준</td></tr>
+        <tr><td>OTT·구독 서비스</td><td>30,000~50,000원</td><td></td></tr>
+        <tr><td>자동차 보험료 (월 환산)</td><td>50,000~100,000원</td><td></td></tr>
+        <tr><td>주차비·차량 유지비</td><td>변동</td><td></td></tr>
+        <tr><td>의료·약값</td><td>변동</td><td>기록 누락 多</td></tr>
+        <tr><td>경조사비 (월 환산)</td><td>100,000~200,000원</td><td>비정기 지출</td></tr>
+        <tr><td>신용카드 할부 잔액</td><td>확인 필요</td><td></td></tr>
+        <tr><td>외식·배달비</td><td>식비 내 비중 높음</td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="note warning">
+      <strong>진단:</strong> 통신비·차량 관련·경조사·의료비 합산 시 실제 가처분 금액은 <strong>1,500,000~1,800,000원 수준</strong>일 가능성 높음.
+    </div>
+    <div class="sub-section">
+      <div class="sub-title">개선 방법</div>
+      <ul class="apple-list">
+        <li>카드/계좌 내역 1개월치 전체 캡처 → 항목별 분류</li>
+        <li>"식비"와 "외식비" 분리 기록</li>
+        <li>연간 비정기 지출(경조사, 차량보험 등)을 12로 나눠 월 충당금 설정</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. 대출 상환 전략 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-purple">🏦</div>
+      <div>
+        <div class="section-title">5. 대출 상환 전략</div>
+        <div class="section-subtitle">월 92만원 이상 고정 지출 감소 목표</div>
+      </div>
+    </div>
+
+    <div class="sub-title">지식산업센터 처분</div>
+    <table>
+      <thead><tr><th>순서</th><th>내용</th><th>효과</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-blue">1순위</span></td>
+          <td>원금 회수분 → 아빠 차용금 1억 상환</td>
+          <td><strong>월 이자 70만 원 절감</strong></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-green">2순위</span></td>
+          <td>추가 수익분 → 신용대출 우선 상환</td>
+          <td>고금리 부채 제거</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sub-section">
+      <div class="sub-title">토지 지분 매각 (수영이 공동 투자분)</div>
+      <table>
+        <thead><tr><th>항목</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>처분 효과</td><td><strong>월 이자 22만 원 절감</strong></td></tr>
+          <tr><td>회수 목표</td><td>4,500만 원 (자금 운용 여유 확보)</td></tr>
+          <tr><td>다른 필지</td><td>2,500만 원 추정 — 추후 상황 보고 정리</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">상환 완료 후 기대 효과</div>
+      <ul class="apple-list">
+        <li>신용대출 갈아타기로 <strong>이자율 추가 인하</strong></li>
+        <li>월 고정 지출 <strong>최소 92만 원 이상 감소</strong></li>
+        <li>팀장 수당 의존도 낮아짐 → 팀 퍼포먼스 집중 환경 조성</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6. 실행 로드맵 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-teal">🗺️</div>
+      <div>
+        <div class="section-title">6. 잘 살기 위한 실행 로드맵</div>
+        <div class="section-subtitle">단계별 재정 회복 플랜</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">부채 정리 (지금 ~ 1년)</div>
+          <div class="step-desc">지식산업센터 처분 → 아빠 1억 상환 / 토지 매각 / 신용대출 갈아타기</div>
+        </div>
+        <div class="step-badge">월 +90만원</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">지출 구조 개선 (3개월 내)</div>
+          <div class="step-desc">카드 내역 분류 · 외식비 예산 설정 · 경조사 충당금 통장 분리</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">저축/투자 구조화 (부채 정리 후)</div>
+          <div class="step-desc">비상금 800만원 · 자녀 교육 적금 · IRP·연금저축 단계적 확대</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">수입 구조 강화</div>
+          <div class="step-desc">팀 성과 → 성과급 확대 / 아내 수당 유지·확대 / 현금흐름 자산 재배치</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="hb-label">핵심 요약</div>
+      <div class="hb-text">
+        지금 당장 가장 중요한 것 딱 하나:<br>
+        <strong>지식산업센터 빠르게 처분 → 아빠 1억 상환</strong><br>
+        → 월 70만원이 생기면 숨통이 트임. 나머지는 그 다음에 차례로 해결됨.
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 절세 저축 전략 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">💎</div>
+      <div>
+        <div class="section-title">7. 절세 저축 전략</div>
+        <div class="section-subtitle">2026년 3월~</div>
+      </div>
+    </div>
+
+    <div class="sub-title">월 납입 계획</div>
+    <table>
+      <thead><tr><th>상품</th><th>월 납입액</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>ISA (개인종합자산관리계좌)</td><td>400,000원</td><td>만기 3년, 의무 유지</td></tr>
+        <tr><td>연금저축 (아내)</td><td>200,000원</td><td>65세 이후 수령, 장기 보유</td></tr>
+        <tr><td>연금저축 (남편)</td><td>추가 개설 예정</td><td>세액공제 극대화</td></tr>
+        <tr><td>청약</td><td>일시 중단</td><td>10만원짜리는 유지</td></tr>
+        <tr class="total-row"><td>합계</td><td>600,000원~</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub-section">
+      <div class="sub-title">기존 상품 정리</div>
+      <ul class="apple-list">
+        <li>기존 20만원짜리 펀드 <strong>해지 → ISA + 연금저축으로 이동</strong></li>
+        <li>여윳돈 생기는 만큼 납입액 단계적 상향 예정</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">세제 혜택 정리</div>
+      <table>
+        <thead><tr><th>상품</th><th>혜택</th></tr></thead>
+        <tbody>
+          <tr><td>ISA</td><td>이자·배당 비과세 (서민형 400만원 한도), 만기 후 연금 전환 시 추가 세액공제</td></tr>
+          <tr><td>연금저축</td><td>연 최대 600만원 납입분 세액공제 (16.5% 또는 13.2%)</td></tr>
+          <tr><td>남편 연금저축</td><td>세액공제 한도 별도 적용 → 부부 합산 혜택 극대화</td></tr>
+        </tbody>
+      </table>
+      <div class="note success">
+        연금저축 연 600만원 납입 시 세액공제 <strong>최대 99만원 환급</strong> (소득 기준)
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">연말정산 전략</div>
+      <ul class="apple-list">
+        <li><strong>의료비:</strong> 총급여 3% 초과분부터 공제 → 영수증 빠짐없이 수집</li>
+        <li><strong>교육비:</strong> 자녀 학원비 등 공제 항목 확인</li>
+        <li><strong>신용카드/체크카드:</strong> 총급여 25% 초과분 공제 → 체크카드 비중 높이면 유리</li>
+        <li><strong>연금저축·ISA:</strong> 납입 내역 자동 반영, 증빙 별도 불필요</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">증권 계좌 신규 개설 (남편)</div>
+      <ul class="apple-list">
+        <li>연금저축펀드 계좌 개설 (증권사 — 수수료 저렴, 상품 다양)</li>
+        <li>ISA도 증권사형으로 개설 시 ETF 직접 투자 가능</li>
+        <li>추천 순서: <strong>연금저축펀드 → ISA(중개형)</strong> 순으로 개설</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  가계부 정리 · 2026년 4월 4일
+</footer>
+
+</body>
+</html>
