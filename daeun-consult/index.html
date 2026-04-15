@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>양다은 발달 상담 기록</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+      background: #f5f5f7;
+      color: #1d1d1f;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(160deg, #1a2a3a 0%, #2c3e50 50%, #1a2a3a 100%);
+      color: #f5f5f7;
+      padding: 72px 24px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at 30% 50%, rgba(100,180,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero .date {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8ab4d8;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5.5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #f5f5f7 0%, #a8c8e8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .hero .subtitle {
+      font-size: 17px;
+      color: #8ab4d8;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Summary Cards */
+    .summary-bar {
+      display: flex;
+      gap: 12px;
+      max-width: 900px;
+      margin: -28px auto 0;
+      padding: 0 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .summary-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 18px 22px;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .summary-card .label {
+      font-size: 11px;
+      color: #86868b;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .summary-card .value {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .summary-card.teal .value { color: #30b0c7; }
+    .summary-card.purple .value { color: #af52de; }
+    .summary-card.orange .value { color: #ff9500; }
+
+    /* Content */
+    .content {
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Section */
+    .section {
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .icon-blue { background: #dceeff; }
+    .icon-green { background: #d1f5db; }
+    .icon-purple { background: #ecdeff; }
+    .icon-orange { background: #ffecd6; }
+    .icon-teal { background: #d6f5f0; }
+    .icon-pink { background: #fde8f5; }
+    .icon-red { background: #fde8e7; }
+    .icon-yellow { background: #fff3d6; }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+    }
+    .section-subtitle {
+      font-size: 13px;
+      color: #86868b;
+      margin-top: 2px;
+    }
+
+    /* Info bar */
+    .info-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #f9f9fb;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .info-item {
+      font-size: 14px;
+      color: #3a3a3c;
+    }
+    .info-item .info-label {
+      font-size: 11px;
+      color: #86868b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    thead tr {
+      border-bottom: 1.5px solid #e5e5ea;
+    }
+    thead th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #86868b;
+      padding: 0 12px 10px;
+    }
+    tbody tr {
+      border-bottom: 1px solid #f2f2f7;
+      transition: background 0.15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f9f9fb; }
+    tbody td {
+      padding: 12px;
+      color: #1d1d1f;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .badge-green { background: #d1f5db; color: #1c7a3c; }
+    .badge-orange { background: #ffecd6; color: #a05000; }
+    .badge-red { background: #fde8e7; color: #c93025; }
+    .badge-blue { background: #dceeff; color: #0051a8; }
+    .badge-purple { background: #ecdeff; color: #6e3fa8; }
+    .badge-teal { background: #d6f5f0; color: #1a7a6a; }
+
+    /* List */
+    .apple-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .apple-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: #1d1d1f;
+    }
+    .apple-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0071e3;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .apple-list.green li::before { background: #30d158; }
+    .apple-list.orange li::before { background: #ff9500; }
+    .apple-list.purple li::before { background: #af52de; }
+
+    /* Note box */
+    .note {
+      background: #f2f2f7;
+      border-left: 3px solid #86868b;
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: #3a3a3c;
+      margin-top: 20px;
+    }
+    .note.info { border-color: #0071e3; background: #f0f6ff; }
+    .note.warning { border-color: #ff9f0a; background: #fffbf0; }
+    .note.success { border-color: #30d158; background: #f0fdf4; }
+    .note.purple { border-color: #af52de; background: #f8f0ff; }
+
+    /* Sub-section */
+    .sub-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #f2f2f7;
+    }
+    .sub-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Pill grid */
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .pill {
+      background: #f2f2f7;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: #3a3a3c;
+    }
+    .pill.green { background: #d1f5db; color: #1c7a3c; }
+    .pill.blue { background: #dceeff; color: #0051a8; }
+    .pill.orange { background: #ffecd6; color: #a05000; }
+    .pill.purple { background: #ecdeff; color: #6e3fa8; }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .step-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px;
+      background: #f9f9fb;
+      border-radius: 14px;
+    }
+    .step-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #0071e3;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-num.purple { background: #af52de; }
+    .step-num.teal { background: #30b0c7; }
+    .step-num.orange { background: #ff9500; }
+    .step-content .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-content .step-desc {
+      font-size: 14px;
+      color: #3a3a3c;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, #2c3e50 0%, #1a2a3a 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-top: 24px;
+    }
+    .highlight-box .hb-label {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    .highlight-box .hb-text {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    /* Strength/Weakness cards */
+    .sw-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .sw-card {
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .sw-card.strength {
+      background: linear-gradient(135deg, #f0fdf4 0%, #d1f5db 100%);
+    }
+    .sw-card.improve {
+      background: linear-gradient(135deg, #fffbf0 0%, #ffecd6 100%);
+    }
+    .sw-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .sw-card.strength h4 { color: #1c7a3c; }
+    .sw-card.improve h4 { color: #a05000; }
+    .sw-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sw-card li {
+      font-size: 14px;
+      padding-left: 14px;
+      position: relative;
+    }
+    .sw-card.strength li { color: #2d6a3e; }
+    .sw-card.improve li { color: #8a5000; }
+    .sw-card li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+      top: 7px;
+    }
+    .sw-card.strength li::before { background: #30d158; }
+    .sw-card.improve li::before { background: #ff9500; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 13px;
+      color: #86868b;
+    }
+
+    strong { font-weight: 600; }
+
+    @media (max-width: 600px) {
+      .section { padding: 20px; }
+      .summary-bar { gap: 8px; }
+      .summary-card { padding: 14px 12px; min-width: 100px; }
+      .summary-card .value { font-size: 15px; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .info-bar { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <p class="date">2026. 04. 15</p>
+  <h1>다은이 발달 상담 기록</h1>
+  <p class="subtitle">의사 상담 &middot; 언어 검사 &middot; 감각통합 검사</p>
+</div>
+
+<!-- Summary Bar -->
+<div class="summary-bar">
+  <div class="summary-card teal">
+    <div class="label">의사 상담</div>
+    <div class="value">16분</div>
+  </div>
+  <div class="summary-card purple">
+    <div class="label">언어 검사</div>
+    <div class="value">8분</div>
+  </div>
+  <div class="summary-card orange">
+    <div class="label">감통 검사</div>
+    <div class="value">12분</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- 기본 정보 -->
+  <div class="section">
+    <div class="info-bar">
+      <div class="info-item">
+        <span class="info-label">보호자</span>
+        양준모 (아빠), 엄마 동석
+      </div>
+      <div class="info-item">
+        <span class="info-label">기관</span>
+        아트볼라 센터
+      </div>
+      <div class="info-item">
+        <span class="info-label">이전 치료</span>
+        서대문 봄봄 정신건강의학과 &mdash; 언어+감통 주 2회, 약 1년 (2023~2024.12)
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. 의사선생님 상담 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">&#x1F3E5;</div>
+      <div>
+        <div class="section-title">1. 의사선생님 상담</div>
+        <div class="section-subtitle">주요 관심사 및 의사 소견</div>
+      </div>
+    </div>
+
+    <div class="sub-title">주요 관심사</div>
+    <ul class="apple-list">
+      <li><strong>또래 소통 어려움</strong> &mdash; 친구들과 놀 때 자기가 하고 싶은 이야기만 일방적으로 하고 가버림</li>
+      <li>규칙&middot;규율은 잘 따르고, 부모와는 필요한 소통이 원활</li>
+      <li>포용력 있는 특정 친구 1명(같은 단지 남자아이)과는 잘 놀지만, 상대가 맞춰주는 경우에만 소통 가능</li>
+    </ul>
+
+    <div class="sub-section">
+      <div class="sub-title">발달 이력</div>
+      <table>
+        <thead><tr><th>영역</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td>언어 발달</td><td>24개월 때 또래 대비 늦음 &rarr; <strong>6세 이후 문장 급격히 발달</strong></td></tr>
+          <tr><td>대근육&middot;소근육</td><td><span class="badge badge-green">정상</span></td></tr>
+          <tr><td>글쓰기&middot;받아쓰기</td><td><span class="badge badge-green">잘 함</span></td></tr>
+          <tr><td>기저귀 떼기</td><td><span class="badge badge-orange">늦은 편</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">강점</div>
+      <div class="pill-grid">
+        <div class="pill green">모방 능력 우수</div>
+        <div class="pill green">규칙&middot;규율 잘 따름</div>
+        <div class="pill green">성격 예민하지 않음</div>
+      </div>
+      <div class="note info" style="margin-top:16px">
+        유치원 선생님 말투 재현, TV 대사를 A&middot;B 역할로 혼자 수행할 정도의 우수한 모방 능력
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">의사 소견</div>
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">화용(pragmatics) 발달이 핵심 과제</div>
+            <div class="step-desc">상대 표정&middot;감정 읽기, 주제 유지하며 대화 주고받기 연습 필요</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">언어 수준은 올라온 상태</div>
+            <div class="step-desc">이를 또래 관계에서 활용하는 연습이 핵심</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">"눈치"가 생겨야 할 시기 (7세)</div>
+            <div class="step-desc">상대 기분&middot;선호를 파악해 반응 조절하는 능력 형성기</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num" style="background:#ff453a">!</div>
+          <div class="step-content">
+            <div class="step-title">조기 개입 권장</div>
+            <div class="step-desc">또래 거절 경험이 쌓이면 정서&middot;성격에 영향 줄 수 있음</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">치료 방향 (의사 권고)</div>
+      <ul class="apple-list green">
+        <li><strong>놀이 치료 중심</strong> &mdash; 롤플레잉으로 사회적 상황 연습</li>
+        <li><strong>단기 집중 (1년 내)</strong> 바짝 하고 종결하는 것이 가장 효과적</li>
+        <li>병원 외 또래 경험 기회 확대 (종교기관 활동, 놀이터, 동네 모임 등)</li>
+        <li>매일 아이에게 "오늘 친구랑 어땠어? 기분은 어땠어?" 질문하는 습관</li>
+        <li>검사 결과에 따라 언어&middot;감통&middot;심리(놀이) 병행 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. 언어 검사 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-purple">&#x1F4AC;</div>
+      <div>
+        <div class="section-title">2. 언어 검사 피드백</div>
+        <div class="section-subtitle">수용&middot;표현&middot;어휘&middot;전반적 언어 발달</div>
+      </div>
+    </div>
+
+    <div class="sub-title">실시 검사</div>
+    <div class="pill-grid">
+      <div class="pill blue">수용(이해) 언어</div>
+      <div class="pill blue">표현(말하기) 언어</div>
+      <div class="pill blue">어휘력</div>
+      <div class="pill blue">전반적 언어 발달</div>
+      <div class="pill">채점 및 보고서 추후 전달</div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">검사 중 관찰</div>
+      <table>
+        <thead><tr><th>관찰 항목</th><th>내용</th><th>평가</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>집중력</td>
+            <td>40분간 착석하여 검사 수행</td>
+            <td><span class="badge badge-green">양호</span></td>
+          </tr>
+          <tr>
+            <td>동기&middot;의욕</td>
+            <td>당일 컨디션 저하 영향</td>
+            <td><span class="badge badge-orange">낮음</span></td>
+          </tr>
+          <tr>
+            <td>모르는 문항</td>
+            <td>"모르겠어"라고 말하지 않고 입을 닫음</td>
+            <td><span class="badge badge-red">침묵 거부</span></td>
+          </tr>
+          <tr>
+            <td>아는 문항</td>
+            <td>말이 많아지고 자발적으로 이야기 만들어 표현</td>
+            <td><span class="badge badge-green">활발</span></td>
+          </tr>
+          <tr>
+            <td>문법 형태소</td>
+            <td>조사(와, 에, 를 등) 생략 나타남</td>
+            <td><span class="badge badge-orange">미흡</span></td>
+          </tr>
+          <tr>
+            <td>단어 수준</td>
+            <td>단어 자체의 생략은 없음</td>
+            <td><span class="badge badge-green">정상</span></td>
+          </tr>
+          <tr>
+            <td>모방</td>
+            <td>선생님&middot;TV 대사 문장 통째 학습 재현</td>
+            <td><span class="badge badge-green">우수</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">언어 치료사 소견</div>
+      <ul class="apple-list purple">
+        <li>말 시작이 늦어 또래 대비 문장 표현이 아직 매끄럽지 않음</li>
+        <li><strong>화용(pragmatics) 발달이 가장 미흡</strong> &mdash; 상황에 맞는 말 사용 어려움</li>
+        <li>좋아하는 주제에서는 풍부한 표현 가능</li>
+        <li>모르거나 어려운 상황에서 <strong>말하기를 거부하는 패턴</strong> &rarr; 또래 관계에서도 나타날 수 있음</li>
+      </ul>
+
+      <div class="note purple" style="margin-top:16px">
+        <strong>핵심:</strong> "엄마<strong>와</strong> 아빠는 오늘 백화점<strong>에</strong> 갔다" &rarr; 다은이 표현: "엄마 아빠는 오늘 백화점에 갔다" (조사 '와' 생략)
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 감통 검사 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-orange">&#x270B;</div>
+      <div>
+        <div class="section-title">3. 감각통합(감통) 검사 피드백</div>
+        <div class="section-subtitle">발달연령 &middot; 시지각(DTVP) &middot; 대근육</div>
+      </div>
+    </div>
+
+    <div class="sub-title">발달 연령 검사</div>
+    <ul class="apple-list">
+      <li><strong>개인사회성(일상생활 기술)</strong> &mdash; 연령 대비 다소 부족</li>
+      <li>티셔츠 혼자 입기 어려움, 양치 미숙</li>
+      <li>바지&middot;양말&middot;겉옷은 혼자 가능</li>
+    </ul>
+
+    <div class="sub-section">
+      <div class="sub-title">시지각(DTVP) 검사 &mdash; 5개 항목</div>
+      <table>
+        <thead><tr><th>하위 항목</th><th>내용</th><th>결과</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>눈-손 협응</td>
+            <td>칸 안에 선 긋기</td>
+            <td><span class="badge badge-green">잘함</span></td>
+          </tr>
+          <tr>
+            <td>따라 그리기</td>
+            <td>모양 보고 똑같이 그리기</td>
+            <td><span class="badge badge-teal">매우 잘함</span></td>
+          </tr>
+          <tr>
+            <td>도형-배경 구분</td>
+            <td>배경에서 도형 찾기</td>
+            <td><span class="badge badge-green">잘함</span></td>
+          </tr>
+          <tr>
+            <td>시각 통합</td>
+            <td>점 이어 모양 유추</td>
+            <td><span class="badge badge-green">잘함</span></td>
+          </tr>
+          <tr>
+            <td>형태 항상성</td>
+            <td>회전&middot;크기 변한 도형 찾기</td>
+            <td><span class="badge badge-teal">잘함 (정확)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">대근육 &middot; 시각 추적 평가</div>
+      <table>
+        <thead><tr><th>항목</th><th>결과</th><th>상세</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>대근육</td>
+            <td><span class="badge badge-green">잘함</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>시각 추적 (정중선 교차)</td>
+            <td><span class="badge badge-red">어려움</span></td>
+            <td>눈만 움직여야 하는데 머리&middot;몸이 함께 움직임</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warning" style="margin-top:24px">
+      <strong>참고:</strong> 당일 컨디션 저하(구토 3회)로 후반부 집중력이 떨어졌으나 전반적으로 잘 수행. 후반부 힘들어하며 엎드리는 모습 보였으나 시각 관련 항목에서는 실력 발휘.
+    </div>
+  </div>
+
+  <!-- 종합 정리 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-teal">&#x1F4CB;</div>
+      <div>
+        <div class="section-title">종합 정리</div>
+        <div class="section-subtitle">강점과 개선 필요 영역</div>
+      </div>
+    </div>
+
+    <div class="sw-grid">
+      <div class="sw-card strength">
+        <h4>강점</h4>
+        <ul>
+          <li>규칙&middot;규율 잘 따름</li>
+          <li>모방 능력 우수</li>
+          <li>시지각 능력 양호~우수</li>
+          <li>대근육&middot;소근육 정상</li>
+          <li>성격이 크게 예민하지 않음</li>
+        </ul>
+      </div>
+      <div class="sw-card improve">
+        <h4>개선 필요</h4>
+        <ul>
+          <li>화용 언어 (상황 맞는 대화)</li>
+          <li>양방향 소통</li>
+          <li>모르는 것 표현하기</li>
+          <li>문법 형태소(조사) 사용</li>
+          <li>일상생활 기술 (옷 입기 등)</li>
+          <li>시각 추적 (정중선 교차)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 향후 계획 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">&#x1F680;</div>
+      <div>
+        <div class="section-title">향후 계획</div>
+        <div class="section-subtitle">치료 및 가정 실천 방안</div>
+      </div>
+    </div>
+
+    <div class="sub-title">치료 계획</div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num teal">1</div>
+        <div class="step-content">
+          <div class="step-title">정식 검사 보고서 수령</div>
+          <div class="step-desc">언어 검사 채점 완료 후 보고서 전달 &rarr; 치료 계획 확정</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num purple">2</div>
+        <div class="step-content">
+          <div class="step-title">치료 시작</div>
+          <div class="step-desc">놀이 치료 + 언어 치료 + 감통 치료 병행 예상</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num orange">3</div>
+        <div class="step-content">
+          <div class="step-title">1년 내 집중 치료 후 종결</div>
+          <div class="step-desc">단기간 바짝 진행하는 것이 가장 효과적 (의사 권고)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">가정에서 실천할 것</div>
+      <ul class="apple-list green">
+        <li>매일 "오늘 친구랑 어땠어? 기분은 어떠니?" 질문하기</li>
+        <li>또래 경험 기회 확대 (동네 모임, 놀이터, 종교기관 활동 등)</li>
+        <li>치료 후 선생님이 내주는 숙제 가정에서 함께 연습</li>
+        <li>모르는 것은 "모르겠어요"라고 말하는 연습</li>
+        <li>일상생활 기술(옷 입기, 양치 등) 자립 기회 제공</li>
+      </ul>
+    </div>
+
+    <div class="highlight-box">
+      <div class="hb-label">핵심 메시지</div>
+      <div class="hb-text">
+        다은이는 언어 수준이 크게 올라온 상태이고, 모방 능력이 우수합니다.<br>
+        지금 가장 중요한 것은 <strong>화용(pragmatics)</strong> &mdash;<br>
+        상대의 감정을 읽고, 상황에 맞는 대화를 주고받는 연습.<br><br>
+        <strong>1년 집중 치료 + 가정에서의 또래 경험 확대</strong>가 핵심입니다.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  양다은 발달 상담 기록 &middot; 2026년 4월 15일 &middot; 클로바노트 음성 녹음 기반 정리
+</footer>
+
+</body>
+</html>
