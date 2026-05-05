@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JustBlurt Reddit 플레이북</title>
+  <style>
+    :root {
+      --bg-white: #fbfbfd;
+      --bg-light: #f5f5f7;
+      --bg-dark: #1d1d1f;
+      --bg-black: #000000;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --text-on-dark: #f5f5f7;
+      --link: #0066cc;
+      --link-hover: #0077ed;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --green: #30d158;
+      --red: #ff3b30;
+      --yellow: #ffd60a;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --hero-size: clamp(44px, 7vw, 88px);
+      --headline-size: clamp(28px, 4vw, 56px);
+      --title-size: clamp(22px, 3vw, 40px);
+      --subtitle-size: clamp(18px, 2vw, 26px);
+      --body-size: clamp(15px, 1.2vw, 19px);
+      --caption-size: clamp(12px, 1vw, 15px);
+      --max-width: 960px;
+      --gutter: 24px;
+      --radius-card: 20px;
+      --radius-btn: 980px;
+      --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-white);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      height: 44px;
+      background: rgba(29, 29, 31, 0.88);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding: 0 var(--gutter);
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    }
+
+    nav a {
+      color: rgba(245,245,247,0.72);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: color 200ms var(--ease);
+      white-space: nowrap;
+    }
+    nav a:hover { color: #f5f5f7; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg-black);
+      color: var(--text-on-dark);
+      text-align: center;
+      padding: clamp(80px, 12vw, 160px) var(--gutter) clamp(60px, 8vw, 120px);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,113,227,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: var(--caption-size);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: var(--hero-size);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -0.022em;
+      margin-bottom: 22px;
+    }
+    .hero h1 span { color: var(--blue); }
+    .hero-sub {
+      font-size: var(--subtitle-size);
+      font-weight: 400;
+      color: rgba(245,245,247,0.6);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.07);
+      border: 0.5px solid rgba(255,255,255,0.15);
+      border-radius: 980px;
+      padding: 8px 18px;
+      font-size: 14px;
+      color: rgba(245,245,247,0.75);
+      backdrop-filter: blur(8px);
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION BASE ── */
+    .section {
+      padding: clamp(60px, 8vw, 120px) var(--gutter);
+    }
+    .section--dark {
+      background: var(--bg-dark);
+      color: var(--text-on-dark);
+    }
+    .section--light { background: var(--bg-light); }
+    .section--white { background: var(--bg-white); }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .part-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .section--dark .part-label { color: #64a7e0; }
+
+    .section-title {
+      font-size: var(--headline-size);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: var(--subtitle-size);
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 52px;
+      line-height: 1.45;
+      max-width: 640px;
+    }
+    .section--dark .section-sub { color: rgba(245,245,247,0.55); }
+
+    /* ── CASE CARDS ── */
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 52px;
+    }
+    .case-card {
+      background: rgba(255,255,255,0.05);
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      transition: transform 300ms var(--ease), background 300ms var(--ease);
+    }
+    .case-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.08);
+    }
+    .case-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .case-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-on-dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .case-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(245,245,247,0.55);
+    }
+
+    /* ── PRINCIPLES ── */
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+    .principle {
+      background: var(--bg-dark);
+      padding: 32px 28px;
+      transition: background 200ms var(--ease);
+    }
+    .principle:hover { background: rgba(255,255,255,0.03); }
+    .principle-num {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(0,113,227,0.35);
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+    .principle h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-on-dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .principle p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(245,245,247,0.5);
+    }
+
+    /* ── PERSONA CARDS ── */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 680px) { .persona-grid { grid-template-columns: 1fr; } }
+    .persona-card {
+      background: #fff;
+      border-radius: var(--radius-card);
+      padding: 32px 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+      transition: transform 300ms var(--ease), box-shadow 300ms var(--ease);
+    }
+    .persona-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .persona-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 3px 3px 0 0;
+    }
+    .persona-a::before { background: var(--blue); }
+    .persona-b::before { background: var(--green); }
+    .persona-c::before { background: var(--yellow); }
+    .persona-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+    }
+    .persona-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .persona-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .persona-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      background: var(--bg-light);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .priority-badge {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 14px;
+    }
+
+    /* ── STEP FLOW ── */
+    .step-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 52px;
+    }
+    @media (max-width: 700px) { .step-flow { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 440px) { .step-flow { grid-template-columns: 1fr; } }
+    .step-card {
+      background: #fff;
+      border-radius: var(--radius-card);
+      padding: 28px 22px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    .step-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--bg-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+    .step-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .step-card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #0a0a0a;
+      border-radius: 14px;
+      padding: 24px;
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .code-block pre {
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", Menlo, Monaco, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #a8d8a8;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .code-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+    /* ── PROMPT CARDS ── */
+    .prompt-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .prompt-card {
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-card);
+      padding: 28px;
+    }
+    .prompt-card h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-on-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .prompt-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    /* ── TIMELINE / PHASES ── */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .phase-grid { grid-template-columns: 1fr; } }
+    .phase-card {
+      background: #fff;
+      border-radius: var(--radius-card);
+      padding: 32px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    }
+    .phase-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .phase-num-box {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--bg-light);
+      display: flex;
+      align-items: center; justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+    .phase-header-text h3 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+    }
+    .phase-weeks {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .phase-items {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .phase-items li {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      padding-left: 18px;
+      position: relative;
+    }
+    .phase-items li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+    .phase-items li strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ── DONTS ── */
+    .dont-list {
+      display: grid;
+      gap: 2px;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+    .dont-item {
+      background: rgba(255,255,255,0.04);
+      padding: 28px 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: background 200ms var(--ease);
+    }
+    .dont-item:hover { background: rgba(255,255,255,0.06); }
+    .dont-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,59,48,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .dont-item h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-on-dark);
+      margin-bottom: 6px;
+    }
+    .dont-item p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(245,245,247,0.5);
+    }
+
+    /* ── KPI TABLE ── */
+    .kpi-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-card);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: 15px;
+    }
+    thead {
+      background: var(--bg-light);
+    }
+    th {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    td {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    td:first-child { font-weight: 600; }
+    .kpi-red {
+      color: var(--red);
+      background: rgba(255,59,48,0.06);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+    }
+    .kpi-yellow {
+      color: #b8860b;
+      background: rgba(255,214,10,0.12);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+    }
+    .kpi-green {
+      color: #1a8a43;
+      background: rgba(48,209,88,0.12);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+    }
+    @media (max-width: 580px) { .decision-grid { grid-template-columns: 1fr; } }
+    .decision-card {
+      background: #fff;
+      border-radius: var(--radius-card);
+      padding: 26px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      border-top: 3px solid transparent;
+    }
+    .decision-card--red { border-color: var(--red); }
+    .decision-card--yellow { border-color: var(--yellow); }
+    .decision-card--green { border-color: var(--green); }
+    .decision-card h4 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    .decision-card p {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist {
+      display: grid;
+      gap: 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+      transition: transform 200ms var(--ease);
+    }
+    .check-item:hover { transform: translateX(4px); }
+    .check-box {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--blue);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .check-day {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 3px;
+    }
+    .check-item p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .check-item p strong { font-weight: 600; }
+
+    /* ── OUTRO ── */
+    .outro {
+      background: var(--bg-black);
+      color: var(--text-on-dark);
+      text-align: center;
+      padding: clamp(80px, 12vw, 160px) var(--gutter);
+      position: relative;
+      overflow: hidden;
+    }
+    .outro::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,113,227,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .outro blockquote {
+      font-size: clamp(22px, 3vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      max-width: 680px;
+      margin: 0 auto 24px;
+    }
+    .outro blockquote em {
+      color: var(--blue);
+      font-style: normal;
+    }
+    .outro-sub {
+      font-size: var(--body-size);
+      color: rgba(245,245,247,0.5);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent);
+      margin: 0 var(--gutter);
+    }
+
+    /* ── REVEAL ── */
+    .apple-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .apple-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .apple-reveal:nth-child(2) { transition-delay: 80ms; }
+    .apple-reveal:nth-child(3) { transition-delay: 160ms; }
+    .apple-reveal:nth-child(4) { transition-delay: 240ms; }
+    .apple-reveal:nth-child(5) { transition-delay: 320ms; }
+    .apple-reveal:nth-child(6) { transition-delay: 400ms; }
+    .apple-reveal:nth-child(7) { transition-delay: 480ms; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { gap: 16px; }
+      nav a { font-size: 11px; }
+    }
+    @media (max-width: 480px) {
+      nav { gap: 10px; overflow-x: auto; justify-content: flex-start; padding: 0 16px; }
+    }
+
+    /* ── WEEK TIMELINE ── */
+    .week-timeline {
+      display: grid;
+      gap: 0;
+      position: relative;
+    }
+    .week-timeline::before {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--blue), rgba(0,113,227,0.1));
+    }
+    .week-row {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 20px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .week-dot {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--bg-light);
+      border: 2px solid var(--blue);
+      display: flex;
+      align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue);
+      z-index: 1;
+      flex-shrink: 0;
+    }
+    .week-dot--active {
+      background: var(--blue);
+      color: #fff;
+    }
+    .week-body {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+      margin-bottom: 8px;
+    }
+    .week-body h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .week-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--bg-light);
+      color: var(--text-tertiary);
+      border-radius: 4px;
+      padding: 2px 7px;
+    }
+    .week-tag--active {
+      background: rgba(0,113,227,0.1);
+      color: var(--blue);
+    }
+    .week-tasks {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+    .week-tasks li {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      padding-left: 16px;
+      position: relative;
+    }
+    .week-tasks li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 11px;
+    }
+    .week-tasks li strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ── POST TEMPLATE ── */
+    .post-template {
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+    .post-template-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .post-reddit-icon {
+      width: 28px; height: 28px;
+      background: #ff4500;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .post-meta { font-size: 12px; color: rgba(245,245,247,0.4); }
+    .post-meta strong { color: rgba(245,245,247,0.7); font-size: 13px; }
+    .post-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-on-dark);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .post-body {
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(245,245,247,0.55);
+    }
+    .post-body strong { color: rgba(245,245,247,0.8); }
+
+    /* ── MINING TABLE ── */
+    .mining-table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      margin: 16px 0;
+    }
+    .mining-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: rgba(255,255,255,0.03);
+    }
+    .mining-table th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(245,245,247,0.4);
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+      white-space: nowrap;
+    }
+    .mining-table td {
+      padding: 12px 16px;
+      border-top: 0.5px solid rgba(255,255,255,0.05);
+      color: rgba(245,245,247,0.65);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .mining-table td:first-child { color: var(--text-on-dark); font-weight: 500; }
+    .score-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .score-hi { background: rgba(48,209,88,0.2); color: #30d158; }
+    .score-md { background: rgba(255,214,10,0.2); color: #ffd60a; }
+    .score-lo { background: rgba(255,59,48,0.2); color: #ff3b30; }
+
+    /* ── SIGNAL TAG ── */
+    .signal-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .signal-tag {
+      background: rgba(0,113,227,0.12);
+      border: 0.5px solid rgba(0,113,227,0.25);
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #64a7e0;
+      font-family: "SF Mono", Menlo, monospace;
+    }
+    .signal-tag--red {
+      background: rgba(255,59,48,0.1);
+      border-color: rgba(255,59,48,0.2);
+      color: #ff6b60;
+    }
+
+    /* ── ACTION ROWS ── */
+    .action-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    .action-table tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+    .action-table td {
+      padding: 14px 16px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.05);
+      color: rgba(245,245,247,0.65);
+      vertical-align: top;
+    }
+    .action-table td:first-child {
+      white-space: nowrap;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      width: 80px;
+    }
+    .action-table td:nth-child(2) {
+      color: var(--text-on-dark);
+      font-weight: 600;
+      width: 140px;
+    }
+    .action-table td strong { color: rgba(245,245,247,0.9); }
+
+    /* ── INLINE HIGHLIGHT ── */
+    .highlight {
+      background: linear-gradient(120deg, rgba(0,113,227,0.12) 0%, rgba(0,113,227,0.06) 100%);
+      border-left: 2.5px solid var(--blue);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-style: italic;
+    }
+    .section--dark .highlight {
+      background: rgba(0,113,227,0.1);
+      color: var(--text-on-dark);
+    }
+
+    footer {
+      background: var(--bg-dark);
+      padding: 36px var(--gutter);
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      border-top: 0.5px solid rgba(255,255,255,0.06);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#part1">케이스</a>
+  <a href="#part2">시장분석</a>
+  <a href="#part3">채굴시스템</a>
+  <a href="#part4">12주 플레이북</a>
+  <a href="#part5">Don'ts</a>
+  <a href="#part6">KPI</a>
+  <a href="#part7">액션</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">JustBlurt × Reddit GTM</p>
+  <h1>Reddit 활용<br><span>플레이북</span></h1>
+  <p class="hero-sub">"Blurt it before you lose it."<br>생각이 사라지기 전에 — 말하면 바로 Notion</p>
+  <div class="hero-meta">
+    <span class="hero-badge"><span class="dot"></span>7개 케이스 분석</span>
+    <span class="hero-badge"><span class="dot"></span>12주 실행 플레이북</span>
+    <span class="hero-badge"><span class="dot"></span>확정된 차별화 DP 5가지</span>
+  </div>
+</section>
+
+<!-- PART 1 — CASES -->
+<section class="section section--dark" id="part1">
+  <div class="container">
+    <p class="part-label apple-reveal">Part 1</p>
+    <h2 class="section-title apple-reveal">케이스 플레이북에서 추출한<br>Reddit 활용 핵심 원칙</h2>
+    <p class="section-sub apple-reveal">71개 케이스 중 Reddit이 핵심 채널로 등장한 7개 사례.</p>
+
+    <div class="case-grid">
+      <div class="case-card apple-reveal">
+        <p class="case-num">Case 15 · Pat Walls</p>
+        <h3>링크 금지를 역이용한 풀 포스트 전략</h3>
+        <p>콘텐츠 자체를 풀 포스트로 올리고 골든 타임에 이메일 리스트로 전환. "관심은 일시적, 이메일은 영구적." — Starter Story $1M 달성</p>
+      </div>
+      <div class="case-card apple-reveal">
+        <p class="case-num">Case 17 · YouTube Transcript Tool</p>
+        <h3>채널 선택의 정확도 = 전환율</h3>
+        <p>Product Hunt은 창업자 커뮤니티. 실제 고객은 도메인별 서브레딧에 있다. 채널 선택의 정확도가 곧 전환율.</p>
+      </div>
+      <div class="case-card apple-reveal">
+        <p class="case-num">Case 18 · Gold Mining Framework</p>
+        <h3>Reddit = 고객 인터뷰의 대체재</h3>
+        <p>익명성이 만드는 솔직한 장문 대화에서 실제 언어를 추출해 카피라이팅에 그대로 활용. 핵심 쿼리: <code style="color:#64a7e0;font-size:12px">"I think" OR "I feel" OR "I was"</code></p>
+      </div>
+      <div class="case-card apple-reveal">
+        <p class="case-num">Case 22 · Dennis / Yataphone</p>
+        <h3>차단 전 몇 분 만에 첫 판매 발생</h3>
+        <p>여행자 커뮤니티 즉시 차단 → 기업가 서브레딧으로 전환. "1인 개발자 vs 거대 기업" 스토리가 스크롤을 멈추게 한다.</p>
+      </div>
+      <div class="case-card apple-reveal">
+        <p class="case-num">Case 28 · Setter AI</p>
+        <h3>신용카드 결제만이 진짜 검증</h3>
+        <p>Reddit은 검증 도구가 아니라 카피라이팅 소스로 사용하라. 무료 베타, 아이디어 반응 — 전부 가짜 검증이다.</p>
+      </div>
+      <div class="case-card apple-reveal">
+        <p class="case-num">Case 36 · Gravel</p>
+        <h3>Building-in-Public → 광고 $0, 유저 수천 명</h3>
+        <p>첫 몇 시간 좋아요 200+, 노출 30만+. 기술적 디테일을 솔직하게 공유하면 신뢰와 사용자가 동시에 들어온다.</p>
+      </div>
+      <div class="case-card apple-reveal">
+        <p class="case-num">Case 53 · Roman / Goji Berry AI</p>
+        <h3>6개월 조회수 1,100만, 계약 성사율 상승</h3>
+        <p>YC 탈락마저 콘텐츠로 전환. "아 그 Reddit 사람!" — 비가시적 인지가 데모 콜 계약 성사율을 높인다.</p>
+      </div>
+      <div class="case-card apple-reveal">
+        <p class="case-num">Case 54 · SaveWise</p>
+        <h3>3.5개월 댓글 → 톱 포스트 하나로 폭발</h3>
+        <p>마케팅 $0, 월 $25K. F5bot으로 실시간 대응. "도움을 먼저 주면 제품을 언급할 자격이 생긴다."</p>
+      </div>
+    </div>
+
+    <p class="part-label apple-reveal" style="margin-top:60px">7개 사례를 가로지르는</p>
+    <h2 class="section-title apple-reveal" style="margin-bottom:36px">5가지 공통 원칙</h2>
+
+    <div class="principles">
+      <div class="principle apple-reveal">
+        <div class="principle-num">01</div>
+        <h3>고객이 모인 곳을 찾아라</h3>
+        <p>빌더가 모인 곳이 아니다. Product Hunt·HN·IH는 사는 사람이 아니라 만드는 사람이 모인 공간이다. SaveWise의 이 채널 이탈률은 95~96%였다.</p>
+      </div>
+      <div class="principle apple-reveal">
+        <div class="principle-num">02</div>
+        <h3>워밍업 없이 포스팅하지 마라</h3>
+        <p>SaveWise는 3.5개월 댓글만 달았고, Roman은 7~14일 워밍업을 시스템화했다. 신뢰 자본이 없는 계정은 알고리즘도 사람도 무시한다.</p>
+      </div>
+      <div class="principle apple-reveal">
+        <div class="principle-num">03</div>
+        <h3>링크는 프로필 바이오에</h3>
+        <p>본문 직접 링크는 즉시 반감을 산다. 호기심과 증거로 클릭을 유도하고, 판매는 랜딩 페이지가 한다.</p>
+      </div>
+      <div class="principle apple-reveal">
+        <div class="principle-num">04</div>
+        <h3>첫 10분이 전부다</h3>
+        <p>Reddit 알고리즘은 초기 반응에 강하게 의존한다. Roman의 1,100만 뷰는 15명의 상호 업보트 그룹에서 나왔다.</p>
+      </div>
+      <div class="principle apple-reveal">
+        <div class="principle-num">05</div>
+        <h3>실패를 콘텐츠로 전환하라</h3>
+        <p>YC 탈락·광고 실패·예상 밖 결과 — 이런 콘텐츠가 성공 스토리보다 높은 조회수를 기록한다. 솔직함이 Reddit의 통화다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 2 — MARKET -->
+<section class="section section--white" id="part2">
+  <div class="container">
+    <p class="part-label apple-reveal">Part 2</p>
+    <h2 class="section-title apple-reveal">시장 진단과<br>Reddit 적합도 분석</h2>
+    <p class="section-sub apple-reveal">핵심 페인: <em>"생각난 아이디어를 메모하기 위해 휴대폰을 꺼내다가 흐름을 놓치는 경험"</em><br>JustBlurt는 생각과 Notion 사이의 모든 마찰을 제거한다. 경쟁사 전원이 "앱을 열어야만" 동작한다 — 이게 진입 공간이다.</p>
+
+    <div class="apple-reveal" style="background:#f5f5f7;border-radius:18px;padding:28px 32px;margin-bottom:40px;">
+      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--blue);margin-bottom:16px;">확정된 차별화 포인트 (DP) 5가지</p>
+      <div style="display:grid;gap:12px;">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="min-width:32px;height:32px;border-radius:8px;background:#0071e3;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;">1</span>
+          <div><strong>Hey Siri — 화면 꺼진 채로 캡처</strong><br><span style="font-size:13px;color:var(--text-secondary)">경쟁사 전원 불가. 앱을 열어야만 동작. JustBlurt만 zero-unlock.</span></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="min-width:32px;height:32px;border-radius:8px;background:#0071e3;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;">2</span>
+          <div><strong>Lock Screen 위젯 — 꺼낸 순간 즉시</strong><br><span style="font-size:13px;color:var(--text-secondary)">Face ID 0.3초 → 즉시 녹음. Voices.ink 없음.</span></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="min-width:32px;height:32px;border-radius:8px;background:#0071e3;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;">3</span>
+          <div><strong>Apple Watch — 폰 꺼내지 않고</strong><br><span style="font-size:13px;color:var(--text-secondary)">손목 탭 → 녹음. Voices.ink·Notis.ai 모두 없음.</span></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="min-width:32px;height:32px;border-radius:8px;background:#30d158;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;">4</span>
+          <div><strong>Intent DB 라우팅 — 말하는 내용으로 DB 자동 분류 (v2)</strong><br><span style="font-size:13px;color:var(--text-secondary)">시장 전체 없음. 아이디어→Ideas DB / 미팅→Meeting DB 자동.</span></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="min-width:32px;height:32px;border-radius:8px;background:#0071e3;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;">5</span>
+          <div><strong>Notion 직통 — 중간 단계 없이 바로 DB 저장</strong><br><span style="font-size:13px;color:var(--text-secondary)">공식 API. 캡처 → Notion 완료. 복사·붙여넣기 없음.</span></div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--text-tertiary);margin-top:16px;">론칭 메시지는 DP1~3 집중. DP4(Intent 라우팅)은 업데이트 마케팅으로 별도 집행.</p>
+    </div>
+
+    <h3 class="apple-reveal" style="font-size:22px;font-weight:700;letter-spacing:-0.015em;margin-bottom:20px;color:var(--text-primary)">핵심 타겟 페르소나 3개</h3>
+    <div class="persona-grid">
+      <div class="persona-card persona-a apple-reveal">
+        <p class="persona-label">페르소나 A · 추천 1순위</p>
+        <h3>Notion PKM 헤비유저</h3>
+        <p>Second Brain 구축이 평생 과제인 사람들. "지금 떠오른 생각을 마찰 없이 캡처하는 것"이 핵심 페인포인트.</p>
+        <div class="persona-tags">
+          <span class="tag">r/Notion 25만</span>
+          <span class="tag">r/PKMS 6만</span>
+          <span class="tag">r/BSB</span>
+        </div>
+        <span class="priority-badge">PMF 검증 최우선</span>
+      </div>
+      <div class="persona-card persona-b apple-reveal">
+        <p class="persona-label">페르소나 B · 추천 2순위</p>
+        <h3>Solo Founder</h3>
+        <p>운전·산책 중 아이디어를 Notion 프로젝트 DB에 즉시 꽂아넣고 싶은 1인 창업가. 자기 홍보 허용 공간 다수.</p>
+        <div class="persona-tags">
+          <span class="tag">r/SaaS</span>
+          <span class="tag">r/indiehackers</span>
+          <span class="tag">r/ERA</span>
+        </div>
+        <span class="priority-badge" style="background:var(--green)">빠른 첫 매출</span>
+      </div>
+      <div class="persona-card persona-c apple-reveal">
+        <p class="persona-label">페르소나 C · 추천 3순위</p>
+        <h3>ADHD / 글쓰기 마찰 큰 사용자</h3>
+        <p>타이핑 자체가 인지 부하인 사람들에게 "말로 Notion 채우기"는 접근성 도구. 마케팅 톤에 매우 민감.</p>
+        <div class="persona-tags">
+          <span class="tag">r/ADHD 190만</span>
+          <span class="tag">r/productivity</span>
+        </div>
+        <span class="priority-badge" style="background:#6c6c70">장기 브랜드</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 3 — MINING SYSTEM -->
+<section class="section section--dark" id="part3">
+  <div class="container">
+    <p class="part-label apple-reveal">Part 3</p>
+    <h2 class="section-title apple-reveal">4단계 Reddit<br>페인포인트 채굴 시스템</h2>
+    <p class="section-sub apple-reveal">Case 18 Gold Mining Framework를 JustBlurt 전용으로 재구성한 구체적 실행 매뉴얼.</p>
+
+    <div class="step-flow">
+      <div class="step-card apple-reveal">
+        <div class="step-icon">⚙️</div>
+        <h3>Pre-Step<br>환경 세팅</h3>
+        <p>Notion DB 템플릿, F5bot, 크롬 탭 그룹 세팅. 채굴 전 30분 투자.</p>
+      </div>
+      <div class="step-card apple-reveal">
+        <div class="step-icon">🔍</div>
+        <h3>Step 1<br>정밀 검색 쿼리</h3>
+        <p>감정·의도 시그널 쿼리 18개. 페르소나별 목표 스레드 60개 이상.</p>
+      </div>
+      <div class="step-card apple-reveal">
+        <div class="step-icon">📋</div>
+        <h3>Step 2<br>데이터 수집·스코어링</h3>
+        <p>6개 필드 수집 + 페인 강도 점수화. 우선순위 스레드를 명확히.</p>
+      </div>
+      <div class="step-card apple-reveal">
+        <div class="step-icon">🤖</div>
+        <h3>Step 3<br>Claude 4단계 처리</h3>
+        <p>Pain → Positioning → Angle → Copy 순서로 프롬프트 실행.</p>
+      </div>
+      <div class="step-card apple-reveal" style="grid-column: span 1;">
+        <div class="step-icon">✍️</div>
+        <h3>Step 4<br>카피 이식</h3>
+        <p>Reddit 언어 → 랜딩 헤드라인 직이식 + A/B 테스트 설계.</p>
+      </div>
+    </div>
+
+    <!-- PRE-STEP -->
+    <div style="margin-bottom:52px;">
+      <h3 class="apple-reveal" style="font-size:22px;font-weight:700;color:var(--text-on-dark);margin-bottom:8px">Pre-Step — 채굴 환경 세팅 (30분)</h3>
+      <p class="apple-reveal" style="font-size:14px;color:rgba(245,245,247,0.5);margin-bottom:20px">채굴 시작 전 이 세 가지가 없으면 수집한 데이터가 흩어진다.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;" class="apple-reveal">
+        <div class="prompt-card">
+          <h4 style="font-size:14px;margin-bottom:10px;">① Notion 수집 DB 만들기</h4>
+          <p style="font-size:13px;color:rgba(245,245,247,0.5);line-height:1.6;">속성: URL / 서브레딧 / OP 인용문 / 대안제품언급 / 업보트수 / 페인강도(1-5) / 카피후보여부<br><br>갤러리뷰로 보면 페인 패턴이 한눈에 보인다.</p>
+        </div>
+        <div class="prompt-card">
+          <h4 style="font-size:14px;margin-bottom:10px;">② F5bot 키워드 등록</h4>
+          <p style="font-size:13px;color:rgba(245,245,247,0.5);line-height:1.6;">"voice to notion" / "notion voice" / "transcribe to notion" / "audio notion" / "voice memo workflow" / "voices.ink" / "audio pen" / "whisper memos" / "notion quick capture" / "second brain voice" / "dictation app notion" / "note to notion"</p>
+        </div>
+        <div class="prompt-card">
+          <h4 style="font-size:14px;margin-bottom:10px;">③ 크롬 탭 그룹 세팅</h4>
+          <p style="font-size:13px;color:rgba(245,245,247,0.5);line-height:1.6;">탭 그룹 A: Google 검색창 (쿼리 실행용)<br>탭 그룹 B: 수집한 Reddit 스레드<br>탭 그룹 C: Notion DB (기록용)<br>탭 그룹 D: Claude (프롬프트 실행)<br><br>탭 전환 마찰을 최소화해야 집중이 유지된다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div style="margin-bottom:52px;">
+      <h3 class="apple-reveal" style="font-size:22px;font-weight:700;color:var(--text-on-dark);margin-bottom:8px">Step 1 — 정밀 검색 쿼리 (목표: 스레드 60개+)</h3>
+      <p class="apple-reveal" style="font-size:14px;color:rgba(245,245,247,0.5);margin-bottom:16px">이 쿼리들을 Google에 그대로 복붙. 각 쿼리당 상위 10개 스레드 열기. 감정·의도 시그널이 없는 스레드는 즉시 버린다.</p>
+
+      <p class="apple-reveal" style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,245,247,0.35);margin-bottom:10px;">감정·의도 시그널 — 이 표현이 있는 스레드만 수집</p>
+      <div class="signal-row apple-reveal">
+        <span class="signal-tag">"I wish"</span>
+        <span class="signal-tag">"I hate"</span>
+        <span class="signal-tag">"frustrated"</span>
+        <span class="signal-tag">"looking for"</span>
+        <span class="signal-tag">"why doesn't"</span>
+        <span class="signal-tag">"I've been struggling"</span>
+        <span class="signal-tag">"any app that"</span>
+        <span class="signal-tag">"does anyone know"</span>
+        <span class="signal-tag">"I can't believe"</span>
+        <span class="signal-tag--red">"Voices.ink"</span>
+        <span class="signal-tag--red">"Audio Pen"</span>
+        <span class="signal-tag--red">"Whisper Memos"</span>
+      </div>
+
+      <div class="code-label apple-reveal" style="margin-top:24px;">페르소나 A — Notion PKM 헤비유저 (목표 25개)</div>
+      <div class="code-block apple-reveal"><pre>site:reddit.com (notion OR "second brain") (voice OR dictation OR "voice memo") ("I wish" OR "I hate" OR "frustrated" OR "looking for")
+
+site:reddit.com r/Notion ("voice to notion" OR "audio note" OR "voice memo") -"how to"
+
+site:reddit.com r/Notion ("quick capture" OR "capture ideas" OR "fleeting note") ("frustrated" OR "wish" OR "hate")
+
+site:reddit.com r/PKMS (voice OR dictation OR audio) notion ("workflow" OR "capture" OR "inbox")
+
+site:reddit.com r/BuildingaSecondBrain (voice OR audio OR dictation) notion
+
+site:reddit.com r/Notion "I've been looking for" OR "anyone know" OR "does anyone use" voice OR audio OR dictation
+
+site:reddit.com r/Notion voices.ink OR "audio pen" OR "whisper memos" OR "otter.ai"</pre></div>
+
+      <div class="code-label apple-reveal">페르소나 B — Solo Founder / Indie Hacker (목표 20개)</div>
+      <div class="code-block apple-reveal"><pre>site:reddit.com (r/SaaS OR r/indiehackers OR r/EntrepreneurRideAlong) (voice OR dictation OR "voice note") notion
+
+site:reddit.com (founder OR indie OR solopreneur) ("voice memo" OR "dictation") notion ("workflow" OR "capture" OR "CRM")
+
+site:reddit.com r/SaaS "voice to notion" OR "audio to notion" OR "speak to notion"
+
+site:reddit.com (r/indiehackers OR r/SaaS) ("I use" OR "anyone use") (voice OR audio) (notion OR "knowledge base") ("wish" OR "but" OR "except")</pre></div>
+
+      <div class="code-label apple-reveal">페르소나 C — ADHD / 접근성 (목표 15개)</div>
+      <div class="code-block apple-reveal"><pre>site:reddit.com r/ADHD (notion OR "note taking" OR "second brain") (voice OR audio OR dictation) ("forgot" OR "lost" OR "wish" OR "can't")
+
+site:reddit.com r/ADHD ("voice to text" OR "speech to text") notion OR obsidian OR "note taking"
+
+site:reddit.com r/productivity ("voice to text" OR transcription OR dictation) (notion OR obsidian) ("I use" OR "wish" OR "recommend")</pre></div>
+
+      <div class="code-label apple-reveal">경쟁사 약점 채굴 (목표 10개)</div>
+      <div class="code-block apple-reveal"><pre>site:reddit.com "voices.ink" ("but" OR "except" OR "wish" OR "doesn't" OR "can't" OR "limitation")
+
+site:reddit.com "audio pen" OR "audiopen" ("but" OR "except" OR "wish" OR "doesn't" OR "problem")
+
+site:reddit.com "whisper memos" notion ("doesn't" OR "wish" OR "limitation" OR "alternative")</pre></div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div style="margin-bottom:52px;">
+      <h3 class="apple-reveal" style="font-size:22px;font-weight:700;color:var(--text-on-dark);margin-bottom:8px">Step 2 — 데이터 수집·스코어링</h3>
+      <p class="apple-reveal" style="font-size:14px;color:rgba(245,245,247,0.5);margin-bottom:16px">각 스레드를 Notion DB에 기록. 핵심은 <strong style="color:#64a7e0">그들의 언어 그대로</strong> 복사하는 것. 요약하지 말 것.</p>
+
+      <div class="mining-table-wrap apple-reveal">
+        <table class="mining-table">
+          <thead>
+            <tr>
+              <th>필드</th>
+              <th>기록 방법</th>
+              <th>예시</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🔗 URL</td>
+              <td>스레드 URL 그대로</td>
+              <td>reddit.com/r/Notion/comments/xxx</td>
+            </tr>
+            <tr>
+              <td>📍 서브레딧</td>
+              <td>r/ 이름</td>
+              <td>r/Notion, r/ADHD, r/SaaS</td>
+            </tr>
+            <tr>
+              <td>💬 OP 인용문</td>
+              <td>OP 원문 그대로 복사. 절대 요약 금지</td>
+              <td>"I just want to tap once and talk, why is this so hard with Notion"</td>
+            </tr>
+            <tr>
+              <td>🔧 대안 제품</td>
+              <td>스레드에서 언급된 경쟁 도구 + 그 한계</td>
+              <td>Voices.ink — "월 5회 제한이 너무 빡빡함"</td>
+            </tr>
+            <tr>
+              <td>👍 업보트수</td>
+              <td>숫자 기록. 높을수록 보편적 페인</td>
+              <td>847 upvotes → 핵심 페인</td>
+            </tr>
+            <tr>
+              <td>🔥 페인 강도</td>
+              <td>1~5 점수화. 감정 강도 기준</td>
+              <td>5 = "I've been looking for this for years"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="apple-reveal" style="font-size:13px;color:rgba(245,245,247,0.4);margin-top:12px;">목표: 페인 강도 4-5점 스레드 15개 이상 수집. 이것이 카피라이팅 소스가 된다.</p>
+
+      <h4 class="apple-reveal" style="font-size:16px;font-weight:600;color:var(--text-on-dark);margin:28px 0 12px">스코어링 기준표</h4>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;" class="apple-reveal">
+        <div style="background:rgba(255,59,48,0.1);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:20px;font-weight:700;color:#ff3b30;">1점</div>
+          <div style="font-size:11px;color:rgba(245,245,247,0.4);margin-top:4px;">단순 질문<br>"어떻게 해요?"</div>
+        </div>
+        <div style="background:rgba(255,149,0,0.1);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:20px;font-weight:700;color:#ff9500;">2점</div>
+          <div style="font-size:11px;color:rgba(245,245,247,0.4);margin-top:4px;">가벼운 불만<br>"좀 불편한데"</div>
+        </div>
+        <div style="background:rgba(255,214,10,0.1);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:20px;font-weight:700;color:#ffd60a;">3점</div>
+          <div style="font-size:11px;color:rgba(245,245,247,0.4);margin-top:4px;">명확한 페인<br>"왜 안되지?"</div>
+        </div>
+        <div style="background:rgba(48,209,88,0.1);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:20px;font-weight:700;color:#30d158;">4점</div>
+          <div style="font-size:11px;color:rgba(245,245,247,0.4);margin-top:4px;">강한 욕구<br>"찾고 있었어"</div>
+        </div>
+        <div style="background:rgba(0,113,227,0.15);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:20px;font-weight:700;color:#0071e3;">5점</div>
+          <div style="font-size:11px;color:rgba(245,245,247,0.4);margin-top:4px;">절박<br>"몇 년째 찾음"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div style="margin-bottom:52px;">
+      <h3 class="apple-reveal" style="font-size:22px;font-weight:700;color:var(--text-on-dark);margin-bottom:8px">Step 3 — Claude 4단계 처리</h3>
+      <p class="apple-reveal" style="font-size:14px;color:rgba(245,245,247,0.5);margin-bottom:20px">수집한 스레드 텍스트를 Claude에 붙여넣고 아래 프롬프트를 순서대로 실행. 각 결과를 Notion에 저장.</p>
+
+      <div class="prompt-grid">
+        <div class="prompt-card apple-reveal">
+          <h4><span class="prompt-num">1</span>Pain Point Extractor — 실제 언어 추출</h4>
+          <div class="code-block"><pre>아래는 Notion 사용자들이 음성 캡처 워크플로우에 대해 Reddit에서 나눈 실제 대화입니다.
+[스레드 텍스트 붙여넣기 — 최소 15개 스레드]
+
+다음을 추출해줘. 반드시 실제 인용문을 그대로 사용할 것:
+
+1. 페인포인트 Top 5 (빈도순)
+   - 페인 설명 (한 문장)
+   - 가장 강렬한 실제 인용문 2개
+   - 이 페인을 언급한 스레드 수
+
+2. 그들이 시도한 대안 도구와 구체적 한계
+   (도구명: 한계점 — 인용문)
+
+3. 반복적으로 등장하는 표현/단어 Top 10
+   (마케팅 용어 말고, 그들이 실제로 쓰는 단어)
+
+4. 어떤 도구도 아직 해결 못한 갭(Gap)
+   — 여러 스레드에서 반복되지만 솔루션이 없는 것</pre></div>
+        </div>
+        <div class="prompt-card apple-reveal">
+          <h4><span class="prompt-num">2</span>Copy Refiner — 서브레딧별 카피 정제</h4>
+          <div class="code-block"><pre>[Pain Point Extractor 결과 붙여넣기]
+
+JustBlurt 확정 포지셔닝:
+- 핵심 메시지: "Blurt it before you lose it."
+- 핵심 페인: 폰 꺼내다가 생각 흐름을 놓치는 경험
+- 차별점: Hey Siri(화면 꺼진 채 캡처) / Lock Screen 위젯 / Apple Watch
+
+위 Reddit 데이터를 보고:
+1. 유저들이 실제로 쓴 표현 중 이 메시지를 가장 강하게
+   지지하는 인용문 Top 3 (그들의 언어 그대로)
+
+2. 각 서브레딧별 같은 메시지 다르게 표현하기
+   - r/Notion: 시각적·워크플로우 중심
+   - r/PKMS: PKM 철학 연결
+   - r/productivity: 시간 절약·효율 수치
+
+3. "Hey Siri" 시나리오를 가장 공감 가게 묘사한
+   Reddit 유저 표현이 있다면 추출
+
+4. 현재 포지셔닝에서 놓친 페인포인트가 있다면 추가 제안</pre></div>
+        </div>
+        <div class="prompt-card apple-reveal">
+          <h4><span class="prompt-num">3</span>Content Angle Generator — 포스트 앵글 도출</h4>
+          <div class="code-block"><pre>[Positioning Validator 결과 붙여넣기]
+
+r/Notion, r/SaaS, r/ADHD 각각에 맞는
+Reddit 톱레벨 포스트 앵글 5개를 만들어줘.
+
+각 앵글마다:
+- 대상 서브레딧
+- 포스트 제목 (Reddit 제목 스타일, 클릭 유발형)
+- 본문 첫 문단 (200자 내외, 1인칭 경험담)
+- 기대되는 댓글 반응 2~3개
+- CTA (링크 금지 — "check my profile" 형태)
+- 이 앵글이 효과적인 이유 (한 줄)
+
+조건:
+- 기능 소개 ✗ / 스토리·데이터·실험 ✓
+- "내가 겪은 문제" → "내가 만든 것" → "결과" 구조
+- 자기 제품 이름은 마지막 한 번만</pre></div>
+        </div>
+        <div class="prompt-card apple-reveal">
+          <h4><span class="prompt-num">4</span>Copy Rewriter — 랜딩 카피 이식</h4>
+          <div class="code-block"><pre>[Pain Point Extractor 결과의 "실제 표현 Top 10" 붙여넣기]
+
+현재 JustBlurt 랜딩 페이지 카피:
+- 현재 헤드라인: [현재 헤드라인 입력]
+- 현재 서브헤드: [현재 서브헤드 입력]
+- 현재 CTA: [현재 버튼 문구]
+
+Reddit 사용자의 실제 언어를 사용해서 다음을 재작성:
+1. 헤드라인 3가지 옵션 (10단어 이내)
+2. 서브헤드 3가지 옵션 (20단어 이내)
+3. Feature bullet 5개 (사용자 언어로)
+4. CTA 버튼 문구 3가지
+
+규칙: "AI-powered", "seamless", "effortless" 같은
+마케팅 용어 절대 금지. 그들이 실제로 쓰는 단어만.</pre></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div>
+      <h3 class="apple-reveal" style="font-size:22px;font-weight:700;color:var(--text-on-dark);margin-bottom:8px">Step 4 — 카피 이식 & A/B 테스트 설계</h3>
+      <p class="apple-reveal" style="font-size:14px;color:rgba(245,245,247,0.5);margin-bottom:20px">Claude가 뽑은 카피를 랜딩에 이식하고, 즉시 A/B 테스트를 설계한다.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;" class="apple-reveal">
+        <div class="prompt-card">
+          <h4 style="font-size:14px;margin-bottom:12px;">❌ Before — 마케팅 언어</h4>
+          <div style="font-size:13px;color:rgba(245,245,247,0.4);line-height:1.7;">
+            <div style="margin-bottom:6px;"><span style="color:#ff6b60;">헤드:</span> "AI-Powered Voice-to-Notion Automation"</div>
+            <div style="margin-bottom:6px;"><span style="color:#ff6b60;">서브:</span> "Seamlessly capture your thoughts and organize them effortlessly"</div>
+            <div><span style="color:#ff6b60;">CTA:</span> "Get Started Free"</div>
+          </div>
+        </div>
+        <div class="prompt-card">
+          <h4 style="font-size:14px;margin-bottom:12px;">✅ After — Reddit 사용자 언어</h4>
+          <div style="font-size:13px;color:rgba(245,245,247,0.5);line-height:1.7;">
+            <div style="margin-bottom:6px;"><span style="color:#30d158;">헤드:</span> "그냥 말하면 Notion에 들어가는 거"</div>
+            <div style="margin-bottom:6px;"><span style="color:#30d158;">서브:</span> "잠금화면 → 탭 → 말하기 → Notion DB 자동 정리. 앱 열 필요 없음."</div>
+            <div><span style="color:#30d158;">CTA:</span> "1분 만에 첫 녹취 해보기"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight apple-reveal" style="margin-top:24px;">
+        A/B 테스트 설계: 기존 카피 vs Reddit 언어 카피를 동시에 올리고 UTM으로 구분. 2주 후 이메일 가입률 비교. Case 28 Setter AI: "실제 고객이 불평하는 방식으로 쓴 카피가 모든 마케팅 카피보다 전환율이 높다."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 4 — 12-WEEK PLAYBOOK -->
+<section class="section section--light" id="part4">
+  <div class="container">
+    <p class="part-label apple-reveal">Part 4</p>
+    <h2 class="section-title apple-reveal">JustBlurt Reddit GTM<br>12주 구체적 실행 플랜</h2>
+    <p class="section-sub apple-reveal">Case 53(Roman) + Case 54(SaveWise) 방법론을 주 단위 데일리 액션으로 분해. 매주 무엇을, 언제, 어떻게 할지 명확하게.</p>
+
+    <!-- PHASE 1 -->
+    <div style="margin-bottom:60px;">
+      <div class="apple-reveal" style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;">1</div>
+        <div>
+          <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.015em;color:var(--text-primary);">Phase 1 — 기반 구축</h3>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:2px;">Week 1~2 · 목표: 계정 세팅 완료 + 거점 지도 완성 + F5bot 가동</p>
+        </div>
+      </div>
+
+      <div class="week-timeline apple-reveal">
+        <div class="week-row">
+          <div class="week-dot week-dot--active">W1</div>
+          <div class="week-body">
+            <h4>계정 세팅 & 랜딩 페이지 준비 <span class="week-tag week-tag--active">핵심 주</span></h4>
+            <ul class="week-tasks">
+              <li><strong>Day 1</strong> — Reddit 계정 생성. 프로필 사진 (실제 얼굴 or 앱 아이콘), 바이오: "Building JustBlurt — voice → Notion before you lose the thought | iOS dev" + 랜딩 URL (본문 링크 절대 금지)</li>
+              <li><strong>Day 1</strong> — F5bot(f5bot.com) 가입 후 키워드 12개 등록: "voice to notion" / "notion voice" / "transcribe to notion" / "audio notion" / "voices.ink" / "audio pen" / "whisper memos" / "voice memo workflow" / "notion quick capture" / "second brain voice" / "dictation app notion" / "note to notion"</li>
+              <li><strong>Day 2</strong> — Map of Reddit(anvaka.github.io/map-of-reddit)에서 r/Notion 중심 클러스터 탐색. 1차 거점 5개 선정: r/Notion / r/PKMS / r/BuildingaSecondBrain / r/SaaS / r/productivity</li>
+              <li><strong>Day 2</strong> — 2차 거점 5개 선정: r/indiehackers / r/ADHD / r/EntrepreneurRideAlong / r/ObsidianMD / r/selfimprovement</li>
+              <li><strong>Day 3~4</strong> — Part 3 채굴 시스템 실행. 스레드 60개 수집 + Notion DB 기록</li>
+              <li><strong>Day 5</strong> — Claude 프롬프트 1~4 실행. 페인포인트 데이터셋 완성</li>
+              <li><strong>Day 6~7</strong> — 채굴 결과로 랜딩 페이지 헤드라인·서브헤드 재작성. UTM 파라미터 세팅</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-dot">W2</div>
+          <div class="week-body">
+            <h4>커뮤니티 정찰 & 첫 댓글 준비 <span class="week-tag">준비</span></h4>
+            <ul class="week-tasks">
+              <li><strong>월~수</strong> — 1차 거점 5개 서브레딧의 사이드바 룰 정독. 위반 항목 체크리스트 작성</li>
+              <li><strong>월~수</strong> — 각 서브레딧 인기 포스트 Top 30개 분석. 제목 패턴 / 본문 길이 / 톤 / 이미지 유무 기록</li>
+              <li><strong>목~금</strong> — r/Notion: 시각적 데모 선호, GIF/스크린샷 필수 / r/SaaS: 숫자·메트릭 선호 / r/ADHD: 공감·진솔함, 마케팅 느낌 즉시 거부 → 서브레딧별 톤 가이드 메모</li>
+              <li><strong>토~일</strong> — 댓글 템플릿 5종 작성 (아래 템플릿 참고). 진심으로 도움되는 답변 구조화</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div style="margin-bottom:60px;">
+      <div class="apple-reveal" style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;">2</div>
+        <div>
+          <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.015em;color:var(--text-primary);">Phase 2 — 워밍업</h3>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:2px;">Week 3~5 · 목표: Karma 150+ / 모더레이터 인지 / JustBlurt 언급 0회</p>
+        </div>
+      </div>
+
+      <div class="week-timeline apple-reveal">
+        <div class="week-row">
+          <div class="week-dot">W3</div>
+          <div class="week-body">
+            <h4>r/Notion 집중 워밍업 <span class="week-tag">댓글 전용</span></h4>
+            <ul class="week-tasks">
+              <li><strong>매일 오전 9시 (한국)</strong> — F5bot 이메일 확인. 키워드 알림 스레드에 즉시 답변 (가장 빠른 진성 리드)</li>
+              <li><strong>하루 3개 댓글</strong> — r/Notion에서 "voice", "capture", "workflow" 관련 포스트 찾아 진심 어린 답변</li>
+              <li>댓글 공식: <strong>공감 + 실제로 작동하는 팁 + 관련 리소스(다른 사람 도구 추천 OK)</strong>. JustBlurt 절대 언급 금지</li>
+              <li>예시 댓글: "I've had the same frustration. What's worked for me is [진짜 팁]. For the workflow you described, [구체적 제안]. Have you tried [다른 도구]?"</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-dot">W4</div>
+          <div class="week-body">
+            <h4>거점 확장 + Karma 가속 <span class="week-tag">댓글 전용</span></h4>
+            <ul class="week-tasks">
+              <li><strong>하루 4~5개 댓글</strong> — r/Notion(2) + r/productivity(2) + r/PKMS(1) 분산</li>
+              <li><strong>업보트 많이 받는 댓글 패턴 파악</strong> — 길이 150~300자 / 구체적 팁 / 공감 선행 / 무조건 helpful</li>
+              <li>r/SaaS 첫 진입 — 인디 해커 관련 포스트에 "fellow builder" 관점으로 댓글. 아직 JustBlurt 언급 금지</li>
+              <li>주간 목표: 댓글 Karma 50+ 달성</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-dot">W5</div>
+          <div class="week-body">
+            <h4>r/ADHD 진입 + 포스트 준비 <span class="week-tag">댓글 + 준비</span></h4>
+            <ul class="week-tasks">
+              <li><strong>r/ADHD 첫 진입</strong> — 노트 테이킹·생산성 관련 스레드. 절대 마케팅 톤 금지. "ADHD인 나도 이렇게 느낀다" 공감 우선</li>
+              <li><strong>Karma 목표 달성 확인</strong> — 댓글 Karma 100+ / 포스트 Karma 50+</li>
+              <li><strong>첫 포스트 원고 작성 완료</strong> — 3가지 옵션 중 1개 선택 + 실제 원고 완성</li>
+              <li><strong>부스트 그룹 모집</strong> — 신뢰할 수 있는 동료/친구 5~10명에게 포스트 날짜·시간 공유 요청. 자연스러운 업보트 OK, 조직적 조작 NG</li>
+              <li>포스트 게시 최적 시간 확정: <strong>한국 밤 10시 = 미국 동부 오전 9시 (Reddit 피크 타임)</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div style="margin-bottom:60px;">
+      <div class="apple-reveal" style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#1d1d1f;flex-shrink:0;">3</div>
+        <div>
+          <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.015em;color:var(--text-primary);">Phase 3 — 첫 톱레벨 포스트</h3>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:2px;">Week 6 · 목표: 업보트 50+ / 랜딩 유입 200+ / 이메일 30+</p>
+        </div>
+      </div>
+
+      <div class="apple-reveal" style="background:#fff;border-radius:var(--radius-card);padding:32px;box-shadow:0 2px 20px rgba(0,0,0,0.06);margin-bottom:16px;">
+        <h4 style="font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:20px;">포스트 3가지 옵션 — 첫 포스트는 옵션 A 권장 ★</h4>
+
+        <div style="display:grid;gap:16px;">
+          <div style="border-left:3px solid var(--blue);padding-left:20px;">
+            <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:6px;">옵션 A · r/Notion, r/PKMS — 페인포인트 공감형 ★ 첫 포스트 권장</p>
+            <p style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">제목: "I kept losing ideas mid-thought while reaching for my phone. So I built an app that captures to Notion before you even unlock."</p>
+            <p style="font-size:13px;color:var(--text-secondary);line-height:1.65;">훅: "The friction wasn't Notion. It was getting to Notion." → 앱 열고 버튼 찾는 사이 생각이 사라지는 경험 공감 → Hey Siri로 화면 꺼진 채 캡처하는 워크플로우 공개 → JustBlurt은 맨 마지막 "check my profile" 형태</p>
+          </div>
+          <div style="border-left:3px solid var(--green);padding-left:20px;">
+            <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#1a8a43;margin-bottom:6px;">옵션 B · r/SaaS / r/indiehackers — Building in Public형</p>
+            <p style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">제목: "Built a voice-to-Notion app where 'Hey Siri, [app name]' sends your thought directly to the right Notion DB — screen off, zero taps."</p>
+            <p style="font-size:13px;color:var(--text-secondary);line-height:1.65;">본문: 기술적 디테일 + "1인 개발자가 직접 만든" 서사. Hey Siri App Intents 구현 과정, 첫 사용자 피드백, 예상 밖 발견 공유. 숫자 중심. 실패한 가정도 포함. 인디 커뮤니티는 투명함을 좋아함.</p>
+          </div>
+          <div style="border-left:3px solid var(--red);padding-left:20px;">
+            <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--red);margin-bottom:6px;">옵션 C · r/ADHD — 공감형 (신중하게)</p>
+            <p style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">제목: "Voices.ink, AudioPen tried them all. Built my own because of one thing they all missed."</p>
+            <p style="font-size:13px;color:var(--text-secondary);line-height:1.65;">본문: 경쟁사 비방 없이 "내가 겪은 갭" 중심 스토리. "모든 도구가 앱을 열어야 했다. 운전 중·산책 중엔 폰을 꺼낼 수 없다." 공통 한계를 정직하게 서술 → 내가 만든 이유로 연결. r/productivity, r/PKMS 타깃.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="apple-reveal" style="background:#fff;border-radius:var(--radius-card);padding:28px;box-shadow:0 2px 16px rgba(0,0,0,0.05);">
+        <h4 style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:16px;">⏱ 포스트 당일 타임라인 (한국 시간 기준)</h4>
+        <table class="action-table" style="color:var(--text-primary);">
+          <tr>
+            <td style="color:var(--blue);">오후 9시</td>
+            <td style="color:var(--text-primary);">최종 원고 검토</td>
+            <td style="color:var(--text-secondary);">오탈자 확인, 링크 제거 확인, CTA가 "check my profile"인지 확인</td>
+          </tr>
+          <tr>
+            <td style="color:var(--blue);">오후 9시30분</td>
+            <td style="color:var(--text-primary);">부스트 그룹 알림</td>
+            <td style="color:var(--text-secondary);">카카오톡/슬랙으로 "30분 후 올릴게요" 사전 알림</td>
+          </tr>
+          <tr>
+            <td style="color:var(--blue);">밤 10시</td>
+            <td style="color:var(--text-primary);">포스트 게시</td>
+            <td style="color:var(--text-secondary);">Reddit 피크 타임. 게시 즉시 UTM URL을 부스트 그룹에 공유</td>
+          </tr>
+          <tr>
+            <td style="color:var(--blue);">10시~10시10분</td>
+            <td style="color:var(--text-primary);">10분 골든타임</td>
+            <td style="color:var(--text-secondary);">업보트 10개 목표. 알고리즘 트리거 활성화. 이 10분이 전체 조회수를 결정</td>
+          </tr>
+          <tr>
+            <td style="color:var(--blue);">10시~자정</td>
+            <td style="color:var(--text-primary);">모든 댓글 답변</td>
+            <td style="color:var(--text-secondary);">비판적 댓글도 차분하게. 증거·숫자로 답변. 감정적 반응 절대 금지</td>
+          </tr>
+          <tr>
+            <td style="color:var(--blue);">다음날 오전</td>
+            <td style="color:var(--text-primary);">2차 댓글 순회</td>
+            <td style="color:var(--text-secondary);">밤사이 달린 댓글 전부 답변. 24시간 내 100% 응답률 목표</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div>
+      <div class="apple-reveal" style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+        <div style="width:48px;height:48px;border-radius:14px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;">4</div>
+        <div>
+          <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.015em;color:var(--text-primary);">Phase 4 — 확장과 시스템화</h3>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:2px;">Week 7~12 · 목표: 이메일 500+ / 다운로드 1,000+ / 첫 유료 전환</p>
+        </div>
+      </div>
+
+      <div class="week-timeline apple-reveal">
+        <div class="week-row">
+          <div class="week-dot">W7</div>
+          <div class="week-body">
+            <h4>2번째 포스트 + BIP 트랙 시작 <span class="week-tag week-tag--active">확장</span></h4>
+            <ul class="week-tasks">
+              <li><strong>첫 포스트 결과 분석</strong> — 어떤 댓글에 가장 많은 반응? 어떤 질문이 반복됐나? → 다음 포스트 앵글 힌트</li>
+              <li><strong>Building in Public 첫 포스트</strong> (r/SaaS 또는 r/indiehackers): "Week 1 JustBlurt 론칭: 업보트 X개, 랜딩 Y명, 이메일 Z개. 배운 것들"</li>
+              <li><strong>F5bot 알림 스레드 즉시 대응</strong> 루틴화 — 매일 오전 9시 확인 → 키워드 언급 스레드에 30분 내 댓글</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-dot">W8</div>
+          <div class="week-body">
+            <h4>앵글 다양화 + 서브레딧 분산 <span class="week-tag">분산</span></h4>
+            <ul class="week-tasks">
+              <li><strong>r/PKMS 첫 톱레벨 포스트</strong>: "Voice capture for PKM: my 30-day experiment with different tools" — 데이터/비교 중심</li>
+              <li><strong>r/productivity 포스트</strong>: 워크플로우 시각화 (Loom 영상 or GIF) 포함. r/productivity는 시각 자료 반응 좋음</li>
+              <li><strong>이메일 시퀀스 설계</strong> — 가입자 첫 이메일: "왜 만들었나" 스토리. 2주차: 사용 팁. 3주차: 피드백 요청</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-dot">W9</div>
+          <div class="week-body">
+            <h4>ADHD 커뮤니티 + 실패 콘텐츠 <span class="week-tag">심화</span></h4>
+            <ul class="week-tasks">
+              <li><strong>r/ADHD 첫 톱레벨 포스트</strong>: 공감 선행, 개인 스토리. "This is how I stop losing ideas 30 seconds after I have them"</li>
+              <li><strong>실패 콘텐츠 1개</strong>: "I thought X would be the hardest part of building JustBlurt. I was wrong." — 예상 밖 실패가 성공 스토리보다 2~3배 조회수</li>
+              <li><strong>앱스토어 리뷰 모니터링</strong> — 부정 리뷰를 다음 포스트 소재로 전환</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-dot">W10</div>
+          <div class="week-body">
+            <h4>마일스톤 공유 + 유료 전환 테스트 <span class="week-tag week-tag--active">전환</span></h4>
+            <ul class="week-tasks">
+              <li><strong>100명 다운로드 마일스톤 포스트</strong>: 숫자 + 사용자 피드백 + 다음 로드맵. 숫자는 신뢰를 만든다</li>
+              <li><strong>첫 유료 플랜 발표</strong>: 기존 무료 사용자에게 얼리버드 가격 제공 이메일 발송</li>
+              <li><strong>YC / 인큐베이터 탈락 경험 있으면 공유</strong>: Case 53 Roman처럼 "YC 탈락했지만 배운 것들"이 거대한 공감을 부른다</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-dot">W11</div>
+          <div class="week-body">
+            <h4>시스템화 + 크로스 채널 시작 <span class="week-tag">스케일</span></h4>
+            <ul class="week-tasks">
+              <li><strong>주간 루틴 고정화</strong>: 월-수-금 포스트 / 화-목-토-일 댓글 집중 / 매일 오전 F5bot 확인</li>
+              <li><strong>Twitter/X 병행 시작</strong>: Reddit 포스트를 Twitter 스레드로 재가공. 동일 콘텐츠 멀티 채널 활용</li>
+              <li><strong>Reddit → SEO 전환</strong>: 반응 좋은 Reddit 포스트 주제를 블로그 롱폼으로 변환</li>
+            </ul>
+          </div>
+        </div>
+        <div class="week-row">
+          <div class="week-dot">W12</div>
+          <div class="week-body">
+            <h4>12주 회고 + 다음 사이클 설계 <span class="week-tag">회고</span></h4>
+            <ul class="week-tasks">
+              <li><strong>12주 회고 포스트</strong>: "12 weeks of Reddit marketing for my Notion voice app — full breakdown with numbers". 이 포스트 자체가 가장 큰 바이럴 가능성</li>
+              <li><strong>KPI 최종 측정</strong>: Part 6 기준표로 빨간불/노란불/초록불 판정 → 다음 12주 전략 수정</li>
+              <li><strong>이메일 자산 이전</strong>: Reddit 의존도를 낮추고 이메일 리스트 중심으로 자체 채널 확보</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 주간 루틴 -->
+      <div class="apple-reveal" style="background:#fff;border-radius:var(--radius-card);padding:28px;box-shadow:0 2px 16px rgba(0,0,0,0.05);margin-top:20px;">
+        <h4 style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:16px;">📅 Week 7~12 주간 고정 루틴</h4>
+        <table class="action-table">
+          <tr>
+            <td>월요일</td>
+            <td style="color:var(--text-primary);">톱레벨 포스트</td>
+            <td style="color:var(--text-secondary);">밤 10시 게시. r/Notion 또는 r/SaaS. 부스트 그룹 대기. 게시 후 2시간 댓글 집중 답변</td>
+          </tr>
+          <tr>
+            <td>화요일</td>
+            <td style="color:var(--text-primary);">댓글 순회</td>
+            <td style="color:var(--text-secondary);">오전 F5bot 확인 → 즉시 대응. 어제 포스트 밤사이 댓글 전부 답변. 새 스레드 3~5개 댓글</td>
+          </tr>
+          <tr>
+            <td>수요일</td>
+            <td style="color:var(--text-primary);">BIP 포스트</td>
+            <td style="color:var(--text-secondary);">주간 진행상황 공유. MRR / 다운로드 / 실패 실험. r/indiehackers 타깃</td>
+          </tr>
+          <tr>
+            <td>목요일</td>
+            <td style="color:var(--text-primary);">댓글 + 수집</td>
+            <td style="color:var(--text-secondary);">F5bot 대응. 댓글 5개 이상. 다음 주 포스트 소재 리서치</td>
+          </tr>
+          <tr>
+            <td>금요일</td>
+            <td style="color:var(--text-primary);">2번째 포스트</td>
+            <td style="color:var(--text-secondary);">다른 서브레딧 타깃 (r/ADHD / r/productivity / r/PKMS 로테이션)</td>
+          </tr>
+          <tr>
+            <td>토~일</td>
+            <td style="color:var(--text-primary);">KPI 측정 + 준비</td>
+            <td style="color:var(--text-secondary);">주간 KPI 기록 (Karma / 조회 / 랜딩 유입 / 이메일 / 다운 / 전환). 다음 주 포스트 원고 작성 완료</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- UTM 가이드 -->
+      <div class="apple-reveal" style="background:#fff;border-radius:var(--radius-card);padding:28px;box-shadow:0 2px 16px rgba(0,0,0,0.05);margin-top:16px;">
+        <h4 style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:14px;">🔗 UTM 태깅 가이드 — 어떤 포스트에서 왔는지 정확히 추적</h4>
+        <div class="code-block" style="margin:0;background:#1a1a1a;"><pre style="color:#a8d8a8;">https://justblurt.app/?utm_source=reddit
+  &utm_medium=organic
+  &utm_campaign=notion-workflow-post     ← 포스트 주제
+  &utm_content=r_notion                  ← 서브레딧
+
+# 예시
+https://justblurt.app/?utm_source=reddit&utm_medium=organic&utm_campaign=bip-week1&utm_content=r_indiehackers
+https://justblurt.app/?utm_source=reddit&utm_medium=organic&utm_campaign=adhd-note&utm_content=r_adhd</pre></div>
+        <p style="font-size:12px;color:var(--text-tertiary);margin-top:10px;">Google Analytics 또는 Plausible에서 캠페인별 이메일 가입률 비교 → 어떤 포스트가 진짜 전환을 만드는지 2주 내 파악 가능</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 5 — DONT'S -->
+<section class="section section--dark" id="part5">
+  <div class="container">
+    <p class="part-label apple-reveal">Part 5</p>
+    <h2 class="section-title apple-reveal">절대 하지 말아야 할 것</h2>
+    <p class="section-sub apple-reveal">어긴 순간 계정 차단·서브레딧 영구 밴·"이 브랜드 싫어" 바이럴로 직결.</p>
+
+    <div class="dont-list">
+      <div class="dont-item apple-reveal">
+        <div class="dont-icon">🚫</div>
+        <div>
+          <h4>워밍업 없이 톱레벨 포스트를 올리지 말 것</h4>
+          <p>신규 계정의 자기 제품 홍보는 모더레이터·봇·유저가 동시에 감지한다. Case 22 Dennis는 차단 전 첫 판매를 냈지만, 이건 운이지 전략이 아니다.</p>
+        </div>
+      </div>
+      <div class="dont-item apple-reveal">
+        <div class="dont-icon">🚫</div>
+        <div>
+          <h4>여러 서브레딧에 같은 포스트를 동시에 올리지 말 것</h4>
+          <p>Reddit 자동 시스템은 cross-posting spam을 매우 빠르게 감지한다. 같은 메시지라도 각 서브레딧 톤에 맞춰 다시 써야 한다.</p>
+        </div>
+      </div>
+      <div class="dont-item apple-reveal">
+        <div class="dont-icon">🚫</div>
+        <div>
+          <h4>본문에 직접 링크를 박지 말 것</h4>
+          <p>Roman, SaveWise 모두 일관되게 강조. 링크는 프로필 바이오에만. 본문은 "DM me / check my profile / I built a small tool for this"로.</p>
+        </div>
+      </div>
+      <div class="dont-item apple-reveal">
+        <div class="dont-icon">🚫</div>
+        <div>
+          <h4>"내 제품이 최고"라고 말하지 말 것</h4>
+          <p>Reddit은 자랑하는 사람을 본능적으로 싫어한다. 대신 "내가 이런 문제를 겪었고, 이런 워크플로우를 만들었고, 결과는 이랬다"는 1인칭 경험담으로.</p>
+        </div>
+      </div>
+      <div class="dont-item apple-reveal">
+        <div class="dont-icon">🚫</div>
+        <div>
+          <h4>부정적 댓글에 감정적으로 반응하지 말 것</h4>
+          <p>"이건 이미 X가 만들었잖아", "이거 사기 아냐?" — 반드시 온다. 사실로 차분히 답하거나 무시하라. 한 번의 감정적 답변이 스레드 전체를 망친다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 6 — KPI -->
+<section class="section section--white" id="part6">
+  <div class="container">
+    <p class="part-label apple-reveal">Part 6</p>
+    <h2 class="section-title apple-reveal">성과 측정 KPI와<br>의사결정 트리</h2>
+    <p class="section-sub apple-reveal">12주가 끝났을 때 다음 지표로 의사결정합니다.</p>
+
+    <div class="kpi-table-wrap apple-reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>지표</th>
+            <th>🔴 빨간불</th>
+            <th>🟡 노란불</th>
+            <th>🟢 초록불</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>누적 Reddit 노출</td>
+            <td><span class="kpi-red">&lt; 10,000</span></td>
+            <td><span class="kpi-yellow">10K ~ 50K</span></td>
+            <td><span class="kpi-green">50K+</span></td>
+          </tr>
+          <tr>
+            <td>랜딩 페이지 유입</td>
+            <td><span class="kpi-red">&lt; 500</span></td>
+            <td><span class="kpi-yellow">500 ~ 2,000</span></td>
+            <td><span class="kpi-green">2,000+</span></td>
+          </tr>
+          <tr>
+            <td>이메일 가입자</td>
+            <td><span class="kpi-red">&lt; 100</span></td>
+            <td><span class="kpi-yellow">100 ~ 500</span></td>
+            <td><span class="kpi-green">500+</span></td>
+          </tr>
+          <tr>
+            <td>App Store 다운로드</td>
+            <td><span class="kpi-red">&lt; 200</span></td>
+            <td><span class="kpi-yellow">200 ~ 1,000</span></td>
+            <td><span class="kpi-green">1,000+</span></td>
+          </tr>
+          <tr>
+            <td>유료 전환율</td>
+            <td><span class="kpi-red">&lt; 1%</span></td>
+            <td><span class="kpi-yellow">1 ~ 3%</span></td>
+            <td><span class="kpi-green">3%+</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="decision-grid">
+      <div class="decision-card decision-card--red apple-reveal">
+        <h4>🔴 빨간불이면</h4>
+        <p>채널 자체를 의심하라. 페르소나가 틀렸거나, 메시지가 안 맞거나, JustBlurt이 아직 SLC(Simple·Lovable·Complete) 기준에 못 미친 것. Case 28 — "신용카드 결제만이 진짜 검증."</p>
+      </div>
+      <div class="decision-card decision-card--yellow apple-reveal">
+        <h4>🟡 노란불이면</h4>
+        <p>메시지·앵글을 바꿔라. 같은 채널·같은 페르소나에 다른 카피·다른 앵글로 한 번 더 6주 사이클을 돌린다.</p>
+      </div>
+      <div class="decision-card decision-card--green apple-reveal">
+        <h4>🟢 초록불이면</h4>
+        <p>Case 53 시스템화 단계로. 외주 또는 AI 도구로 스케일업하고, SEO·Twitter·TikTok으로 Reddit 단일 의존도를 낮춰라.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 7 — CHECKLIST -->
+<section class="section section--light" id="part7">
+  <div class="container">
+    <p class="part-label apple-reveal">Part 7</p>
+    <h2 class="section-title apple-reveal">첫 7일<br>액션 체크리스트</h2>
+    <p class="section-sub apple-reveal">이번 주 안에 할 일들. 한 줄 한 줄 체크하면서 진행하세요.</p>
+
+    <div class="checklist">
+      <div class="check-item apple-reveal">
+        <div class="check-box"></div>
+        <div>
+          <p class="check-day">Day 1</p>
+          <p><strong>Reddit 계정 생성, 프로필 세팅</strong>, 1차 거점 서브레딧 5개 선정</p>
+        </div>
+      </div>
+      <div class="check-item apple-reveal">
+        <div class="check-box"></div>
+        <div>
+          <p class="check-day">Day 1</p>
+          <p><strong>F5bot 키워드 12개 등록</strong> — voice to notion, voices.ink, audio pen 등</p>
+        </div>
+      </div>
+      <div class="check-item apple-reveal">
+        <div class="check-box"></div>
+        <div>
+          <p class="check-day">Day 2 ~ 3</p>
+          <p>Part 3 Google 검색 쿼리로 <strong>스레드 20개 수집</strong>, 마크다운으로 정제</p>
+        </div>
+      </div>
+      <div class="check-item apple-reveal">
+        <div class="check-box"></div>
+        <div>
+          <p class="check-day">Day 3</p>
+          <p><strong>Claude 프롬프트 1·2·3 실행</strong> — 페인포인트·포지셔닝·앵글 도출</p>
+        </div>
+      </div>
+      <div class="check-item apple-reveal">
+        <div class="check-box"></div>
+        <div>
+          <p class="check-day">Day 4</p>
+          <p><strong>Reddit 사용자 언어로 랜딩 페이지 헤드라인 재작성</strong>, UTM 태깅 세팅</p>
+        </div>
+      </div>
+      <div class="check-item apple-reveal">
+        <div class="check-box"></div>
+        <div>
+          <p class="check-day">Day 4</p>
+          <p><strong>이메일 가입 폼 최적화</strong> — 랜딩 페이지 상단·하단 2곳</p>
+        </div>
+      </div>
+      <div class="check-item apple-reveal">
+        <div class="check-box"></div>
+        <div>
+          <p class="check-day">Day 5 ~ 7</p>
+          <p>1차 거점 5개 서브레딧에서 <strong>댓글 워밍업 시작</strong> (하루 3~5개)</p>
+        </div>
+      </div>
+      <div class="check-item apple-reveal">
+        <div class="check-box"></div>
+        <div>
+          <p class="check-day">Day 7</p>
+          <p>다음 6주 <strong>콘텐츠 캘린더 작성</strong> — 앵글 5개를 6주에 분산 배치</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <div class="container">
+    <blockquote class="apple-reveal">
+      <em>Attention → Users → Dollars.</em><br>
+      제품을 만드는 것은 절반이고,<br>관심을 끌어내는 것이 나머지 절반이다.
+    </blockquote>
+    <p class="outro-sub apple-reveal">
+      JustBlurt은 이미 절반을 끝냈습니다.<br>
+      이제 나머지 절반의 첫 한 달을 Reddit에서 시작하세요.<br><br>
+      <em style="color:rgba(245,245,247,0.4);font-style:normal">
+        "Reddit에서 무료 베타 테스터를 모으는 것은 가짜 검증이다.<br>
+        진짜 검증은 신용카드 결제다." — Setter AI
+      </em>
+    </p>
+  </div>
+</section>
+
+<footer>
+  JustBlurt Reddit Playbook · Based on 71 Bootstrapper Case Studies · 2026
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.apple-reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
