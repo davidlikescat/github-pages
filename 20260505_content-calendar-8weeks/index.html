@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solo Builder Playbook — 8-Week Content Calendar</title>
+  <style>
+    :root {
+      --apple-bg-white: #fbfbfd;
+      --apple-bg-light: #f5f5f7;
+      --apple-bg-dark: #1d1d1f;
+      --apple-bg-black: #000000;
+      --apple-text-primary: #1d1d1f;
+      --apple-text-secondary: #6e6e73;
+      --apple-text-tertiary: #86868b;
+      --apple-text-on-dark: #f5f5f7;
+      --apple-link: #0066cc;
+      --apple-blue: #0071e3;
+      --apple-blue-hover: #0077ed;
+      --apple-green: #30d158;
+      --apple-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --apple-hero-size: clamp(48px, 8vw, 96px);
+      --apple-headline-size: clamp(32px, 5vw, 64px);
+      --apple-title-size: clamp(22px, 3vw, 40px);
+      --apple-subtitle-size: clamp(18px, 2vw, 26px);
+      --apple-body-size: clamp(14px, 1.2vw, 19px);
+      --apple-caption-size: clamp(11px, 1vw, 14px);
+      --apple-weight-bold: 700;
+      --apple-weight-semibold: 600;
+      --apple-weight-medium: 500;
+      --apple-weight-regular: 400;
+      --apple-lh-tight: 1.05;
+      --apple-lh-snug: 1.15;
+      --apple-lh-body: 1.6;
+      --apple-ls-tight: -0.015em;
+      --apple-max-width: 980px;
+      --apple-gutter: 22px;
+      --apple-section-pad-xl: clamp(80px, 12vw, 160px);
+      --apple-section-pad-lg: clamp(60px, 8vw, 100px);
+      --apple-section-pad-md: clamp(40px, 5vw, 72px);
+      --apple-gap-xl: 48px;
+      --apple-gap-lg: 32px;
+      --apple-gap-md: 20px;
+      --apple-gap-sm: 12px;
+      --apple-radius-card: 18px;
+      --apple-radius-btn: 980px;
+      --apple-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --apple-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --apple-duration-base: 400ms;
+      --apple-duration-reveal: 900ms;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--apple-font);
+      background: var(--apple-bg-black);
+      color: var(--apple-text-on-dark);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      height: 44px;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      letter-spacing: -0.01em;
+      color: var(--apple-text-tertiary);
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    }
+    nav span { color: var(--apple-text-on-dark); margin: 0 6px; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: var(--apple-section-pad-xl) var(--apple-gutter);
+      background: var(--apple-bg-black);
+    }
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: var(--apple-weight-medium);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--apple-text-tertiary);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: var(--apple-hero-size);
+      font-weight: var(--apple-weight-bold);
+      line-height: var(--apple-lh-tight);
+      letter-spacing: var(--apple-ls-tight);
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .hero h1 .accent { color: var(--apple-green); }
+    .hero-sub {
+      font-size: var(--apple-subtitle-size);
+      font-weight: var(--apple-weight-regular);
+      color: var(--apple-text-secondary);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: var(--apple-lh-body);
+    }
+    .badge-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.08);
+      border: 0.5px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--apple-text-secondary);
+    }
+    .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--apple-green); }
+
+    /* Section wrapper */
+    .section-light {
+      background: var(--apple-bg-light);
+      color: var(--apple-text-primary);
+      padding: var(--apple-section-pad-lg) var(--apple-gutter);
+    }
+    .section-dark {
+      background: var(--apple-bg-dark);
+      color: var(--apple-text-on-dark);
+      padding: var(--apple-section-pad-lg) var(--apple-gutter);
+    }
+    .section-black {
+      background: var(--apple-bg-black);
+      color: var(--apple-text-on-dark);
+      padding: var(--apple-section-pad-lg) var(--apple-gutter);
+    }
+    .inner {
+      max-width: var(--apple-max-width);
+      margin: 0 auto;
+    }
+
+    /* Week section */
+    .week-header {
+      margin-bottom: 40px;
+    }
+    .week-number {
+      font-size: 13px;
+      font-weight: var(--apple-weight-medium);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--apple-text-tertiary);
+      margin-bottom: 10px;
+    }
+    .section-light .week-number { color: var(--apple-text-secondary); }
+    .week-title {
+      font-size: var(--apple-headline-size);
+      font-weight: var(--apple-weight-bold);
+      line-height: var(--apple-lh-snug);
+      letter-spacing: var(--apple-ls-tight);
+      margin-bottom: 12px;
+    }
+    .week-hook {
+      font-size: var(--apple-subtitle-size);
+      font-weight: var(--apple-weight-regular);
+      color: var(--apple-text-secondary);
+      font-style: italic;
+    }
+    .section-dark .week-hook { color: var(--apple-text-tertiary); }
+
+    /* Slides grid */
+    .slides-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 768px) {
+      .slides-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .slides-grid { grid-template-columns: 1fr; }
+    }
+
+    .slide-card {
+      border-radius: 12px;
+      padding: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 0.5px solid rgba(255,255,255,0.1);
+    }
+    .section-light .slide-card {
+      background: rgba(0,0,0,0.04);
+      border: 0.5px solid rgba(0,0,0,0.08);
+    }
+    .slide-num {
+      font-size: 11px;
+      font-weight: var(--apple-weight-semibold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--apple-text-tertiary);
+      margin-bottom: 6px;
+    }
+    .slide-card.slide-hook { border-color: rgba(48,209,88,0.4); background: rgba(48,209,88,0.08); }
+    .slide-card.slide-cta { border-color: rgba(0,113,227,0.4); background: rgba(0,113,227,0.08); }
+    .slide-text {
+      font-size: 13px;
+      line-height: 1.4;
+      color: inherit;
+    }
+    .section-light .slide-text { color: var(--apple-text-primary); }
+
+    /* CTA keyword badge */
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .keyword-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--apple-blue);
+      color: #fff;
+      border-radius: var(--apple-radius-btn);
+      font-size: 15px;
+      font-weight: var(--apple-weight-semibold);
+      letter-spacing: 0.04em;
+    }
+    .cta-label {
+      font-size: var(--apple-body-size);
+      color: var(--apple-text-tertiary);
+    }
+    .section-light .cta-label { color: var(--apple-text-secondary); }
+    .cases-tag {
+      font-size: 13px;
+      color: var(--apple-text-tertiary);
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 8px;
+    }
+    .section-light .cases-tag {
+      background: rgba(0,0,0,0.05);
+      color: var(--apple-text-secondary);
+    }
+
+    /* Summary table section */
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--apple-body-size);
+    }
+    th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: var(--apple-weight-semibold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--apple-text-tertiary);
+      padding: 12px 16px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.12);
+    }
+    td {
+      padding: 14px 16px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.06);
+      color: var(--apple-text-on-dark);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    .kw {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--apple-blue);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: var(--apple-weight-semibold);
+      letter-spacing: 0.04em;
+    }
+    .check { color: var(--apple-green); font-weight: 600; }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: var(--apple-section-pad-xl) var(--apple-gutter);
+      background: var(--apple-bg-black);
+    }
+    .final-cta h2 {
+      font-size: var(--apple-headline-size);
+      font-weight: var(--apple-weight-bold);
+      letter-spacing: var(--apple-ls-tight);
+      margin-bottom: 16px;
+    }
+    .final-cta p {
+      font-size: var(--apple-body-size);
+      color: var(--apple-text-secondary);
+      margin-bottom: 40px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      height: 50px;
+      padding: 0 32px;
+      background: var(--apple-blue);
+      color: #fff;
+      border-radius: var(--apple-radius-btn);
+      font-size: 17px;
+      font-weight: var(--apple-weight-medium);
+      text-decoration: none;
+      transition: background 200ms var(--apple-ease);
+    }
+    .btn-primary:hover { background: var(--apple-blue-hover); }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity var(--apple-duration-reveal) var(--apple-ease-out),
+                  transform var(--apple-duration-reveal) var(--apple-ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal:nth-child(2) { transition-delay: 80ms; }
+    .reveal:nth-child(3) { transition-delay: 160ms; }
+    .reveal:nth-child(4) { transition-delay: 240ms; }
+    .reveal:nth-child(5) { transition-delay: 320ms; }
+  </style>
+</head>
+<body>
+
+<nav>
+  Solo Builder Playbook &nbsp;·&nbsp; <span>8-Week Content Calendar</span> &nbsp;·&nbsp; Instagram Carousel
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <p class="hero-eyebrow">Instagram Carousel Strategy</p>
+  <h1>Solo Builder<br /><span class="accent">Playbook</span></h1>
+  <p class="hero-sub">8 weeks. 8 chapters. One carousel a week.<br />Comment a keyword → ManyChat delivers the full breakdown.</p>
+  <div class="badge-row">
+    <span class="badge"><span class="dot"></span> 8 chapters</span>
+    <span class="badge"><span class="dot"></span> 80 slides total</span>
+    <span class="badge"><span class="dot"></span> 9 ManyChat keywords</span>
+  </div>
+</section>
+
+<!-- Week 0 — Hook Post -->
+<section class="section-light">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 0 · Launch Post</p>
+      <h2 class="week-title">Hook Post</h2>
+      <p class="week-hook">"71 solo builders. One playbook. 8 weeks of drops."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid" style="grid-template-columns: repeat(3,1fr)">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1 · Hook</p>
+          <p class="slide-text">71개의 케이스. 8챕터 플레이북. 8주 연속 드롭.</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2–9 · Preview</p>
+          <p class="slide-text">각 챕터 요약 미리보기 + 케이스 숫자 공개</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10 · CTA</p>
+          <p class="slide-text">Comment "PLAYBOOK" for the full 8-week plan</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">PLAYBOOK</span>
+        <span class="cta-label">ManyChat trigger → 메인 플로우 (이메일 수집)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Week 1 -->
+<section class="section-dark">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 1 · Chapter 1</p>
+      <h2 class="week-title">Idea Discovery</h2>
+      <p class="week-hook">"The $35K/month idea that took 10 minutes to find."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1</p>
+          <p class="slide-text">훅: "The $35K/month idea that took 10 minutes to find."</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2</p>
+          <p class="slide-text">새 아이디어 X, 검증된 시장의 균열 찾기</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 3</p>
+          <p class="slide-text">케이스: Samuel — 안경사 → 3개 앱 → $35K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 4</p>
+          <p class="slide-text">도구: Ahrefs + Twitter + Reddit 불만 키워드</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 5</p>
+          <p class="slide-text">케이스: Abhishek — Typeform → Euform → $11K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 6</p>
+          <p class="slide-text">프레임워크: "[제품명] alternative" 검색법</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 7</p>
+          <p class="slide-text">케이스: Calday — Calendly 클론 → 니치 포지셔닝 → $5K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 8</p>
+          <p class="slide-text">골든 룰: Saturated market = validated market</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 9</p>
+          <p class="slide-text">45분 Gold Mining Framework</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10</p>
+          <p class="slide-text">Comment "IDEA" for the full Chapter 1 breakdown</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">IDEA</span>
+        <span class="cases-tag">핵심 케이스: #3, #17, #29, #44</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Week 2 -->
+<section class="section-light">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 2 · Chapter 2</p>
+      <h2 class="week-title">Build Fast</h2>
+      <p class="week-hook">"He built a $30K/month app on his subway commute."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1</p>
+          <p class="slide-text">훅: "He built a $30K/month app on his subway commute."</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2</p>
+          <p class="slide-text">바이브 코딩이란? AI로 코드 없이 앱 만들기</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 3</p>
+          <p class="slide-text">케이스: Polus — 전철 출퇴근 → Creator Hunter → $30K</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 4</p>
+          <p class="slide-text">툴스택: Bolt → Cursor → Vercel → Supabase</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 5</p>
+          <p class="slide-text">케이스: George — 18세, 레슬링 AI 앱 → $17K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 6</p>
+          <p class="slide-text">MVP 원칙: 기능 1개로 시작하라</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 7</p>
+          <p class="slide-text">케이스: Pontis — 3시간 빌드 → 월 220만 방문자 → $34K</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 8</p>
+          <p class="slide-text">Max의 28개 앱 포트폴리오 → $10K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 9</p>
+          <p class="slide-text">오늘 시작할 수 있는 툴 리스트</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10</p>
+          <p class="slide-text">Comment "BUILD" for the full Chapter 2 breakdown</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">BUILD</span>
+        <span class="cases-tag">핵심 케이스: #25, #46, #40, #48</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Week 3 -->
+<section class="section-dark">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 3 · Chapter 3</p>
+      <h2 class="week-title">Validate First</h2>
+      <p class="week-hook">"He collected $10K before writing one line of code."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1</p>
+          <p class="slide-text">훅: "He collected $10K before writing one line of code."</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2</p>
+          <p class="slide-text">검증의 진짜 의미: 가입 X, 결제 O</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 3</p>
+          <p class="slide-text">케이스: Will Cannon — Cold Email 하나로 첫 $1M ARR</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 4</p>
+          <p class="slide-text">Stripe 버튼이 없으면 제품이 아니다</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 5</p>
+          <p class="slide-text">케이스: Setter AI — 코드 없이 $10K 검증</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 6</p>
+          <p class="slide-text">3단계 검증 프레임워크</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 7</p>
+          <p class="slide-text">랜딩페이지 → Stripe → 고객 인터뷰 순서</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 8</p>
+          <p class="slide-text">케이스: Connor — Payout 앱 → 50일 만에 $20K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 9</p>
+          <p class="slide-text">검증 없이 만드는 게 진짜 리스크</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10</p>
+          <p class="slide-text">Comment "VALIDATE" for the Chapter 3 breakdown</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">VALIDATE</span>
+        <span class="cases-tag">핵심 케이스: #4, #7, #28, #35</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Week 4 -->
+<section class="section-light">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 4 · Chapter 4</p>
+      <h2 class="week-title">Solo Survival</h2>
+      <p class="week-hook">"He made $30K/month and never quit his job. Until the money told him to."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1</p>
+          <p class="slide-text">훅: "He made $30K/month and never quit his job. Until the money told him to."</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2</p>
+          <p class="slide-text">퇴사 먼저? X. 수익 먼저.</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 3</p>
+          <p class="slide-text">케이스: 출퇴근 앱 개발자 → $30K → 자발적 퇴사</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 4</p>
+          <p class="slide-text">직장인 시간 활용법: 새벽 / 점심 / 출퇴근</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 5</p>
+          <p class="slide-text">케이스: Alex Pin — Creator Buddy → $25K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 6</p>
+          <p class="slide-text">번아웃 방지: 하루 2시간 룰</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 7</p>
+          <p class="slide-text">케이스: 직장 다니며 7개월 → 월 $40K</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 8</p>
+          <p class="slide-text">수익이 월급 3배 될 때 퇴사</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 9</p>
+          <p class="slide-text">솔로 생존의 심리: 외로움 vs 자유</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10</p>
+          <p class="slide-text">Comment "SOLO" for the Chapter 4 breakdown</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">SOLO</span>
+        <span class="cases-tag">핵심 케이스: #5, #25, #22, #24</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Week 5 -->
+<section class="section-dark">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 5 · Chapter 5</p>
+      <h2 class="week-title">$0 Growth Engine</h2>
+      <p class="week-hook">"$34K MRR. $0 spent on ads. Here's the full playbook."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1</p>
+          <p class="slide-text">훅: "$34K MRR. $0 spent on ads. Here's the full playbook."</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2</p>
+          <p class="slide-text">오가닉 그로스란: 광고 없이 커뮤니티로 성장</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 3</p>
+          <p class="slide-text">Reddit 전략: 서브레딧 찾기 → 답변 → 자연스럽게 소개</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 4</p>
+          <p class="slide-text">케이스: Goji Berry AI — Reddit → $34K MRR 6개월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 5</p>
+          <p class="slide-text">Hacker News "Show HN" 활용법</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 6</p>
+          <p class="slide-text">케이스: Pontis — 오픈소스 공개 → HN 프런트 → 바이럴</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 7</p>
+          <p class="slide-text">Product Hunt 런칭 전략</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 8</p>
+          <p class="slide-text">케이스: SaveWise — Facebook 그룹 → $25K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 9</p>
+          <p class="slide-text">3채널 오가닉 그로스 템플릿</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10</p>
+          <p class="slide-text">Comment "GROWTH" for the Chapter 5 breakdown</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">GROWTH</span>
+        <span class="cases-tag">핵심 케이스: #15, #40, #53, #54</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Week 6 -->
+<section class="section-light">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 6 · Chapter 6</p>
+      <h2 class="week-title">Portfolio Strategy</h2>
+      <p class="week-hook">"28 apps. Most failed. Still made $10K/month."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1</p>
+          <p class="slide-text">훅: "28 apps. Most failed. Still made $10K/month."</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2</p>
+          <p class="slide-text">포트폴리오 전략이란: 작은 베팅 여러 개</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 3</p>
+          <p class="slide-text">케이스: Max — 28개 앱, 상위 4개가 $10K/월</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 4</p>
+          <p class="slide-text">앱 재사용률 90%: 한 번 만들면 다음은 30분</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 5</p>
+          <p class="slide-text">케이스: Katie Keith — 19개 앱 → 연 $1.8M</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 6</p>
+          <p class="slide-text">포트폴리오 선택 기준: 검증된 시장 + 낮은 유지비</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 7</p>
+          <p class="slide-text">케이스: Pre — 하이퍼 니치 앱들 → $120K/년</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 8</p>
+          <p class="slide-text">실패한 앱을 빠르게 접는 기준</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 9</p>
+          <p class="slide-text">포트폴리오 로드맵: 1→3→10개</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10</p>
+          <p class="slide-text">Comment "PORTFOLIO" for the Chapter 6 breakdown</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">PORTFOLIO</span>
+        <span class="cases-tag">핵심 케이스: #12, #48, #55, #42</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Week 7 -->
+<section class="section-dark">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 7 · Chapter 7</p>
+      <h2 class="week-title">Creator Partnerships</h2>
+      <p class="week-hook">"He had 0 followers. $42K MRR in 90 days. Here's how."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1</p>
+          <p class="slide-text">훅: "He had 0 followers. $42K MRR in 90 days. Here's how."</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2</p>
+          <p class="slide-text">크리에이터 파트너십이란: 팔로워 빌리기</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 3</p>
+          <p class="slide-text">케이스: CJ Zafir — AI 툴 → 유튜버 제휴 → $42K MRR</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 4</p>
+          <p class="slide-text">올바른 크리에이터 찾는 법: 10K~100K 팔로워 니치</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 5</p>
+          <p class="slide-text">파트너십 제안 이메일 템플릿</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 6</p>
+          <p class="slide-text">케이스: YouTube로 앱 $1M/년 성장시킨 사례</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 7</p>
+          <p class="slide-text">수익 쉐어 vs 선불 vs 무료 계정</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 8</p>
+          <p class="slide-text">케이스: 19세 → 10개월 → $80K/월 디자인 에이전시</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 9</p>
+          <p class="slide-text">파트너십 트래킹: UTM + 전환율</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10</p>
+          <p class="slide-text">Comment "PARTNER" for the Chapter 7 breakdown</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">PARTNER</span>
+        <span class="cases-tag">핵심 케이스: #13, #11, #27, #2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Week 8 -->
+<section class="section-light">
+  <div class="inner">
+    <div class="week-header reveal">
+      <p class="week-number">Week 8 · Chapter 8</p>
+      <h2 class="week-title">Monetization + Exit</h2>
+      <p class="week-hook">"He sold 2 apps for $265K. Built them in a hotel room."</p>
+    </div>
+    <div class="reveal">
+      <div class="slides-grid">
+        <div class="slide-card slide-hook">
+          <p class="slide-num">Slide 1</p>
+          <p class="slide-text">훅: "He sold 2 apps for $265K. Built them in a hotel room."</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 2</p>
+          <p class="slide-text">수익화 모델 3가지: 구독 / 일회성 / 광고</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 3</p>
+          <p class="slide-text">가격 올리는 법: 기존 고객 유지하면서</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 4</p>
+          <p class="slide-text">케이스: 호텔방 앱 개발 → 17개 앱 → $265K 엑싯</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 5</p>
+          <p class="slide-text">MicroAcquire / Acquire.com에서 앱 파는 법</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 6</p>
+          <p class="slide-text">케이스: 앱 4개 플립 → $500K</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 7</p>
+          <p class="slide-text">엑싯 배수: ARR 2x~4x 일반적</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 8</p>
+          <p class="slide-text">케이스: 3번 엑싯한 99년생 창업자 전략</p>
+        </div>
+        <div class="slide-card">
+          <p class="slide-num">Slide 9</p>
+          <p class="slide-text">팔기 좋은 앱 만드는 4가지 조건</p>
+        </div>
+        <div class="slide-card slide-cta">
+          <p class="slide-num">Slide 10</p>
+          <p class="slide-text">Comment "EXIT" for the Chapter 8 breakdown</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <span class="keyword-badge">EXIT</span>
+        <span class="cases-tag">핵심 케이스: #23, #34, #37, #33</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ManyChat Summary -->
+<section class="section-black">
+  <div class="inner">
+    <div class="week-header reveal" style="text-align:center; margin-bottom:48px">
+      <p class="week-number" style="text-align:center">ManyChat 세팅</p>
+      <h2 class="week-title" style="font-size:clamp(28px,4vw,52px)">9 Keywords.<br />9 Flows.</h2>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>주차</th>
+            <th>챕터</th>
+            <th>키워드</th>
+            <th>ManyChat 플로우</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Week 0</td>
+            <td>Hook Post</td>
+            <td><span class="kw">PLAYBOOK</span></td>
+            <td><span class="check">✓</span> 메인 플로우 (이메일 수집)</td>
+          </tr>
+          <tr>
+            <td>Week 1</td>
+            <td>Idea Discovery</td>
+            <td><span class="kw">IDEA</span></td>
+            <td>새 플로우 추가</td>
+          </tr>
+          <tr>
+            <td>Week 2</td>
+            <td>Build Fast</td>
+            <td><span class="kw">BUILD</span></td>
+            <td>새 플로우 추가</td>
+          </tr>
+          <tr>
+            <td>Week 3</td>
+            <td>Validate First</td>
+            <td><span class="kw">VALIDATE</span></td>
+            <td>새 플로우 추가</td>
+          </tr>
+          <tr>
+            <td>Week 4</td>
+            <td>Solo Survival</td>
+            <td><span class="kw">SOLO</span></td>
+            <td>새 플로우 추가</td>
+          </tr>
+          <tr>
+            <td>Week 5</td>
+            <td>$0 Growth Engine</td>
+            <td><span class="kw">GROWTH</span></td>
+            <td>새 플로우 추가</td>
+          </tr>
+          <tr>
+            <td>Week 6</td>
+            <td>Portfolio Strategy</td>
+            <td><span class="kw">PORTFOLIO</span></td>
+            <td>새 플로우 추가</td>
+          </tr>
+          <tr>
+            <td>Week 7</td>
+            <td>Creator Partnerships</td>
+            <td><span class="kw">PARTNER</span></td>
+            <td>새 플로우 추가</td>
+          </tr>
+          <tr>
+            <td>Week 8</td>
+            <td>Monetization + Exit</td>
+            <td><span class="kw">EXIT</span></td>
+            <td>새 플로우 추가</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="reveal" style="text-align:center; margin-top:24px; font-size:14px; color:var(--apple-text-tertiary)">
+      모든 키워드 DM은 동일한 Beehiiv 랜딩페이지 링크로 연결
+    </p>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <h2 class="reveal">71 Cases.<br />8 Weeks.<br /><span style="color:var(--apple-green)">One Playbook.</span></h2>
+  <p class="reveal">매주 한 챕터씩. 인스타 캐러셀로 드롭.</p>
+</section>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
