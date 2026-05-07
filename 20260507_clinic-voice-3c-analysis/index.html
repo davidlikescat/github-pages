@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Clinic Voice — 3C 분석 보고서 (냉정한 평가)</title>
+<meta name="description" content="LG U+ AICC 출신이 1·2차 병원 시장으로 진출할 때의 시장·경쟁·자기역량 분석. Ohmae의 3C 프레임워크 기반 솔직한 평가서." />
+<style>
+  :root{
+    --bg-w:#fbfbfd;
+    --bg-l:#f5f5f7;
+    --bg-d:#1d1d1f;
+    --bg-k:#000;
+    --bg-cd:#2a2a2c;
+    --t-1:#1d1d1f;
+    --t-2:#6e6e73;
+    --t-3:#86868b;
+    --t-w:#f5f5f7;
+    --t-w2:#a1a1a6;
+    --t-w3:#6e6e73;
+    --acc:#0071e3;
+    --acc-h:#0077ed;
+    --acc-l:#2997ff;
+    --b-l:rgba(0,0,0,.08);
+    --b-d:rgba(255,255,255,.12);
+    --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Apple SD Gothic Neo","Pretendard","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --hero:clamp(40px,7vw,84px);
+    --headline:clamp(30px,4.6vw,56px);
+    --title:clamp(22px,2.8vw,34px);
+    --sub:clamp(17px,1.8vw,24px);
+    --body:clamp(15px,1.1vw,17px);
+    --small:clamp(13px,0.95vw,15px);
+    --max:980px;
+    --wide:1240px;
+    --gut:22px;
+    --pad-xl:clamp(96px,11vw,160px);
+    --pad-lg:clamp(72px,8vw,120px);
+    --pad-md:clamp(48px,5vw,80px);
+    --rad:20px;
+    --rad-sm:14px;
+    --rad-pill:980px;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--font);
+    background:var(--bg-w);
+    color:var(--t-1);
+    font-size:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    word-break:keep-all;
+  }
+  a{color:inherit;text-decoration:none}
+  ul,ol{list-style:none}
+
+  /* Nav */
+  .nav{
+    position:sticky;top:0;height:48px;z-index:9999;
+    background:rgba(251,251,253,.78);
+    backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:.5px solid var(--b-l);
+  }
+  .nav__inner{
+    max-width:var(--max);margin:0 auto;height:100%;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 var(--gut);
+  }
+  .nav__brand{font-weight:600;letter-spacing:-.02em;font-size:16px}
+  .nav__brand span{color:var(--t-3);font-weight:400;margin-left:8px}
+  .nav__links{display:flex;gap:24px;font-size:13px;color:var(--t-2)}
+  .nav__links a:hover{color:var(--t-1)}
+  @media (max-width:720px){.nav__links{display:none}}
+
+  /* Section */
+  .section{padding:var(--pad-lg) var(--gut)}
+  .section--xl{padding:var(--pad-xl) var(--gut)}
+  .section--md{padding:var(--pad-md) var(--gut)}
+  .section--dark{background:var(--bg-d);color:var(--t-w)}
+  .section--black{background:var(--bg-k);color:var(--t-w)}
+  .section--light{background:var(--bg-l)}
+  .container{max-width:var(--max);margin:0 auto}
+  .container--wide{max-width:var(--wide);margin:0 auto}
+
+  /* Type */
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.12em;
+    font-size:12px;font-weight:600;
+    color:var(--t-3);margin-bottom:18px;
+  }
+  .section--dark .eyebrow,.section--black .eyebrow{color:var(--t-w3)}
+
+  h1.hero{
+    font-size:var(--hero);font-weight:700;
+    line-height:1.05;letter-spacing:-.022em;margin-bottom:22px;
+  }
+  h2.headline{
+    font-size:var(--headline);font-weight:600;
+    line-height:1.1;letter-spacing:-.022em;margin-bottom:22px;
+  }
+  h3.title{
+    font-size:var(--title);font-weight:600;
+    line-height:1.2;letter-spacing:-.018em;margin-bottom:14px;
+  }
+  h4.subtitle{
+    font-size:clamp(18px,1.8vw,22px);font-weight:600;
+    line-height:1.3;letter-spacing:-.015em;margin-bottom:10px;
+  }
+  .lede{
+    font-size:var(--sub);font-weight:400;
+    line-height:1.4;color:var(--t-2);max-width:760px;
+  }
+  .section--dark .lede,.section--black .lede{color:var(--t-w2)}
+
+  .center{text-align:center}
+  .center .lede{margin-left:auto;margin-right:auto}
+  .section-head{margin-bottom:56px;max-width:820px}
+  .section-head--center{margin-left:auto;margin-right:auto;text-align:center}
+
+  /* Hero */
+  .hero-wrap{
+    background:radial-gradient(1100px 600px at 50% 0%,#28282a 0%,#000 70%);
+    color:var(--t-w);
+    padding:var(--pad-xl) var(--gut) var(--pad-lg);
+    text-align:center;overflow:hidden;position:relative;
+  }
+  .hero-wrap::before{
+    content:"";position:absolute;inset:auto 0 -160px 50%;
+    width:1100px;height:1100px;transform:translateX(-50%);
+    background:radial-gradient(closest-side,rgba(0,113,227,.16),transparent 65%);
+    pointer-events:none;
+  }
+  .hero-wrap .eyebrow{color:var(--t-w3)}
+  .hero__sub{
+    font-size:var(--sub);color:var(--t-w2);
+    max-width:680px;margin:0 auto;
+  }
+  .hero__meta{
+    display:flex;gap:32px;justify-content:center;flex-wrap:wrap;
+    margin-top:48px;padding-top:32px;
+    border-top:.5px solid var(--b-d);
+    font-size:13px;color:var(--t-w3);
+    position:relative;z-index:1;max-width:780px;margin-left:auto;margin-right:auto;
+  }
+  .hero__meta b{color:var(--t-w);font-weight:500;display:block;margin-bottom:4px}
+
+  /* Verdict box */
+  .verdict{
+    max-width:880px;margin:0 auto;
+    background:var(--bg-cd);
+    border:.5px solid var(--b-d);
+    border-radius:var(--rad);
+    padding:clamp(40px,5vw,64px);
+    color:var(--t-w);
+  }
+  .verdict__tag{
+    display:inline-block;font-size:11px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;
+    padding:6px 14px;border-radius:var(--rad-pill);
+    background:var(--acc);color:#fff;margin-bottom:24px;
+  }
+  .verdict__decision{
+    font-size:clamp(36px,5vw,56px);font-weight:700;
+    letter-spacing:-.025em;line-height:1.1;margin-bottom:24px;
+  }
+  .verdict__decision .muted{color:var(--t-w3);font-weight:400}
+  .verdict__body{font-size:var(--sub);color:var(--t-w2);line-height:1.5;margin-bottom:24px}
+  .verdict__list{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:32px;font-size:15px}
+  .verdict__list h5{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--t-w3);margin-bottom:10px;font-weight:600}
+  .verdict__list p{color:var(--t-w);line-height:1.5}
+  @media (max-width:600px){.verdict__list{grid-template-columns:1fr}}
+
+  /* Big text */
+  .big{
+    font-size:clamp(26px,3.6vw,42px);
+    font-weight:600;line-height:1.2;letter-spacing:-.02em;
+    max-width:880px;
+  }
+  .big .muted{color:var(--t-3)}
+
+  /* Cards */
+  .card{
+    background:#fff;
+    border:.5px solid var(--b-l);
+    border-radius:var(--rad);
+    padding:36px 32px;
+  }
+  .section--dark .card,.section--black .card{
+    background:var(--bg-cd);border-color:var(--b-d);color:var(--t-w);
+  }
+  .card__num{
+    font-size:clamp(34px,4.5vw,52px);
+    font-weight:600;letter-spacing:-.025em;line-height:1;
+    color:var(--t-1);margin-bottom:16px;font-variant-numeric:tabular-nums;
+  }
+  .card__num--acc{color:var(--acc)}
+  .section--dark .card__num,.section--black .card__num{color:var(--t-w)}
+  .card__title{
+    font-size:clamp(18px,2vw,22px);font-weight:600;
+    letter-spacing:-.015em;line-height:1.25;margin-bottom:10px;
+  }
+  .card__desc{font-size:15px;color:var(--t-2);line-height:1.55}
+  .section--dark .card__desc,.section--black .card__desc{color:var(--t-w2)}
+
+  /* Grids */
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gut)}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gut)}
+  @media (max-width:760px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+  @media (min-width:761px) and (max-width:960px){.grid-3,.grid-4{grid-template-columns:repeat(2,1fr)}}
+
+  /* 3C Triangle */
+  .triangle{
+    max-width:720px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  }
+  .triangle__cell{
+    background:var(--bg-cd);border:.5px solid var(--b-d);
+    border-radius:var(--rad);padding:32px 24px;text-align:center;color:var(--t-w);
+  }
+  .triangle__cell--full{grid-column:1/-1}
+  .triangle__cell .num{
+    font-size:36px;font-weight:300;color:var(--acc-l);
+    letter-spacing:-.03em;line-height:1;margin-bottom:12px;
+  }
+  .triangle__cell h5{font-size:18px;font-weight:600;margin-bottom:6px;letter-spacing:-.015em}
+  .triangle__cell p{font-size:14px;color:var(--t-w2);line-height:1.5}
+
+  /* Table */
+  .matrix{
+    border-collapse:collapse;width:100%;
+    border-radius:var(--rad);overflow:hidden;
+    border:.5px solid var(--b-l);
+    font-size:14px;
+  }
+  .matrix th,.matrix td{
+    padding:16px 18px;text-align:left;
+    border-bottom:.5px solid var(--b-l);
+    vertical-align:top;line-height:1.5;
+  }
+  .matrix th{
+    background:var(--bg-l);font-weight:600;font-size:12px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--t-2);
+  }
+  .matrix tr:last-child td{border-bottom:none}
+  .matrix td b{font-weight:600;color:var(--t-1);display:block;margin-bottom:4px}
+  .matrix td.us{background:rgba(0,113,227,.05)}
+  .matrix td.us b{color:var(--acc)}
+  .matrix .threat-h{color:#1d1d1f;font-weight:600}
+  .matrix .threat-m{color:var(--t-2);font-weight:500}
+  .matrix .threat-l{color:var(--t-3);font-weight:400}
+  @media (max-width:760px){
+    .matrix{font-size:13px}
+    .matrix th,.matrix td{padding:12px 10px}
+  }
+
+  /* SWOT-like 4 quadrants */
+  .quad{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+    background:var(--b-l);border:.5px solid var(--b-l);
+    border-radius:var(--rad);overflow:hidden;
+  }
+  .quad__cell{background:#fff;padding:36px 32px}
+  .quad__cell--dark{background:var(--bg-d);color:var(--t-w)}
+  .quad__cell .label{
+    font-size:12px;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--t-3);font-weight:600;margin-bottom:14px;
+  }
+  .quad__cell--dark .label{color:var(--t-w3)}
+  .quad__cell h4{
+    font-size:clamp(20px,2.2vw,26px);font-weight:600;
+    letter-spacing:-.018em;margin-bottom:18px;line-height:1.2;
+  }
+  .quad__cell ul{font-size:14px;line-height:1.7}
+  .quad__cell li{padding-left:18px;position:relative;color:var(--t-1)}
+  .quad__cell--dark li{color:var(--t-w)}
+  .quad__cell li::before{
+    content:"—";position:absolute;left:0;color:var(--t-3);
+  }
+  .quad__cell--dark li::before{color:var(--t-w3)}
+  @media (max-width:760px){.quad{grid-template-columns:1fr}}
+
+  /* Quote */
+  .quote-block{max-width:760px;margin:0 auto;text-align:center}
+  .quote{
+    font-size:clamp(24px,3vw,34px);font-weight:500;
+    line-height:1.3;letter-spacing:-.02em;
+  }
+  .quote__attr{
+    display:block;margin-top:20px;font-size:14px;
+    color:var(--t-3);font-weight:400;
+  }
+
+  /* Persona card */
+  .persona{
+    background:#fff;border:.5px solid var(--b-l);
+    border-radius:var(--rad);padding:36px;
+  }
+  .persona__head{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:20px;border-bottom:.5px solid var(--b-l)}
+  .persona__avatar{
+    width:48px;height:48px;border-radius:50%;
+    background:var(--bg-l);display:flex;align-items:center;justify-content:center;
+    font-size:18px;font-weight:600;color:var(--t-2);
+    flex-shrink:0;
+  }
+  .persona__title{font-size:18px;font-weight:600;letter-spacing:-.015em}
+  .persona__sub{font-size:13px;color:var(--t-3);margin-top:2px}
+  .persona__row{
+    display:grid;grid-template-columns:120px 1fr;gap:14px;
+    padding:10px 0;border-top:.5px solid var(--b-l);font-size:14px;
+  }
+  .persona__row:first-of-type{border-top:none}
+  .persona__row dt{color:var(--t-3);font-weight:500}
+  .persona__row dd{color:var(--t-1);line-height:1.5}
+
+  /* Reality check (brutal) */
+  .reality{
+    background:var(--bg-cd);border-radius:var(--rad);
+    padding:32px;color:var(--t-w);position:relative;
+    border:.5px solid var(--b-d);
+  }
+  .reality__num{
+    font-size:48px;font-weight:300;color:var(--acc-l);
+    letter-spacing:-.03em;line-height:1;margin-bottom:16px;
+  }
+  .reality h4{
+    font-size:20px;font-weight:600;margin-bottom:10px;
+    letter-spacing:-.015em;line-height:1.3;
+  }
+  .reality p{font-size:14px;color:var(--t-w2);line-height:1.55}
+  .reality .so-what{
+    margin-top:16px;padding-top:16px;
+    border-top:.5px solid var(--b-d);
+    font-size:14px;line-height:1.55;color:var(--t-w);
+  }
+  .reality .so-what b{color:var(--acc-l);font-weight:600;display:block;margin-bottom:4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+  /* Path comparison */
+  .path{
+    background:#fff;border:.5px solid var(--b-l);
+    border-radius:var(--rad);padding:36px 32px;
+    display:flex;flex-direction:column;height:100%;
+  }
+  .path--reco{
+    background:var(--bg-d);color:var(--t-w);border-color:transparent;
+    box-shadow:0 24px 60px rgba(0,113,227,.14);
+    position:relative;
+  }
+  .path--reco::before{
+    content:"권고";position:absolute;top:-12px;left:32px;
+    background:var(--acc);color:#fff;font-size:11px;font-weight:600;
+    padding:6px 14px;border-radius:var(--rad-pill);letter-spacing:.1em;
+  }
+  .path__name{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--t-3);margin-bottom:8px;font-weight:600}
+  .path--reco .path__name{color:var(--acc-l)}
+  .path__title{font-size:22px;font-weight:600;letter-spacing:-.018em;margin-bottom:20px;line-height:1.2}
+  .path__row{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:12px 0;border-top:.5px solid var(--b-l);font-size:14px;line-height:1.5}
+  .path--reco .path__row{border-top-color:var(--b-d)}
+  .path__row:first-of-type{border-top:none}
+  .path__row dt{color:var(--t-3);font-weight:500;min-width:80px}
+  .path--reco .path__row dt{color:var(--t-w3)}
+  .path__row dd{color:var(--t-1)}
+  .path--reco .path__row dd{color:var(--t-w)}
+  .path__verdict{margin-top:auto;padding-top:24px;font-size:13px;color:var(--t-2)}
+  .path--reco .path__verdict{color:var(--t-w2)}
+
+  /* Roadmap (90 days) */
+  .step{
+    display:grid;grid-template-columns:80px 1fr;gap:32px;
+    padding:28px 0;border-top:.5px solid var(--b-d);
+  }
+  .step:first-child{border-top:none}
+  .step__num{
+    font-size:clamp(36px,4vw,52px);font-weight:300;
+    color:var(--t-w3);letter-spacing:-.03em;line-height:1;
+  }
+  .step__body h4{font-size:clamp(18px,2vw,22px);font-weight:600;margin-bottom:8px;letter-spacing:-.015em}
+  .step__body p{font-size:15px;line-height:1.55;color:var(--t-w2)}
+  .step__body .gate{
+    display:inline-block;font-size:11px;letter-spacing:.08em;
+    margin-top:14px;padding:6px 12px;
+    border:.5px solid var(--b-d);border-radius:var(--rad-pill);
+    color:var(--t-w);text-transform:uppercase;font-weight:600;
+  }
+  @media (max-width:600px){.step{grid-template-columns:1fr;gap:8px}}
+
+  /* CTA */
+  .cta{
+    background:var(--bg-k);color:#fff;text-align:center;
+    padding:var(--pad-xl) var(--gut);
+  }
+  .cta h2{
+    font-size:var(--hero);font-weight:700;
+    line-height:1.05;letter-spacing:-.022em;
+    max-width:820px;margin:0 auto 20px;
+  }
+  .cta p{font-size:var(--sub);color:var(--t-w2);max-width:620px;margin:0 auto 36px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:160px;height:48px;padding:0 28px;
+    background:var(--acc);color:#fff;border:none;
+    border-radius:var(--rad-pill);
+    font-size:16px;font-weight:500;letter-spacing:-.01em;
+    cursor:pointer;transition:background .2s var(--ease);
+    font-family:inherit;
+  }
+  .btn:hover{background:var(--acc-h)}
+  .btn--ghost{background:transparent;border:1px solid rgba(255,255,255,.25);margin-left:8px}
+  .btn--ghost:hover{background:rgba(255,255,255,.06)}
+
+  /* Footer */
+  footer{
+    background:#000;color:var(--t-w3);
+    padding:48px var(--gut) 32px;font-size:12px;line-height:1.6;
+  }
+  footer .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
+
+  /* Reveal */
+  .reveal{
+    opacity:0;transform:translateY(20px);
+    transition:opacity .8s var(--ease),transform .8s var(--ease);
+  }
+  .reveal.is-visible{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* Score bar */
+  .score-bar{display:grid;grid-template-columns:140px 1fr 60px;gap:16px;align-items:center;padding:14px 0;border-top:.5px solid var(--b-l);font-size:14px}
+  .score-bar:first-of-type{border-top:none}
+  .score-bar__label{color:var(--t-2);font-weight:500}
+  .score-bar__track{height:6px;background:var(--bg-l);border-radius:980px;overflow:hidden;position:relative}
+  .score-bar__fill{height:100%;background:var(--acc);border-radius:980px;transform-origin:left;transform:scaleX(0);transition:transform 1.2s var(--ease)}
+  .is-visible .score-bar__fill{transform:scaleX(var(--w,0.5))}
+  .score-bar__num{font-variant-numeric:tabular-nums;font-weight:600;color:var(--t-1);text-align:right}
+  .section--dark .score-bar,.section--black .score-bar{border-top-color:var(--b-d)}
+  .section--dark .score-bar__label,.section--black .score-bar__label{color:var(--t-w2)}
+  .section--dark .score-bar__num,.section--black .score-bar__num{color:var(--t-w)}
+  .section--dark .score-bar__track,.section--black .score-bar__track{background:var(--bg-cd)}
+
+  /* Note callout */
+  .note{
+    border-left:2px solid var(--acc);padding:8px 0 8px 18px;
+    font-size:14px;color:var(--t-2);line-height:1.6;
+    margin:16px 0;
+  }
+  .section--dark .note,.section--black .note{color:var(--t-w2)}
+  .note b{color:var(--t-1);font-weight:600}
+  .section--dark .note b,.section--black .note b{color:var(--t-w)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <div class="nav__brand">Clinic Voice<span>3C 분석</span></div>
+    <div class="nav__links">
+      <a href="#verdict">결론</a>
+      <a href="#customer">Customer</a>
+      <a href="#competition">Competition</a>
+      <a href="#company">Company</a>
+      <a href="#path">권고</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-wrap">
+  <div class="container">
+    <p class="eyebrow">A Brutally Honest 3C Analysis</p>
+    <h1 class="hero">정답이 듣고 싶은 게 아니라,<br/>틀린 답을 피하고 싶은 사람을 위한 보고서.</h1>
+    <p class="hero__sub">LG U+ AICC 사업 담당자가 1·2차 병원 SOHO 시장으로 직접 진출할 때, Ohmae의 3C 프레임워크로 본 시장·경쟁·자기역량의 진실.</p>
+    <div class="hero__meta">
+      <div><b>Framework</b>Kenichi Ohmae 3C Strategic Triangle (1982)</div>
+      <div><b>Stance</b>판단 보류 → 조건부 Go</div>
+      <div><b>Decision Window</b>6~12개월</div>
+    </div>
+  </div>
+</header>
+
+<!-- VERDICT -->
+<section class="section section--xl" id="verdict">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Executive Verdict</p>
+      <h2 class="headline">결론을 먼저 말씀드립니다.</h2>
+    </div>
+
+    <div class="verdict reveal">
+      <span class="verdict__tag">Conditional Go</span>
+      <h3 class="verdict__decision">"진입은 가능하다.<br/><span class="muted">단, 단독 1인 창업은 No-Go."</span></h3>
+      <p class="verdict__body">시장은 비어 있고, 글로벌 검증은 끝났고, 본인의 AICC 도메인 경험은 한국에서 손꼽히는 자산입니다. 그러나 1·2차 의원 SOHO 영업은 한국에서 가장 보수적인 IT 도입 시장이며, 2026년 하반기 유비케어 의사랑 AI 출시로 진입 윈도우가 6~12개월로 좁아졌습니다. 1인 단독 창업으로는 영업·구축·CS·법무를 동시에 감당할 수 없습니다.</p>
+      <div class="verdict__list">
+        <div>
+          <h5>가야 할 길</h5>
+          <p>① 코파운더 1~2명(영업/의료 도메인) 확보<br/>② 또는 병원 마케팅 대행사 채널 파트너십<br/>③ 또는 EMR 3사(유비케어·비트·이지스) 모듈 협력</p>
+        </div>
+        <div>
+          <h5>피해야 할 길</h5>
+          <p>① 직접 콜드 영업으로 1차 의원 100곳 도달 시도<br/>② LG U+ 재직 중 사업 준비 (경업 리스크)<br/>③ 가격 자체로 경쟁 — 통신사·EMR 자본력에 패배</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORK -->
+<section class="section section--md section--light">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">The Framework</p>
+      <h2 class="headline">왜 3C인가.</h2>
+      <p class="lede">Kenichi Ohmae(전 McKinsey 일본 파트너)가 1982년 「The Mind of the Strategist」에서 제시한 전략 삼각형. 마이클 포터의 5 Forces가 산업 구조를 보는 도구라면, 3C는 "내가 어디로 가야 하는가"를 보는 도구입니다.</p>
+    </div>
+
+    <div class="triangle reveal">
+      <div class="triangle__cell triangle__cell--full">
+        <div class="num">01</div>
+        <h5>Customer</h5>
+        <p>Ohmae는 "고객이 가장 먼저"라고 명시했습니다. 회사도 경쟁자도, 결국 고객이 결제하지 않으면 의미가 없기 때문입니다.</p>
+      </div>
+      <div class="triangle__cell">
+        <div class="num">02</div>
+        <h5>Competition</h5>
+        <p>고객이 우리 대신 선택할 수 있는 모든 옵션. 직접 경쟁자뿐 아니라 "현상 유지"도 경쟁자입니다.</p>
+      </div>
+      <div class="triangle__cell">
+        <div class="num">03</div>
+        <h5>Company</h5>
+        <p>우리만이 갖는 차별적 역량. 흉내 낼 수 없거나, 흉내 내려면 자기 경제성을 포기해야 하는 그것.</p>
+      </div>
+    </div>
+
+    <div class="note reveal" style="max-width:880px;margin:48px auto 0">
+      <b>벤치마크 사례 — 후지필름 vs 사쿠라필름.</b>
+      후지가 화질로 시장을 장악했을 때, 사쿠라는 "고객이 진짜 원하는 건 가격"이라는 Customer 분석에서 출발해 같은 가격에 24매 필름(후지는 20매)을 출시. 후지의 강점(화질)을 정면 충돌하지 않고, 자기 강점(원가 효율)으로 고객 니즈에 맞췄습니다. <b>3C의 sweet spot은 "우리 강점 ∩ 고객 니즈 ∩ 경쟁자가 못하는 것"의 교집합에 있습니다.</b>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER -->
+<section class="section section--xl" id="customer">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">① Customer · 1·2차 의원 시장</p>
+      <h2 class="headline">시장은 크다.<br/>그런데 그들은 결제하지 않는다.</h2>
+      <p class="lede">5만 5천 곳이라는 숫자에 속지 마세요. 한국 1·2차 의원은 "IT SaaS에 가장 늦게 결제하는" 그룹 중 하나입니다. 그게 진실입니다.</p>
+    </div>
+
+    <!-- Customer market sizing -->
+    <div class="grid-4 reveal">
+      <div class="card">
+        <div class="card__num">5.5만</div>
+        <h4 class="card__title">1·2차 의료기관</h4>
+        <p class="card__desc">의원 35,000 + 치과 19,000 + 한의원 14,500 + 병원 1,700</p>
+      </div>
+      <div class="card">
+        <div class="card__num">46.8%</div>
+        <h4 class="card__title">유비케어 의사랑 점유율</h4>
+        <p class="card__desc">1만 5천 곳 사용. EMR 채널이 이미 한 곳에 집중되어 있다.</p>
+      </div>
+      <div class="card">
+        <div class="card__num card__num--acc">₩1.1억</div>
+        <h4 class="card__title">피부과 월평균 매출</h4>
+        <p class="card__desc">성형 ₩1.06억, 치과 ₩7천만. 비급여 비중이 높을수록 SaaS 결제 여력 큼.</p>
+      </div>
+      <div class="card">
+        <div class="card__num">3-6개월</div>
+        <h4 class="card__title">평균 영업 사이클</h4>
+        <p class="card__desc">의원장은 의사회·동기·세무사 추천이 없으면 결제하지 않는다.</p>
+      </div>
+    </div>
+
+    <!-- Persona -->
+    <div style="margin-top:64px" class="reveal">
+      <h3 class="title" style="margin-bottom:24px">타깃 페르소나 — 강남 피부과 김원장 (45세)</h3>
+      <div class="persona">
+        <div class="persona__head">
+          <div class="persona__avatar">P1</div>
+          <div>
+            <div class="persona__title">김원장 · 1차 의원 · 비급여 60%</div>
+            <div class="persona__sub">Primary Buyer · 결제 의사결정자 = 본인 = 1인</div>
+          </div>
+        </div>
+        <dl>
+          <div class="persona__row"><dt>월 매출</dt><dd>1.0~1.5억 원 / 영업이익률 30~40% / 데스크 2명, 간호사 3명</dd></div>
+          <div class="persona__row"><dt>현재 마케팅</dt><dd>네이버 플레이스 + 인스타그램 + 블로그. 마케팅 대행사 월 200~500만 원 (애드리절트·하룹·라온하제 등)</dd></div>
+          <div class="persona__row"><dt>최대 페인</dt><dd>점심·야간·주말 신환 콜 미응답으로 인한 매출 손실 (체감 30~50건/월)</dd></div>
+          <div class="persona__row"><dt>차순위 페인</dt><dd>예약 노쇼, 데스크 이직, 비급여 시술 후 재방문 유도 부재</dd></div>
+          <div class="persona__row"><dt>IT 구매 패턴</dt><dd>EMR은 의사회 친구 추천. 마케팅 대행사도 기존 거래처 소개. 콜드 콜·이메일 = 100% 거절</dd></div>
+          <div class="persona__row"><dt>SaaS 지불 의향</dt><dd>월 30~150만 원 = 결제 가능. 단, ROI가 첫 달부터 보여야 함. 6개월 약정 = 거의 불가능</dd></div>
+          <div class="persona__row"><dt>거부 트리거</dt><dd>"AI 음성봇이 환자에게 잘못 응답하면 누가 책임지나?" — 이 질문에 답하지 못하면 미팅 종료</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Reality check on customer -->
+    <div style="margin-top:64px" class="reveal">
+      <h3 class="title" style="margin-bottom:24px">고객의 진실 — 5가지 불편한 사실</h3>
+      <div class="grid-3">
+        <div class="reality">
+          <div class="reality__num">01</div>
+          <h4>의원장은 신뢰 기반으로만 결제한다</h4>
+          <p>"의사회 친구가 쓰더라"는 한 마디가 100건의 콜드 콜보다 강력하다. 의료는 신뢰 시장이며, IT 도입조차 그 규칙을 따른다.</p>
+          <div class="so-what"><b>So What</b>채널 없는 영업 = CAC 폭발. 첫 50개 의원 확보까지 18개월 이상 걸린다.</div>
+        </div>
+        <div class="reality">
+          <div class="reality__num">02</div>
+          <h4>5만 5천 곳 ≠ 5만 5천 잠재 고객</h4>
+          <p>실제 결제 가능 풀은 비급여 비중 50% 이상 + 월 매출 7천만 원 이상 의원 — 약 8,000곳. 진짜 TAM은 1/7로 줄어든다.</p>
+          <div class="so-what"><b>So What</b>SAM(Serviceable Available Market) 재계산 필수. 8,000 × ₩149만 × 12 = 연 1,430억 (이론치)</div>
+        </div>
+        <div class="reality">
+          <div class="reality__num">03</div>
+          <h4>의원장은 "혁신 얼리어답터"가 아니다</h4>
+          <p>유비케어가 90년대부터 시장을 잡은 이유는 그들이 "의사회·세무사 네트워크"라는 신뢰 채널을 먼저 잡았기 때문. 기술이 아니라.</p>
+          <div class="so-what"><b>So What</b>제품이 좋은 게 1번이 아니다. 추천 채널을 먼저 만들지 못하면 제품도 무용지물.</div>
+        </div>
+        <div class="reality">
+          <div class="reality__num">04</div>
+          <h4>"AI 음성이 잘못 답하면" 트라우마</h4>
+          <p>의원장은 의료 트리아지 책임을 두려워한다. 한 번의 잘못된 응대 = 환자 민원·언론 보도 = 폐원 리스크. 음성봇은 그들에게 양날의 검이다.</p>
+          <div class="so-what"><b>So What</b>"운영(예약·안내) 한정, 진단·증상 분류 명시 제외" 메시지가 영업의 첫 페이지가 되어야 한다.</div>
+        </div>
+        <div class="reality">
+          <div class="reality__num">05</div>
+          <h4>이미 마케팅 대행사에 월 300만 원 쓰고 있다</h4>
+          <p>광고비·블로그·SNS·상담 매니저 비용 합치면 비급여 의원은 매출의 5~15%를 마케팅에 쓴다. 우리 SaaS는 이 예산의 일부를 가져오는 것이지, 새 예산을 만드는 게 아니다.</p>
+          <div class="so-what"><b>So What</b>경쟁자는 통신사·EMR이 아니라 <b>병원 마케팅 대행사</b>. 그들과 싸울 게 아니라 채널로 활용해야 한다.</div>
+        </div>
+        <div class="reality">
+          <div class="reality__num">06</div>
+          <h4>1차 의원의 SaaS 해약률은 매우 높다</h4>
+          <p>마케팅 대행사 평균 약정 6개월 → 미연장률 30~40%. 효과가 30일 안에 안 보이면 끊는다. 한국 SOHO SaaS 평균 연 churn 25~35%.</p>
+          <div class="so-what"><b>So What</b>LTV/CAC 계산 시 churn 30% 가정 필수. 보수적으로는 LTV가 ₩1,490만 × 12 ÷ (1 + 0.3) = 약 ₩1,140만</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block reveal" style="margin-top:80px">
+      <p class="quote">"고객은 우리가 무엇을 만드는지에 관심이 없다. 자기 문제가 풀리는지에 관심이 있다."</p>
+      <span class="quote__attr">Kenichi Ohmae · The Mind of the Strategist (1982)</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION -->
+<section class="section section--xl section--light" id="competition">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">② Competition · 진짜 경쟁자는 누구인가</p>
+      <h2 class="headline">통신사가 아닙니다.<br/>EMR과 마케팅 대행사입니다.</h2>
+      <p class="lede">LG U+ 출신이 가장 흔히 빠지는 함정: "내 옛 동료들이 경쟁자다." 1·2차 시장에서는 아닙니다. 진짜 경쟁자는 의원장이 이미 신뢰하는 두 채널 — EMR 회사와 마케팅 대행사 — 입니다.</p>
+    </div>
+
+    <!-- Competitor matrix -->
+    <div class="reveal" style="overflow-x:auto">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>경쟁 진영</th>
+            <th>대표 플레이어</th>
+            <th>1·2차 침투력</th>
+            <th>위협 등급</th>
+            <th>우리의 대응</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>EMR 채널 지배자</b><br/><span style="color:var(--t-3)">가장 위험</span></td>
+            <td>유비케어 의사랑(46.8%)<br/>비트컴퓨터(12.2%)<br/>이지스(10.8%)<br/>메디블록 닥터팔레트</td>
+            <td>1만 5천+ 곳 직접 채널<br/>월 1회 이상 접점</td>
+            <td><span class="threat-h">최상위 ★★★★★</span><br/>유비케어 의사랑 AI 2026 H2 출시 — STT/SOAP 진료 자동화부터 시작</td>
+            <td>정면 충돌 회피.<br/>음성 콜(인바운드/아웃바운드)은 그들의 사각지대 — 진료실 안 vs 진료실 밖</td>
+          </tr>
+          <tr>
+            <td><b>병원 마케팅 대행사</b><br/><span style="color:var(--t-3)">예산을 이미 가져감</span></td>
+            <td>애드리절트(1,272곳)<br/>하룹(2,000곳)<br/>라온하제(580곳)<br/>상승기획·스타닥</td>
+            <td>의원장과 1:1 신뢰관계<br/>월 200~500만 원 이미 결제</td>
+            <td><span class="threat-h">상위 ★★★★</span><br/>그들이 음성봇을 묶어 팔기 시작하면 우리는 lose</td>
+            <td>경쟁이 아닌 채널 파트너로 전환.<br/>"마케팅 대행사 화이트라벨 SaaS" 옵션 검토</td>
+          </tr>
+          <tr>
+            <td><b>대형 헬스케어 SaaS</b><br/><span style="color:var(--t-3)">상급 → 1·2차 하강</span></td>
+            <td>카카오 케어챗(87곳, 31만 환자)<br/>네이버 클라우드 헬스</td>
+            <td>현재 중대형 병원 중심<br/>1·2차에는 미진입</td>
+            <td><span class="threat-m">중간 ★★★</span><br/>카카오톡 채널·결제 무기로 1·2차 진입 시 강력한 위협</td>
+            <td>음성 영역에서의 우위 유지.<br/>카카오는 텍스트 챗봇 중심, 음성은 약함 — 12개월 내 차별화 가능</td>
+          </tr>
+          <tr>
+            <td><b>통신 3사 AICC</b><br/><span style="color:var(--t-3)">옛 동료 진영</span></td>
+            <td>KT 세라봇(상급종합)<br/>LG U+ 익시오(바른세상병원)<br/>SKT</td>
+            <td>월 200건 자동 응대 수준<br/>구축형 SI, 1·2차 경제성 X</td>
+            <td><span class="threat-l">하위 ★★</span><br/>1·2차에 직접 내려올 가능성 낮음 (인건비 구조 부적합)</td>
+            <td>채널 파트너로 활용 가능.<br/>본인 출신 LG U+가 잠재 채널 — 단, 비경쟁 약정 확인 필수</td>
+          </tr>
+          <tr>
+            <td><b>해외 진입자</b><br/><span style="color:var(--t-3)">잠재 위협</span></td>
+            <td>Doctolib(EU)<br/>Hippocratic AI(US)<br/>Aaron.ai 한국 진출 가능성</td>
+            <td>현재 미진입<br/>한국어·규제 학습 비용 큼</td>
+            <td><span class="threat-l">하위 ★★</span><br/>2~3년 내 직접 진출 가능성 낮음. 단 카카오·네이버와 제휴 시 위협</td>
+            <td>한국 규제·언어 해자 활용.<br/>의료광고법·개인정보보호법 학습 비용이 외산의 진입장벽</td>
+          </tr>
+          <tr>
+            <td><b>현상 유지</b><br/><span style="color:var(--t-3)">가장 큰 경쟁자</span></td>
+            <td>인간 데스크 채용<br/>"우리 병원은 괜찮아"</td>
+            <td>의원의 90% 현재 상태</td>
+            <td><span class="threat-h">최상위 ★★★★★</span><br/>의원장은 "변경 비용 vs 잃는 매출"을 항상 비교한다</td>
+            <td>ROI를 30일 안에 보여주는 메시지.<br/>"100만 원 손실 회수 vs 149만 원 비용" 한 페이지로 증명</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Critical threat -->
+    <div style="margin-top:64px" class="reveal">
+      <div class="card" style="border-left:3px solid var(--acc);background:#fff">
+        <p class="eyebrow">결정적 위협 · Decision-Defining Event</p>
+        <h3 class="title">유비케어 의사랑 AI — 2026년 하반기 상용화</h3>
+        <p style="font-size:16px;line-height:1.7;color:var(--t-1);margin-bottom:14px">2026년 KIMES에서 공개된 '의사랑 AI'는 STT 기반 진료 SOAP 자동 생성, 보험청구 코드 추천이 1차 기능. 즉 <b>그들은 진료실 안</b>을 먼저 잡고 있다. 우리가 노리는 <b>진료실 밖(콜 응대)</b>은 아직 그들의 우선순위가 아니다.</p>
+        <p style="font-size:16px;line-height:1.7;color:var(--t-1)">하지만 의사랑 AI가 1만 5천 곳에 깔리는 순간, 그 다음 단계는 콜 응대 모듈 추가다. 우리에게 남은 윈도우는 그들이 콜 응대까지 내려오기 전 <b>6~12개월</b>. 이 안에 의원장 100~200곳에서 "이미 쓰고 있다"는 레퍼런스를 만들지 못하면, 시장은 닫힌다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section class="section section--xl section--dark" id="company">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">③ Company · 본인의 진짜 자산과 갭</p>
+      <h2 class="headline">AICC를 이만큼 이해하는 사람은<br/>한국에 50명도 안 된다.</h2>
+      <p class="lede">그게 본인의 첫 번째 자산입니다. 그리고 그것만이 본인의 자산입니다. 의원 도메인, SOHO 영업, 의사 네트워크 — 이 셋 모두는 0에서 시작합니다.</p>
+    </div>
+
+    <!-- Capability scoring -->
+    <div class="reveal" style="max-width:760px;margin:0 auto 64px">
+      <h3 class="title" style="margin-bottom:24px;color:var(--t-w)">역량 자가 평가 (1·2차 시장 적합도 기준)</h3>
+      <div class="score-bar"><div class="score-bar__label">AICC 도메인 깊이</div><div class="score-bar__track"><div class="score-bar__fill" style="--w:0.95"></div></div><div class="score-bar__num">9.5</div></div>
+      <div class="score-bar"><div class="score-bar__label">통신·텔레포니 기술</div><div class="score-bar__track"><div class="score-bar__fill" style="--w:0.85"></div></div><div class="score-bar__num">8.5</div></div>
+      <div class="score-bar"><div class="score-bar__label">B2B 엔터프라이즈 영업</div><div class="score-bar__track"><div class="score-bar__fill" style="--w:0.8"></div></div><div class="score-bar__num">8.0</div></div>
+      <div class="score-bar"><div class="score-bar__label">규제·컴플라이언스 이해</div><div class="score-bar__track"><div class="score-bar__fill" style="--w:0.7"></div></div><div class="score-bar__num">7.0</div></div>
+      <div class="score-bar"><div class="score-bar__label">제품 개발 (1인 MVP)</div><div class="score-bar__track"><div class="score-bar__fill" style="--w:0.5"></div></div><div class="score-bar__num">5.0</div></div>
+      <div class="score-bar"><div class="score-bar__label">SOHO 영업·CS 구조</div><div class="score-bar__track"><div class="score-bar__fill" style="--w:0.3"></div></div><div class="score-bar__num">3.0</div></div>
+      <div class="score-bar"><div class="score-bar__label">의원·의료 도메인</div><div class="score-bar__track"><div class="score-bar__fill" style="--w:0.2"></div></div><div class="score-bar__num">2.0</div></div>
+      <div class="score-bar"><div class="score-bar__label">의사 네트워크</div><div class="score-bar__track"><div class="score-bar__fill" style="--w:0.1"></div></div><div class="score-bar__num">1.0</div></div>
+    </div>
+
+    <!-- 4 quadrants -->
+    <h3 class="title reveal" style="text-align:center;margin-bottom:32px;color:var(--t-w)">SWOT — 자기에게 가장 솔직해야 할 부분</h3>
+    <div class="quad reveal">
+      <div class="quad__cell">
+        <p class="label">Strengths</p>
+        <h4>흉내 낼 수 없는 자산</h4>
+        <ul>
+          <li>한국 AICC 시장의 구축형/구독형 양 측면 모두 경험</li>
+          <li>통신사 텔레포니·STT/TTS·NLP 전 스택 이해</li>
+          <li>대기업 SI 영업의 의사결정 구조 파악</li>
+          <li>LG U+ 의료 AICC(바른세상병원) 사례 1차 자료로 학습</li>
+          <li>가격·마진·구축비 구조에 대한 실무 감각</li>
+        </ul>
+      </div>
+      <div class="quad__cell quad__cell--dark">
+        <p class="label">Weaknesses</p>
+        <h4>채워지지 않은 결정적 갭</h4>
+        <ul>
+          <li>의원장 네트워크 0 — 첫 번째 거래까지 6개월</li>
+          <li>의료 도메인(EMR, 의료광고법, 진료 흐름) 학습 곡선</li>
+          <li>SOHO 영업은 엔터프라이즈와 완전히 다른 게임</li>
+          <li>1인 자본 — CAC 12개월치 감당 가능한가</li>
+          <li>제품 개발·CS·영업 동시 운영 한계</li>
+          <li>마케팅 채널·브랜드 0에서 시작</li>
+        </ul>
+      </div>
+      <div class="quad__cell quad__cell--dark">
+        <p class="label">Opportunities</p>
+        <h4>유리한 외부 흐름</h4>
+        <ul>
+          <li>2026 정부 AI 실증사업 20개·의료 바우처 5배 확대</li>
+          <li>OpenAI Realtime API로 1인 MVP 가능</li>
+          <li>유비케어 AI는 진료실 안 — 콜 응대는 사각지대</li>
+          <li>카카오·네이버는 1·2차 미진입</li>
+          <li>해외(Doctolib·Hippocratic) 검증 완료 → 한국 PoC 단축</li>
+          <li>병원 마케팅 대행사 1,272+곳 — 잠재 채널 파트너</li>
+        </ul>
+      </div>
+      <div class="quad__cell">
+        <p class="label">Threats</p>
+        <h4>닥쳐올 외부 위험</h4>
+        <ul>
+          <li>유비케어 의사랑 AI 2026 H2 상용화 — 6~12개월 윈도우</li>
+          <li>LG U+ 경업 약정·비밀유지 의무 (보통 6~12개월)</li>
+          <li>의료광고법·개인정보보호법 위반 시 영업정지</li>
+          <li>카카오 케어챗이 음성으로 확장할 경우</li>
+          <li>의료 트리아지 사고 1건 = 사업 종료 가능</li>
+          <li>SOHO SaaS 한국 평균 churn 25~35%</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note reveal" style="margin-top:48px;border-left-color:var(--acc-l)">
+      <b>가장 솔직한 자기 평가.</b>
+      본인은 "AICC를 만드는 사람"이지, "의원장에게 파는 사람"이 아닙니다. 두 역량은 완전히 다른 근육이고, 한쪽은 10년에 걸쳐 만들어진 자산이지만 다른 쪽은 12개월 안에 만들어야 합니다. 코파운더 또는 채널 파트너가 없다면 이 갭은 메울 수 없습니다.
+    </div>
+  </div>
+</section>
+
+<!-- 3C SWEET SPOT -->
+<section class="section section--xl">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">3C Cross · Sweet Spot</p>
+      <h2 class="headline">교집합에 무엇이 남는가.</h2>
+      <p class="lede">세 원이 겹치는 곳에 사업이 있다. 한쪽이라도 비어 있으면 사업이 아니라 취미다.</p>
+    </div>
+
+    <div class="reveal" style="max-width:880px;margin:0 auto;background:var(--bg-l);border-radius:var(--rad);padding:clamp(40px,5vw,64px)">
+      <h3 class="title">교집합 1 · Customer ∩ Company</h3>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-1);margin-bottom:8px"><b>고객이 원하는 것</b>: 24/7 콜 응대 + 노쇼 방지 + 데스크 인건비 절감</p>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-1);margin-bottom:24px"><b>본인이 잘하는 것</b>: 통신사급 콜 라우팅 + STT/TTS 통합 + AICC 운영 노하우</p>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-2);margin-bottom:32px;padding-left:18px;border-left:2px solid var(--acc)"><b>매칭도 ★★★★☆</b> — 고객 페인과 본인 역량이 정확히 일치. 단, "고객에게 도달하는 채널"이 본인 역량 밖.</p>
+
+      <h3 class="title">교집합 2 · Company ∩ Competition</h3>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-1);margin-bottom:8px"><b>경쟁자가 못하는 것</b>: 유비케어는 콜 응대를 안 함. 통신 3사는 SOHO 가격 못 맞춤. 마케팅 대행사는 음성 기술 없음.</p>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-1);margin-bottom:24px"><b>본인이 잘하는 것</b>: 통신·AI 음성 기술 깊이 + 의료 AICC 사례 학습</p>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-2);margin-bottom:32px;padding-left:18px;border-left:2px solid var(--acc)"><b>차별성 ★★★★★</b> — 음성 + 1·2차 SOHO 가격 + AICC 깊이를 동시에 갖춘 한국 사업자는 거의 없음. 본인의 가장 강력한 우위.</p>
+
+      <h3 class="title">교집합 3 · Customer ∩ Competition</h3>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-1);margin-bottom:8px"><b>고객이 원하는 것</b>: 검증된 솔루션, 의사회 추천, 위험 없음</p>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-1);margin-bottom:24px"><b>경쟁자가 제공하는 것</b>: 유비케어=현상 신뢰, 마케팅 대행사=관계 신뢰, 카카오=브랜드 신뢰</p>
+      <p style="font-size:16px;line-height:1.7;color:var(--t-2);padding-left:18px;border-left:2px solid var(--acc)"><b>위험도 ★★★★☆</b> — 본인은 "신뢰 자산"에서 가장 약함. 의원장은 결국 "누가 추천했나?"부터 묻는다. 채널 파트너 없으면 이 교집합에서 패배.</p>
+    </div>
+
+    <div class="reveal" style="max-width:880px;margin:48px auto 0;text-align:center">
+      <h3 class="title">결국 sweet spot은 한 문장으로 좁혀진다</h3>
+      <p style="font-size:clamp(20px,2.4vw,28px);font-weight:500;line-height:1.4;letter-spacing:-.018em;color:var(--t-1);margin-top:24px">
+        "비급여 비중 50%+ 의원에 / 마케팅 대행사 채널을 통해 / 24/7 인바운드 음성 응대를 / 월 ₩149만에 / 의료광고법 통과 보장으로 제공"
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 PATHS -->
+<section class="section section--xl section--light" id="path">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Path Decision · 어떻게 진입할 것인가</p>
+      <h2 class="headline">세 가지 길.<br/>현실은 두 번째 길에 있다.</h2>
+      <p class="lede">"1·2차 의원 SaaS"라는 결론이 같아도, 어떻게 들어가느냐에 따라 사업의 성패가 갈립니다. 세 옵션을 같은 기준으로 비교했습니다.</p>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="path">
+        <p class="path__name">Path A</p>
+        <h3 class="path__title">직접 SOHO 영업</h3>
+        <dl>
+          <div class="path__row"><dt>채널</dt><dd>의사 커뮤니티·콜드 영업·세미나</dd></div>
+          <div class="path__row"><dt>CAC</dt><dd>₩200~400만 / 의원</dd></div>
+          <div class="path__row"><dt>첫 50개 도달</dt><dd>12~18개월</dd></div>
+          <div class="path__row"><dt>1인 가능?</dt><dd>불가능</dd></div>
+          <div class="path__row"><dt>자본 필요</dt><dd>최소 ₩3~5억</dd></div>
+          <div class="path__row"><dt>실패 확률</dt><dd>70%</dd></div>
+        </dl>
+        <p class="path__verdict">Dan Martell이 "치과·HVAC에 직접 팔라"고 한 이유는 미국이기 때문. 한국에서 동일 모델은 채널 신뢰가 없어 실패 확률이 매우 높다.</p>
+      </div>
+
+      <div class="path path--reco">
+        <p class="path__name">Path B · 권고</p>
+        <h3 class="path__title">마케팅 대행사 채널 파트너</h3>
+        <dl>
+          <div class="path__row"><dt>채널</dt><dd>애드리절트·하룹·라온하제 등<br/>화이트라벨 또는 RevShare</dd></div>
+          <div class="path__row"><dt>CAC</dt><dd>₩50~120만 / 의원</dd></div>
+          <div class="path__row"><dt>첫 50개 도달</dt><dd>4~8개월</dd></div>
+          <div class="path__row"><dt>1인 가능?</dt><dd>코파운더 1명 + 채널 영업 위탁</dd></div>
+          <div class="path__row"><dt>자본 필요</dt><dd>최소 ₩8천~1.5억</dd></div>
+          <div class="path__row"><dt>실패 확률</dt><dd>40%</dd></div>
+        </dl>
+        <p class="path__verdict">대행사는 이미 의원장 신뢰를 가지고 있고, 음성봇이라는 신상품을 늘리고 싶어한다. 우리는 기술 + AICC 운영, 그들은 영업 + CS. 윈윈 구조.</p>
+      </div>
+
+      <div class="path">
+        <p class="path__name">Path C</p>
+        <h3 class="path__title">EMR·통신사 모듈 파트너</h3>
+        <dl>
+          <div class="path__row"><dt>채널</dt><dd>유비케어·비트·LG U+ 부가 모듈</dd></div>
+          <div class="path__row"><dt>CAC</dt><dd>₩30만 미만 (채널이 부담)</dd></div>
+          <div class="path__row"><dt>첫 50개 도달</dt><dd>6~12개월 (계약 협상 포함)</dd></div>
+          <div class="path__row"><dt>1인 가능?</dt><dd>가능 (영업 위탁)</dd></div>
+          <div class="path__row"><dt>자본 필요</dt><dd>최소 ₩5천만~1억</dd></div>
+          <div class="path__row"><dt>실패 확률</dt><dd>50%</dd></div>
+        </dl>
+        <p class="path__verdict">가장 빠른 도달이지만, 협상력 부족으로 마진의 50~70%를 채널에 뺏길 수 있다. 또한 LG U+ 채널은 비경쟁 약정 충돌 가능성. EMR 3사는 협상 진입 자체가 6개월.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:48px;max-width:880px;margin-left:auto;margin-right:auto">
+      <div class="card" style="background:#fff;border-left:3px solid var(--acc)">
+        <p class="eyebrow">권고 — Hybrid B + C</p>
+        <p style="font-size:16px;line-height:1.7;color:var(--t-1)">
+          <b>Phase 1 (0~6개월)</b>: Path B 진행 — 병원 마케팅 대행사 1~2곳과 화이트라벨 PoC. 첫 20~30개 의원 확보, 케이스 스터디 작성.<br/><br/>
+          <b>Phase 2 (6~12개월)</b>: Path C 협상 시작 — Phase 1의 트랙 레코드를 바탕으로 EMR 또는 통신사와 모듈 파트너십 협상. 보통 SaaS 회사가 "이미 100개 의원 사용 중"이라는 트랙 없이는 EMR과 협상 자체가 안 됨.<br/><br/>
+          <b>Phase 3 (12개월+)</b>: 두 채널 동시 운영 — 대행사는 비급여 의원, EMR은 일반 의원으로 시장 분할.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRUTAL SECTION -->
+<section class="section section--black">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Brutal Honesty</p>
+      <h2 class="headline">No-Go가 되는 5가지 시나리오.</h2>
+      <p class="lede">사업 실패는 보통 한 가지 큰 이유가 아니라, 작은 신호 5~7개가 누적되어 발생합니다. 다음 중 하나라도 6개월 안에 해결 안 되면 멈춰야 합니다.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="reality">
+        <div class="reality__num">01</div>
+        <h4>코파운더 또는 채널 파트너 0건</h4>
+        <p>"내가 다 하면 된다"는 생각으로 6개월 가면 — 첫 의원 1곳 결제도 못 본 채 자본만 소진된다.</p>
+        <div class="so-what"><b>Stop Signal</b>3개월 안에 영업/의료도메인 코파운더 OR 마케팅 대행사 1곳 LOI 미확보 시</div>
+      </div>
+      <div class="reality">
+        <div class="reality__num">02</div>
+        <h4>유비케어 의사랑 AI가 콜 응대까지 확장</h4>
+        <p>그들이 콜 응대 모듈을 발표하는 순간, 1만 5천 곳이 우리에게 닫힌다. 우리는 사용자가 늘기 전에 이미 진다.</p>
+        <div class="so-what"><b>Stop Signal</b>유비케어 의사랑 AI 로드맵 발표 또는 콜 응대 PoC 시작 시</div>
+      </div>
+      <div class="reality">
+        <div class="reality__num">03</div>
+        <h4>LG U+ 경업 약정 충돌</h4>
+        <p>퇴사 시점부터 6~12개월 동안 동종 영역 사업화 제한. 위반 시 손해배상 + 사업 중지 가처분 가능.</p>
+        <div class="so-what"><b>Stop Signal</b>퇴사 전 약정 검토 미실시 또는 법무 자문 결과 "1년 이상 제한" 시</div>
+      </div>
+      <div class="reality">
+        <div class="reality__num">04</div>
+        <h4>첫 5개 의원에서 NPS &lt; 40</h4>
+        <p>제품-시장 적합도 신호가 약함. 의원장은 NPS가 40 미만이면 추천하지 않고, 추천 없으면 SOHO 시장은 영원히 안 열린다.</p>
+        <div class="so-what"><b>Stop Signal</b>첫 5개 의원 NPS 40 미만 또는 3개월 후 갱신율 60% 미만 시</div>
+      </div>
+      <div class="reality">
+        <div class="reality__num">05</div>
+        <h4>의료 사고 1건</h4>
+        <p>음성봇이 환자에게 잘못 응답하여 환자 민원 또는 언론 보도 1건 — 사업 종료 가능 수준의 신뢰 붕괴.</p>
+        <div class="so-what"><b>Stop Signal</b>최초 운영 6개월 안에 환자 민원 1건이라도 발생 시 (즉시 운영 중단·재설계)</div>
+      </div>
+      <div class="reality">
+        <div class="reality__num">06</div>
+        <h4>12개월 ARR ₩300M 미달</h4>
+        <p>50개 의원 × ₩149만 × 12 = ₩8.94억이 목표. 30% 도달 못하면 SaaS로서 자체 생존 불가능.</p>
+        <div class="so-what"><b>Stop Signal</b>12개월 시점 ARR ₩300M 미달 또는 churn 35% 초과 시</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 90 DAYS -->
+<section class="section section--xl section--dark">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Next 90 Days</p>
+      <h2 class="headline">먼저 검증할 것은<br/>제품이 아니라 채널입니다.</h2>
+      <p class="lede">제품은 본인이 만들 수 있다. 채널은 만들어보지 않았다. 그러므로 첫 90일은 제품이 아닌 "채널 PMF"에 모두 투자한다.</p>
+    </div>
+
+    <div>
+      <div class="step reveal">
+        <div class="step__num">01</div>
+        <div class="step__body">
+          <h4>Week 1-2 · 법적 정리</h4>
+          <p>LG U+ 경업·비밀유지 약정 검토. 변호사 1회 자문(₩200~300만). 퇴사 시점 + 동종업계 진입 시점 합법 경로 확정.</p>
+          <span class="gate">Gate 1 · 6~12개월 제한 확인 시 사업 시점 재조정</span>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step__num">02</div>
+        <div class="step__body">
+          <h4>Week 3-4 · 코파운더 탐색</h4>
+          <p>의료 도메인 또는 SOHO 영업 경험자 5명 1:1 미팅. 헬스케어 스타트업 전 직원, 의료 SaaS 영업 출신 우선. 지분 20~30% 협의 준비.</p>
+          <span class="gate">Gate 2 · 4주 안에 1명 LOI 미확보 시 단독 창업 재검토</span>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step__num">03</div>
+        <div class="step__body">
+          <h4>Week 5-8 · 채널 파트너 PoC</h4>
+          <p>병원 마케팅 대행사 5곳 미팅 (애드리절트·하룹·라온하제 등). 화이트라벨 또는 RevShare(30/70) 제안. 1곳에서 의원 5곳 PoC 시작.</p>
+          <span class="gate">Gate 3 · 8주 안에 LOI 1건 미확보 시 EMR 채널로 전환</span>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step__num">04</div>
+        <div class="step__body">
+          <h4>Week 9-10 · MVP 데모</h4>
+          <p>OpenAI Realtime + Twilio + n8n 기반 1주일 MVP. 비급여 5개 의원 시나리오 (피부·성형·치과·정형·산부). 데모 콜 영상 5개 제작.</p>
+          <span class="gate">Gate 4 · 의원장 5명 미팅에서 평균 만족도 ≥ 4.0 / 5.0</span>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step__num">05</div>
+        <div class="step__body">
+          <h4>Week 11-12 · 첫 결제 검증</h4>
+          <p>채널을 통해 첫 3~5개 의원 6개월 ₩790,000 평생가 결제. 이게 PMF의 진짜 신호. 약속이 아닌 결제만 인정.</p>
+          <span class="gate">Gate 5 · 90일 안에 3건 결제 미달성 시 권고: 사업 보류, 채용 시장 복귀 검토</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note reveal" style="margin-top:48px;border-left-color:var(--acc-l);max-width:880px">
+      <b>핵심 원칙.</b>
+      90일 안에 5개의 게이트를 모두 통과하지 못하면 — 자존심이 아닌 데이터로 판단한다. 사업의 가장 큰 손실은 잘못된 시작이 아니라 "이미 틀렸다는 신호를 무시한 채 1년을 더 보내는 것"이다.
+    </div>
+  </div>
+</section>
+
+<!-- FINAL VERDICT -->
+<section class="cta">
+  <h2 class="reveal">시장이 비어 있다고<br/>모두가 들어갈 수 있는 건 아니다.</h2>
+  <p class="reveal">본인의 AICC 도메인 깊이는 한국에서 손꼽히는 자산입니다. 그러나 그 자산만으로는 부족합니다. 채널·코파운더·6개월 검증 게이트 — 이 셋을 갖춘 채로 진입한다면, 6~12개월 윈도우 안에 사업을 만들 수 있습니다.</p>
+  <div class="reveal">
+    <a href="#path" class="btn">권고 경로 다시 보기</a>
+    <a href="https://davidlikescat.github.io/github-pages/20260507_clinic-voice-landing/" class="btn btn--ghost">사업 제안서 보기</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>© 2026 Clinic Voice · 3C 분석 보고서 · 사업 의사결정용 내부 자료</div>
+    <div>참조: Ohmae 1982 · 유비케어 KIMES 2026 · LG U+ AICC · 카카오 케어챗 · MEDI:GATE EMR 점유율 조사</div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
