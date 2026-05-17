@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e3">
+<title>최영숙의 올드팝 다이어리</title>
+<meta property="og:title" content="최영숙의 올드팝 다이어리">
+<meta property="og:description" content="어머니가 손수 적으신 인생 올드팝 146곡. 누르면 노래 이야기가 펼쳐집니다.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    --bg:#f7f1e3;
+    --bg-elev:#ffffff;
+    --bg-soft:#efe6cf;
+    --line:rgba(184,138,62,.22);
+    --line-strong:rgba(184,138,62,.45);
+    --accent:#b88a3e;
+    --accent-soft:#d4af6a;
+    --accent-deep:#8a6529;
+    --ink:#241810;
+    --ink-soft:#5a4231;
+    --ink-mute:#8a755a;
+    --red:#d62828;
+    --green:#3a8b3a;
+    --shadow-md:0 8px 24px rgba(45,27,10,.12);
+    --shadow-lg:0 20px 48px rgba(45,27,10,.22);
+    --r-sm:12px;
+    --r-md:18px;
+    --r-lg:24px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#1a1410;
+      --bg-elev:#241b14;
+      --bg-soft:#2d2218;
+      --line:rgba(212,175,106,.18);
+      --line-strong:rgba(212,175,106,.35);
+      --accent:#d4af6a;
+      --accent-soft:#e6c885;
+      --accent-deep:#b88a3e;
+      --ink:#f0e3c5;
+      --ink-soft:#d4bf95;
+      --ink-mute:#9d8868;
+    }
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{font-size:17px}
+  @media (min-width:768px){html{font-size:18px}}
+  body{
+    margin:0;padding:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
+    min-height:100vh;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+  @media (min-width:768px){.wrap{padding:0 32px}}
+
+  /* HEADER */
+  header{padding:40px 20px 20px;text-align:center}
+  @media (min-width:768px){header{padding:72px 32px 28px}}
+  .eyebrow{
+    display:inline-block;
+    font-size:.78rem;letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:14px;
+    font-weight:600;
+  }
+  h1{
+    font-size:clamp(1.85rem,6vw,2.8rem);
+    font-weight:800;
+    margin:0 0 14px;
+    letter-spacing:-.025em;
+    line-height:1.15;
+  }
+  .tagline{
+    color:var(--ink-soft);
+    font-size:clamp(1.02rem,2.4vw,1.15rem);
+    margin:0 auto 26px;
+    max-width:500px;
+    line-height:1.6;
+  }
+  .stats{
+    display:inline-flex;align-items:center;gap:12px;
+    padding:10px 18px;
+    border:1.5px solid var(--accent);
+    border-radius:999px;
+    font-size:.95rem;color:var(--ink-soft);
+    font-variant-numeric:tabular-nums;
+  }
+  .stats b{color:var(--ink);font-weight:700;font-size:1.05rem}
+  .stats .dot{width:4px;height:4px;background:var(--ink-mute);border-radius:50%}
+
+  /* HOW-TO GUIDE */
+  .guide{
+    margin:24px auto 16px;
+    max-width:560px;
+    padding:20px 22px;
+    background:var(--bg-elev);
+    border:1.5px solid var(--line-strong);
+    border-radius:var(--r-md);
+    box-shadow:var(--shadow-md);
+  }
+  .guide-title{
+    font-size:1rem;font-weight:700;
+    color:var(--accent-deep);
+    margin:0 0 12px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .guide-steps{
+    display:flex;flex-direction:column;gap:10px;
+    margin:0;padding:0;list-style:none;
+  }
+  .guide-steps li{
+    display:flex;gap:12px;align-items:flex-start;
+    font-size:.98rem;color:var(--ink-soft);
+    line-height:1.5;
+  }
+  .step-num{
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    width:28px;height:28px;
+    background:var(--accent);
+    color:#fff;
+    border-radius:50%;
+    font-weight:700;font-size:.9rem;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* TOOLBAR */
+  .toolbar{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter:saturate(180%) blur(16px);
+    -webkit-backdrop-filter:saturate(180%) blur(16px);
+    border-bottom:1.5px solid var(--line);
+    padding:14px 16px;
+  }
+  .toolbar-inner{
+    max-width:1180px;margin:0 auto;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .search{position:relative}
+  .search input{
+    width:100%;
+    padding:16px 18px 16px 50px;
+    border:1.5px solid var(--line-strong);
+    background:var(--bg-elev);
+    border-radius:14px;
+    font-family:inherit;font-size:1.05rem;
+    color:var(--ink);
+    outline:none;
+    min-height:54px;
+    transition:border-color .15s,box-shadow .15s;
+  }
+  .search input::placeholder{color:var(--ink-mute)}
+  .search input:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+  .search svg{
+    position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    color:var(--accent);pointer-events:none;
+  }
+
+  .chips{
+    display:flex;gap:8px;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    padding:2px 0 2px;
+    margin:0 -16px;padding-left:16px;padding-right:16px;
+    scrollbar-width:none;
+  }
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    flex-shrink:0;
+    padding:10px 18px;
+    border:1.5px solid var(--line-strong);
+    background:var(--bg-elev);
+    border-radius:999px;
+    font-family:inherit;font-size:.95rem;font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:all .15s;
+    min-height:42px;
+  }
+  .chip:hover{border-color:var(--accent);color:var(--ink)}
+  .chip.active{
+    background:var(--accent);
+    color:#fff;
+    border-color:var(--accent);
+  }
+  .count-row{
+    display:flex;justify-content:space-between;align-items:center;
+    margin:18px 0 12px;
+    padding:0 4px;
+  }
+  .count{
+    font-size:.95rem;color:var(--ink-soft);
+    font-variant-numeric:tabular-nums;
+  }
+  .count b{color:var(--accent);font-size:1.1rem;font-weight:700}
+
+  /* GRID */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    padding:0 0 100px;
+  }
+  @media (min-width:768px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+  @media (min-width:1024px){.grid{grid-template-columns:repeat(4,1fr)}}
+
+  .card{
+    background:var(--bg-elev);
+    border:1.5px solid var(--line);
+    border-radius:var(--r-md);
+    overflow:hidden;
+    cursor:pointer;
+    text-align:left;
+    padding:0;
+    font-family:inherit;
+    color:var(--ink);
+    transition:transform .2s, box-shadow .25s, border-color .2s;
+    display:flex;flex-direction:column;
+    min-height:240px;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-md);
+    border-color:var(--accent);
+  }
+  .card:active{transform:scale(.985)}
+  .card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+  .card-thumb{
+    width:100%;aspect-ratio:1;
+    background:linear-gradient(135deg, var(--accent-soft), var(--accent));
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .card-thumb .ph{
+    color:#fff;font-size:.92rem;
+    padding:16px;text-align:center;font-weight:600;line-height:1.3;
+  }
+  .card-body{
+    padding:14px 16px 16px;
+    flex:1;display:flex;flex-direction:column;
+  }
+  .card-title{
+    font-size:1.05rem;font-weight:700;
+    margin:0 0 4px;
+    color:var(--ink);
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    line-height:1.3;
+  }
+  .card-artist{
+    font-size:.9rem;color:var(--ink-soft);
+    margin:0;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+  }
+  .card-year{
+    margin-top:auto;padding-top:10px;
+    font-size:.85rem;
+    color:var(--accent);
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-mute);
+  }
+  .empty b{display:block;font-size:1.1rem;color:var(--ink);margin-bottom:6px}
+
+  /* MODAL */
+  .modal{
+    position:fixed;inset:0;z-index:200;
+    display:none;
+    background:rgba(20,12,6,.65);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    align-items:flex-end;justify-content:center;
+    animation:fade .25s ease;
+  }
+  @media (min-width:768px){.modal{align-items:center}}
+  .modal.open{display:flex}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+
+  .sheet{
+    background:var(--bg-elev);
+    width:100%;max-width:560px;
+    max-height:94vh;overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    border-radius:24px 24px 0 0;
+    box-shadow:var(--shadow-lg);
+    animation:slideUp .35s cubic-bezier(.16,1,.3,1);
+    position:relative;
+  }
+  @media (min-width:768px){.sheet{border-radius:24px;max-height:90vh}}
+  @keyframes slideUp{
+    from{transform:translateY(40px);opacity:0}
+    to{transform:translateY(0);opacity:1}
+  }
+
+  .sheet-topbar{
+    position:sticky;top:0;z-index:5;
+    background:color-mix(in srgb, var(--bg-elev) 90%, transparent);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    padding:14px 16px;
+    display:flex;justify-content:space-between;align-items:center;
+    border-bottom:1px solid var(--line);
+  }
+  .sheet-counter{
+    font-size:.85rem;color:var(--ink-mute);
+    font-variant-numeric:tabular-nums;
+  }
+  .sheet-counter b{color:var(--accent);font-weight:700}
+  .sheet-close{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:10px 16px;
+    background:var(--bg-soft);
+    border:none;border-radius:999px;
+    color:var(--ink);
+    font-family:inherit;font-size:.95rem;font-weight:600;
+    cursor:pointer;
+    min-height:44px;
+    transition:background .15s;
+  }
+  .sheet-close:hover{background:var(--line-strong)}
+
+  .sheet-hero{padding:28px 24px 0;text-align:center}
+  .sheet-thumb{
+    width:min(64vw,240px);
+    aspect-ratio:1;
+    margin:0 auto 22px;
+    border-radius:var(--r-md);
+    overflow:hidden;
+    background:linear-gradient(135deg, var(--accent-soft), var(--accent));
+    box-shadow:var(--shadow-md);
+  }
+  .sheet-thumb img{width:100%;height:100%;object-fit:cover}
+  .sheet-thumb .ph{
+    width:100%;height:100%;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:700;font-size:1.1rem;
+    padding:20px;text-align:center;line-height:1.3;
+  }
+  .sheet-title{
+    font-size:1.55rem;font-weight:800;
+    margin:0 0 6px;
+    letter-spacing:-.02em;
+    line-height:1.2;
+  }
+  .sheet-artist{
+    color:var(--ink-soft);
+    font-size:1.1rem;margin:0 0 14px;font-weight:500;
+  }
+  .sheet-meta{
+    display:inline-flex;gap:10px;align-items:center;
+    font-size:.9rem;
+    color:var(--accent);
+    font-variant-numeric:tabular-nums;
+    font-weight:700;letter-spacing:.04em;
+    padding:6px 14px;
+    background:color-mix(in srgb, var(--accent) 10%, transparent);
+    border-radius:999px;
+  }
+  .sheet-meta .dot{
+    width:3px;height:3px;background:var(--accent);
+    border-radius:50%;opacity:.6;
+  }
+
+  .sheet-body{padding:22px 24px 28px}
+  .summary{
+    font-size:1.1rem;
+    line-height:1.65;
+    color:var(--ink);
+    margin:0 0 18px;
+    padding:18px 20px;
+    background:var(--bg-soft);
+    border-radius:var(--r-sm);
+    border-left:4px solid var(--accent);
+    font-weight:500;
+  }
+
+  .more-btn{
+    display:flex;width:100%;
+    align-items:center;justify-content:center;gap:8px;
+    padding:14px 18px;
+    background:transparent;
+    border:1.5px dashed var(--accent);
+    border-radius:var(--r-sm);
+    color:var(--accent-deep);
+    font-family:inherit;font-size:1rem;font-weight:700;
+    cursor:pointer;
+    min-height:50px;
+    margin-bottom:12px;
+    transition:background .15s;
+  }
+  .more-btn:hover{background:color-mix(in srgb, var(--accent) 8%, transparent)}
+  .more-btn svg{transition:transform .25s}
+  .more-btn.open svg{transform:rotate(180deg)}
+
+  .story{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .5s ease, opacity .3s ease, margin .3s ease;
+    opacity:0;
+    margin:0;
+  }
+  .story.open{
+    max-height:3000px;
+    opacity:1;
+    margin:0 0 18px;
+  }
+  .story-inner{padding:14px 4px}
+  .story p{
+    margin:0 0 16px;
+    font-size:1.02rem;
+    line-height:1.85;
+    color:var(--ink-soft);
+  }
+  .story p:last-child{margin-bottom:0}
+
+  /* YOUTUBE */
+  .yt-section{margin:24px 0 18px}
+  .yt-label{
+    display:flex;align-items:center;gap:6px;
+    font-size:.85rem;color:var(--ink-mute);
+    margin-bottom:8px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.05em;
+  }
+  .yt-wrap{
+    position:relative;
+    border-radius:var(--r-sm);
+    overflow:hidden;
+    background:#000;
+    aspect-ratio:16/9;
+  }
+  .yt-wrap iframe{
+    position:absolute;inset:0;
+    width:100%;height:100%;border:0;
+  }
+  .yt-pending{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;height:100%;
+    background:linear-gradient(135deg, var(--bg-soft), var(--accent-soft) 250%);
+    color:var(--accent-deep);
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
+    padding:24px;
+  }
+  .yt-pending svg{width:40px;height:40px;opacity:.7}
+  .yt-pending span{font-weight:700}
+  .yt-pending small{font-size:.85rem;color:var(--ink-mute)}
+
+  .sheet-actions{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+  .btn{
+    width:100%;
+    padding:16px 20px;
+    border:none;border-radius:14px;
+    font-family:inherit;font-size:1.05rem;font-weight:700;
+    cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    text-decoration:none;
+    min-height:54px;
+    transition:transform .12s, background .15s;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 4px 14px rgba(214,40,40,.25)}
+  .btn-red:hover{background:#b81e1e}
+  .btn-ghost{
+    background:var(--bg-soft);
+    color:var(--ink);
+    border:1.5px solid var(--line-strong);
+  }
+  .btn-ghost:hover{background:var(--line-strong)}
+
+  .sheet-nav{
+    display:flex;gap:8px;margin-top:14px;
+    padding-top:18px;border-top:1px solid var(--line);
+  }
+  .nav-btn{
+    flex:1;padding:14px;
+    background:var(--bg-soft);
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    font-family:inherit;font-size:.95rem;font-weight:600;
+    color:var(--ink-soft);
+    cursor:pointer;
+    min-height:50px;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    transition:all .15s;
+  }
+  .nav-btn:hover:not(:disabled){border-color:var(--accent);color:var(--ink)}
+  .nav-btn:disabled{opacity:.4;cursor:not-allowed}
+
+  footer{
+    text-align:center;
+    padding:48px 20px 60px;
+    color:var(--ink-mute);
+    font-size:.9rem;
+    border-top:1px solid var(--line);
+    margin-top:40px;
+  }
+  footer .heart{color:var(--accent)}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms !important;
+      transition-duration:.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <span class="eyebrow">Choi Young-sook's Old Pop Diary</span>
+    <h1>최영숙의 올드팝 다이어리</h1>
+    <p class="tagline">어머니가 손수 적으신 인생 올드팝 146곡<br>한 곡씩 누르면 노래 이야기가 펼쳐집니다</p>
+    <div class="stats">
+      <b id="totalCount">146</b><span>곡</span>
+      <span class="dot"></span>
+      <b>41</b><span>장의 손글씨 메모</span>
+    </div>
+
+    <div class="guide">
+      <h3 class="guide-title">♪ 이렇게 사용하세요</h3>
+      <ol class="guide-steps">
+        <li><span class="step-num">1</span><span>듣고 싶은 노래의 <b>앨범 그림을 누르세요</b></span></li>
+        <li><span class="step-num">2</span><span>노래 이야기를 읽고, <b>더 자세히 보기</b>를 누르면 배경이 펼쳐져요</span></li>
+        <li><span class="step-num">3</span><span><b>▶ 영상 보기</b>를 누르면 유튜브에서 노래가 재생됩니다</span></li>
+      </ol>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="toolbar-inner wrap" style="padding:0">
+      <div class="search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" id="q" placeholder="노래 제목·가수 이름으로 찾기" autocomplete="off" inputmode="search">
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip active" data-era="all">전체 보기</button>
+        <button class="chip" data-era="1960">1960년대</button>
+        <button class="chip" data-era="1970">1970년대</button>
+        <button class="chip" data-era="1980">1980년대</button>
+        <button class="chip" data-era="1990">1990년대 이후</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="count-row">
+      <div class="count">현재 <b id="count">146</b>곡 표시 중</div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <footer>
+    <span class="heart">♪</span> 사랑하는 가족과 친구들을 위하여 <span class="heart">♪</span>
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="sheet">
+      <div class="sheet-topbar">
+        <span class="sheet-counter"><b id="sNum">1</b>번째 곡</span>
+        <button class="sheet-close" id="closeBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          닫기
+        </button>
+      </div>
+      <div class="sheet-hero">
+        <div class="sheet-thumb" id="sThumb"></div>
+        <div class="sheet-meta" id="sMeta"></div>
+        <h2 class="sheet-title" id="sTitle"></h2>
+        <p class="sheet-artist" id="sArtist"></p>
+      </div>
+      <div class="sheet-body">
+        <p class="summary" id="sSummary"></p>
+        <button class="more-btn" id="moreBtn">
+          <span id="moreText">▼ 노래 이야기 더 자세히 보기</span>
+        </button>
+        <div class="story" id="sStory"></div>
+
+        <div class="yt-section">
+          <div class="yt-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/></svg>
+            노래 영상
+          </div>
+          <div class="yt-wrap" id="ytWrap"></div>
+        </div>
+
+        <div class="sheet-actions">
+          <a class="btn btn-red" id="ytLink" href="#" target="_blank" rel="noopener">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            ▶ 유튜브에서 노래 듣기
+          </a>
+          <button class="btn btn-ghost" id="shareBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            카톡·문자로 공유하기
+          </button>
+        </div>
+
+        <div class="sheet-nav">
+          <button class="nav-btn" id="prevBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            이전 곡
+          </button>
+          <button class="nav-btn" id="nextBtn">
+            다음 곡
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const SONGS = [{"no": 1, "title": "Goodbye", "artist": "Air Supply", "year": null, "album": null, "thumb": "001_Goodbye_AirSupply.jpg", "ytid": "TGyLsf7PRpU"}, {"no": 2, "title": "Slip Slidin' Away", "artist": "Paul Simon", "year": "2017", "album": "The Concert in Hyde Park", "thumb": "002_SlipSlidinAway_PaulSimon.jpg", "ytid": "ZNt5FnMK2sM"}, {"no": 3, "title": "Soldier of Fortune", "artist": "Deep Purple", "year": "1974", "album": "Stormbringer", "thumb": "003_SoldierofFortune_DeepPurple.jpg", "ytid": "AjIL2BemqBY"}, {"no": 4, "title": "Fly Me to the Moon", "artist": "Julie London", "year": null, "album": null, "thumb": "004_FlyMetotheMoon_JulieLondon.jpg", "ytid": "MeLVCeErypY"}, {"no": 5, "title": "Move On", "artist": "ABBA", "year": "1977", "album": "ABBA: The Album", "thumb": "005_MoveOn_ABBA.jpg", "ytid": "e5GKZgsgi4g"}, {"no": 6, "title": "You Light Up My Life", "artist": "Debby Boone", "year": "1977", "album": "The Best of Debby Boone", "thumb": "006_YouLightUpMyLife_DebbyBoone.jpg", "ytid": "9GECxLvOc1E"}, {"no": 7, "title": "Against All Odds", "artist": "Phil Collins", "year": "1984", "album": "The Singles (Remastered)", "thumb": "007_AgainstAllOdds_PhilCollins.jpg", "ytid": "wuvtoyVi7vY"}, {"no": 8, "title": "Woman in Love", "artist": "Barbra Streisand", "year": null, "album": null, "thumb": "008_WomaninLove_BarbraStreisand.jpg", "ytid": "hQLGCX8D-1Y"}, {"no": 9, "title": "When a Man Loves a Woman", "artist": "Percy Sledge", "year": "1966", "album": "When a Man Loves a Woman", "thumb": "009_WhenaManLovesaWoman_PercySledge.jpg", "ytid": "EYb84BDMbi0"}, {"no": 10, "title": "Sunny", "artist": "Boney M.", "year": "1976", "album": "Take the Heat Off Me", "thumb": "010_Sunny_BoneyM.jpg", "ytid": "ghGiv7YLC7Q"}, {"no": 11, "title": "Everything I Own", "artist": "Bread", "year": "1972", "album": "Baby I'm a Want You", "thumb": "011_EverythingIOwn_Bread.jpg", "ytid": "_21cZe2eO_I"}, {"no": 12, "title": "Changes", "artist": "Black Sabbath", "year": "1972", "album": "Greatest Hits 1970-1978", "thumb": "012_Changes_BlackSabbath.jpg", "ytid": "_eBCxYVma1g"}, {"no": 13, "title": "Seasons in the Sun", "artist": "Terry Jacks", "year": "2013", "album": "Seasons In The Sun (Expanded Edition)", "thumb": "013_SeasonsintheSun_TerryJacks.jpg", "ytid": "-tPcc1ftj8E"}, {"no": 14, "title": "Vincent", "artist": "Don Mclean", "year": "1971", "album": "American Pie", "thumb": "014_Vincent_DonMcLean.jpg", "ytid": "ciLNMesqPh0"}, {"no": 15, "title": "California Dreamin'", "artist": "Mamas & Papas", "year": null, "album": null, "thumb": "015_CaliforniaDreamin_MamasPapas.jpg", "ytid": "Yh87974T6hk"}, {"no": 16, "title": "Goodbye Yellow Brick Road", "artist": "Elton John", "year": "1973", "album": "Diamonds (Deluxe)", "thumb": "016_GoodbyeYellowBrickRoad_EltonJohn.jpg", "ytid": "wy709iNG6i8"}, {"no": 17, "title": "I Want to Know What Love Is", "artist": "Foreigner", "year": "1984", "album": "Agent Provocateur", "thumb": "017_IWanttoKnowWhatLoveIs_Foreigner.jpg", "ytid": "r3Pr1_v7hsw"}, {"no": 18, "title": "Now and Forever", "artist": "Richard Marx", "year": "1993", "album": "Greatest Hits", "thumb": "018_NowandForever_RichardMarx.jpg", "ytid": "OeDiK2uy3DU"}, {"no": 19, "title": "Georgia On My Mind", "artist": "Ray Charles", "year": "1960", "album": "Georgia on My Mind (Original Master Recording) - Single", "thumb": "019_GeorgiaOnMyMind_RayCharles.jpg", "ytid": "ggGzE5KfCio"}, {"no": 20, "title": "Temple of the King", "artist": "Rainbow", "year": "1975", "album": "70s Classic Rock", "thumb": "020_TempleoftheKing_Rainbow.jpg", "ytid": "LN6O7yXyDQQ"}, {"no": 21, "title": "Kiss and Say Goodbye", "artist": "The Manhattans", "year": "1976", "album": "The Manhattans (Expanded Version)", "thumb": "021_KissandSayGoodbye_Manhattans.jpg", "ytid": "wtjro7_R3-4"}, {"no": 22, "title": "I Started a Joke", "artist": "Bee Gees", "year": null, "album": null, "thumb": "022_IStartedaJoke_BeeGees.jpg", "ytid": "b3kBDtjRtB0"}, {"no": 23, "title": "All By Myself", "artist": "Eric Carmen", "year": "1975", "album": "Eric Carmen", "thumb": "023_AllByMyself_EricCarmen.jpg", "ytid": "iN9CjAfo5n0"}, {"no": 24, "title": "Stoney", "artist": "Lobo", "year": "1996", "album": "Best of Lobo", "thumb": "024_Stoney_Lobo.jpg", "ytid": "gTFkGufHYGs"}, {"no": 25, "title": "Make It with You", "artist": "Bread", "year": "1970", "album": "Bread On the Waters", "thumb": "025_MakeItwithYou_Bread.jpg", "ytid": "OudI2JPhEqQ"}, {"no": 26, "title": "Wildflower", "artist": "Skylark", "year": null, "album": null, "thumb": "026_Wildflower_Skylark.jpg", "ytid": "9MJ8flVWL1I"}, {"no": 27, "title": "American Pie", "artist": "Don Mclean", "year": "1971", "album": "American Pie", "thumb": "027_AmericanPie_DonMcLean.jpg", "ytid": "PRpiBpDy7MQ"}, {"no": 28, "title": "We're All Alone", "artist": "Rita Coolidge", "year": "1971", "album": "Anytime... Anywhere", "thumb": "028_WereAllAlone_RitaCoolidge.jpg", "ytid": "tCKO57ZbHSY"}, {"no": 29, "title": "Arthur's Theme (Best That You Can Do)", "artist": "Christopher Cross", "year": "1981", "album": "Arthur: The Album (Soundtrack from the Motion Picture)", "thumb": "029_ArthursThemeBestThatYouCanDo_ChristopherCross.jpg", "ytid": "wJ6zs2WSCjk"}, {"no": 30, "title": "Imagine", "artist": "John Lennon", "year": "1971", "album": "Imagine", "thumb": "030_Imagine_JohnLennon.jpg", "ytid": "VOgFZfRVaww"}, {"no": 31, "title": "(Everything I Do) I Do It for You", "artist": "Bryan Adams", "year": "1991", "album": "Waking Up the Neighbours", "thumb": "031_EverythingIDoIDoItforYou_BryanAdams.jpg", "ytid": "Y0pdQU87dc8"}, {"no": 32, "title": "Sorry Seems to Be the Hardest Word", "artist": "Elton John", "year": "1976", "album": "Blue Moves", "thumb": "032_SorrySeemstoBetheHardestWord_EltonJohn.jpg", "ytid": "OXqw6ERK09o"}, {"no": 33, "title": "How Can I Tell Her", "artist": "Lobo", "year": "1973", "album": "The Best of Lobo", "thumb": "033_HowCanITellHer_Lobo.jpg", "ytid": "-aTK1n1yvUo"}, {"no": 34, "title": "Hello", "artist": "Lionel Richie", "year": null, "album": null, "thumb": null, "ytid": "mHONNcZbwDY"}, {"no": 35, "title": "Just When I Needed You Most", "artist": "Randy Vanwarmer", "year": null, "album": null, "thumb": null, "ytid": "GoMn41bFqVA"}, {"no": 36, "title": "Every Breath You Take", "artist": "Police", "year": null, "album": null, "thumb": "036_EveryBreathYouTake_Police.jpg", "ytid": "OMOGaugKpzs"}, {"no": 37, "title": "All for the Love of a Girl", "artist": "Johnny Horton", "year": null, "album": null, "thumb": null, "ytid": "fyTTpIVMaP0"}, {"no": 38, "title": "Can't Help Falling in Love", "artist": "UB40", "year": null, "album": null, "thumb": "038_CantHelpFallinginLove_UB40.jpg", "ytid": "vUdloUqZa7w"}, {"no": 39, "title": "Three Times a Lady", "artist": "Commodores", "year": null, "album": null, "thumb": "039_ThreeTimesaLady_Commodores.jpg", "ytid": "IOrxEvSFyPs"}, {"no": 40, "title": "You're Only Lonely", "artist": "J.D. Souther", "year": null, "album": null, "thumb": "040_YoureOnlyLonely_JDSouther.jpg", "ytid": "quglprlSQ8k"}, {"no": 41, "title": "My Sweet Lord", "artist": "George Harrison", "year": null, "album": null, "thumb": "041_MySweetLord_GeorgeHarrison.jpg", "ytid": "XWTvkcHlOPQ"}, {"no": 42, "title": "I Am, I Said", "artist": "Neil Diamond", "year": "2009", "album": "Hot August Night / NYC (Live from Madison Square Garden)", "thumb": "042_IAmISaid_NeilDiamond.jpg", "ytid": "8TYesac3Hmw"}, {"no": 43, "title": "Love Hurts", "artist": "Nazareth", "year": null, "album": null, "thumb": "043_LoveHurts_Nazareth.jpg", "ytid": "Vj2AlaQcW40"}, {"no": 44, "title": "Treat Her Gently", "artist": "Paul McCartney & Wings", "year": null, "album": null, "thumb": "044_TreatHerGently_PaulMcCartneyWings.jpg", "ytid": "Hl5h2QZrHjo"}, {"no": 45, "title": "Lost in Love", "artist": "Air Supply", "year": null, "album": null, "thumb": "045_LostinLove_AirSupply.jpg", "ytid": "1bG_zk6FwU0"}, {"no": 46, "title": "Let It Be Me", "artist": "The Everly Brothers", "year": "1959", "album": "The Very Best Of...", "thumb": "046_LetItBeMe_EverlyBrothers.jpg", "ytid": "lvA-STM7oJk"}, {"no": 47, "title": "Carry On Till Tomorrow", "artist": "Badfinger", "year": null, "album": null, "thumb": "047_CarryOnTillTomorrow_Badfinger.jpg", "ytid": "ks1ZYqZJjOc"}, {"no": 48, "title": "Daniel", "artist": "Elton John", "year": "1973", "album": "Don't Shoot Me I'm Only The Piano Player (Bonus Tracks Version)", "thumb": "048_Daniel_EltonJohn.jpg", "ytid": "-9xib-hCm6c"}, {"no": 49, "title": "Count on Me", "artist": "Jefferson Starship", "year": null, "album": null, "thumb": "049_CountonMe_JeffersonStarship.jpg", "ytid": "AOMuK7YYxeg"}, {"no": 50, "title": "My Girl", "artist": "Temptations", "year": null, "album": null, "thumb": "050_MyGirl_Temptations.jpg", "ytid": "y3KJ7d2qBoA"}, {"no": 51, "title": "Last Train to London", "artist": "Electric Light Orchestra", "year": null, "album": null, "thumb": "051_LastTraintoLondon_ElectricLightOrchestra.jpg", "ytid": "qXXZMebT3m8"}, {"no": 52, "title": "Confusion", "artist": "Electric Light Orchestra", "year": null, "album": null, "thumb": null, "ytid": "1jUvhJ_Tgzw"}, {"no": 53, "title": "Morning Has Broken", "artist": "Cat Stevens", "year": null, "album": null, "thumb": "053_MorningHasBroken_CatStevens.jpg", "ytid": "DmAOBosGlHY"}, {"no": 54, "title": "The Boxer", "artist": "Simon & Garfunkel", "year": null, "album": null, "thumb": "054_TheBoxer_SimonGarfunkel.jpg", "ytid": "l3LFML_pxlY"}, {"no": 55, "title": "Easy", "artist": "Lionel Richie", "year": null, "album": null, "thumb": "055_Easy_LionelRichie.jpg", "ytid": "0XRrYgByp28"}, {"no": 56, "title": "Rivers of Babylon", "artist": "Boney M", "year": null, "album": null, "thumb": "056_RiversofBabylon_BoneyM.jpg", "ytid": "l3QxT-w3WMo"}, {"no": 57, "title": "No Matter What", "artist": "Boyzone", "year": null, "album": null, "thumb": "057_NoMatterWhat_Boyzone.jpg", "ytid": "7eul_Vt6SZY"}, {"no": 58, "title": "Don't Let the Sun Go Down on Me", "artist": "Elton John", "year": null, "album": null, "thumb": "058_DontLettheSunGoDownonMe_EltonJohn.jpg", "ytid": "RsKqMNDoR4o"}, {"no": 59, "title": "The First Cut Is the Deepest", "artist": "Rod Stewart", "year": null, "album": null, "thumb": "059_TheFirstCutIstheDeepest_RodStewart.jpg", "ytid": "c5NRH_DxWJE"}, {"no": 60, "title": "Knockin' on Heaven's Door", "artist": "Bob Dylan", "year": null, "album": null, "thumb": "060_KnockinonHeavensDoor_BobDylan.jpg", "ytid": "rm9coqlk8fY"}, {"no": 61, "title": "How Am I Supposed to Live Without You", "artist": "Michael Bolton", "year": null, "album": null, "thumb": "061_HowAmISupposedtoLiveWithoutYou_MichaelBolton.jpg", "ytid": "YFood_bTOX4"}, {"no": 62, "title": "Because of You", "artist": "Kelly Clarkson", "year": null, "album": null, "thumb": null, "ytid": "Ra-Om7UMSJc"}, {"no": 63, "title": "It's So Easy", "artist": "Linda Ronstadt", "year": null, "album": null, "thumb": "063_ItsSoEasy_LindaRonstadt.jpg", "ytid": "__627t2bzJM"}, {"no": 64, "title": "You Needed Me", "artist": "Anne Murray", "year": null, "album": null, "thumb": "064_YouNeededMe_AnneMurray.jpg", "ytid": "-X79Jko9bBI"}, {"no": 65, "title": "Massachusetts", "artist": "Bee Gees", "year": null, "album": null, "thumb": "065_Massachusetts_BeeGees.jpg", "ytid": "FuoWykVNwyI"}, {"no": 66, "title": "Spring, Summer, Winter and Fall", "artist": "Aphrodite's Child", "year": null, "album": null, "thumb": "066_SpringSummerWinterandFall_AphroditesChild.jpg", "ytid": "z7UGHxquI6g"}, {"no": 67, "title": "Take It to the Limit", "artist": "Eagles", "year": null, "album": null, "thumb": "067_TakeIttotheLimit_Eagles.jpg", "ytid": "MxQXKO194XM"}, {"no": 68, "title": "If You Don't Know Me by Now", "artist": "Harold Melvin & the Blue Notes", "year": null, "album": null, "thumb": "068_IfYouDontKnowMebyNow_HaroldMelvintheBlueNotes.jpg", "ytid": "WSwg59g84Rw"}, {"no": 69, "title": "Without You", "artist": "Harry Nilsson", "year": null, "album": null, "thumb": "069_WithoutYou_HarryNilsson.jpg", "ytid": "8dnUv3DUP4E"}, {"no": 70, "title": "For the Good Times", "artist": "Kris Kristofferson", "year": null, "album": null, "thumb": "070_FortheGoodTimes_KrisKristofferson.jpg", "ytid": "52BoLfhw2zE"}, {"no": 71, "title": "You Are Not Alone", "artist": "Michael Jackson", "year": null, "album": null, "thumb": "071_YouAreNotAlone_MichaelJackson.jpg", "ytid": "pAyKJAtDNCw"}, {"no": 72, "title": "Sailing", "artist": "Christopher Cross", "year": null, "album": null, "thumb": "072_Sailing_ChristopherCross.jpg", "ytid": "9PnXcP8ZI7M"}, {"no": 73, "title": "When I Need You", "artist": "Leo Sayer", "year": null, "album": null, "thumb": "073_WhenINeedYou_LeoSayer.jpg", "ytid": "obC0MFHWJ0A"}, {"no": 74, "title": "For the Peace of All Mankind", "artist": "Albert Hammond", "year": null, "album": null, "thumb": "074_ForthePeaceofAllMankind_AlbertHammond.jpg", "ytid": "bf1MqglOoGI"}, {"no": 75, "title": "Hard to Say I'm Sorry", "artist": "Chicago", "year": null, "album": null, "thumb": "075_HardtoSayImSorry_Chicago.jpg", "ytid": "1A0MPWseJIE"}, {"no": 76, "title": "Getaway", "artist": "Earth, Wind & Fire", "year": null, "album": null, "thumb": null, "ytid": "xN_3nib4r3Y"}, {"no": 77, "title": "Stand By Me", "artist": "Ben E. King", "year": null, "album": null, "thumb": "077_StandByMe_BenEKing.jpg", "ytid": "hwZNL7QVJjE"}, {"no": 78, "title": "Saddle the Wind", "artist": "Lou Christie", "year": null, "album": null, "thumb": null, "ytid": null}, {"no": 79, "title": "I Can't Stop Loving You", "artist": "Timi Yuro", "year": null, "album": null, "thumb": "079_ICantStopLovingYou_TimiYuro.jpg", "ytid": "T6O6w2m8nBQ"}, {"no": 80, "title": "I'd Rather Go Blind", "artist": "Rod Stewart", "year": null, "album": null, "thumb": "080_IdRatherGoBlind_RodStewart.jpg", "ytid": "k8Wxx-2yTDY"}, {"no": 81, "title": "Say You, Say Me", "artist": "Lionel Richie", "year": null, "album": null, "thumb": "081_SayYouSayMe_LionelRichie.jpg", "ytid": "9OfoTaLXrUo"}, {"no": 82, "title": "I'm in Love for the Very First Time", "artist": "Maywood", "year": null, "album": null, "thumb": "082_IminLovefortheVeryFirstTime_Maywood.jpg", "ytid": "TvfSys9_jVI"}, {"no": 83, "title": "Dreamin'", "artist": "Cliff Richard", "year": null, "album": null, "thumb": "083_Dreamin_CliffRichard.jpg", "ytid": "_thFKjQOZt4"}, {"no": 84, "title": "More Than I Can Say", "artist": "Leo Sayer", "year": null, "album": null, "thumb": null, "ytid": "GnIlo91CrBw"}, {"no": 85, "title": "Wind of Change", "artist": "Scorpions", "year": null, "album": null, "thumb": "085_WindofChange_Scorpions.jpg", "ytid": "n4RjJKxsamQ"}, {"no": 86, "title": "You're My Everything", "artist": "Santa Esmeralda", "year": null, "album": null, "thumb": "086_YoureMyEverything_SantaEsmeralda.jpg", "ytid": "V5pSQFG_nD4"}, {"no": 87, "title": "The One That You Love", "artist": "Air Supply", "year": null, "album": null, "thumb": null, "ytid": "nY31ZH6hAFI"}, {"no": 88, "title": "I Can Wait Forever", "artist": "Air Supply", "year": null, "album": null, "thumb": null, "ytid": null}, {"no": 89, "title": "Holiday", "artist": "Michel Polnareff", "year": "2017", "album": "Polnareff’s / EP 1971 à 1972", "thumb": "089_Holiday_MichelPolnareff.jpg", "ytid": "_9HU0F6lCro"}, {"no": 90, "title": "Indian Reservation", "artist": "Raiders", "year": null, "album": null, "thumb": "090_IndianReservation_Raiders.jpg", "ytid": "21ixwIaN7qw"}, {"no": 91, "title": "Sympathy", "artist": "Rare Bird", "year": null, "album": null, "thumb": "091_Sympathy_RareBird.jpg", "ytid": "G-DIu3lTEaA"}, {"no": 92, "title": "Sultans of Swing", "artist": "Dire Straits", "year": null, "album": null, "thumb": "092_SultansofSwing_DireStraits.jpg", "ytid": "h0ffIJ7ZO4U"}, {"no": 93, "title": "The Sound of Silence", "artist": "Simon & Garfunkel", "year": null, "album": null, "thumb": "093_TheSoundofSilence_SimonGarfunkel.jpg", "ytid": "NAEppFUWLfc"}, {"no": 94, "title": "Aubrey", "artist": "Bread", "year": "1972", "album": "Guitar Man", "thumb": "094_Aubrey_Bread.jpg", "ytid": "9IWxocGm21U"}, {"no": 95, "title": "Holiday", "artist": "Bee Gees", "year": "1967", "album": "Best of Bee Gees", "thumb": "095_Holiday_BeeGees.jpg", "ytid": "boqNwuYh_rQ"}, {"no": 96, "title": "Tonight", "artist": "Elton John, James Newton Howard & London Symphony Orchestra", "year": "1976", "album": "Blue Moves", "thumb": "096_Tonight_EltonJohn.jpg", "ytid": "R-Ly7xgLXGQ"}, {"no": 97, "title": "Help Me Make It Through the Night", "artist": "Gladys Knight & The Pips", "year": "1971", "album": "Standing Ovation", "thumb": "097_HelpMeMakeItThroughtheNight_GladysKnightthePips.jpg", "ytid": "EX66ZtKnmYU"}, {"no": 98, "title": "Old & Wise", "artist": "The Alan Parsons Project", "year": "1982", "album": "Eye In the Sky", "thumb": "098_OldWise_AlanParsonsProject.jpg", "ytid": "IFL2zFpSFe8"}, {"no": 99, "title": "Dust in the Wind", "artist": "Kansas", "year": null, "album": null, "thumb": "099_DustintheWind_Kansas.jpg", "ytid": "tH2w6Oxx0kQ"}, {"no": 100, "title": "What Am I Supposed to Do", "artist": "Ann-Margret", "year": null, "album": null, "thumb": "100_WhatAmISupposedtoDo_Ann-Margret.jpg", "ytid": "F21D-hhG-6o"}, {"no": 101, "title": "I'm in the Mood for Dancing", "artist": "The Nolans", "year": "1979", "album": "The Best of the Nolans", "thumb": "101_ImintheMoodforDancing_Nolans.jpg", "ytid": "XbAM2_6jKY0"}, {"no": 102, "title": "Honesty", "artist": "Billy Joel", "year": "1978", "album": "The Essential Billy Joel", "thumb": "102_Honesty_BillyJoel.jpg", "ytid": "SuFScoO4tb0"}, {"no": 103, "title": "Up Where We Belong", "artist": "Joe Cocker & Jennifer Warnes", "year": null, "album": null, "thumb": null, "ytid": "bjrOcrisGyI"}, {"no": 104, "title": "I Don't Want to Talk About It", "artist": "Rod Stewart", "year": null, "album": null, "thumb": "104_IDontWanttoTalkAboutIt_RodStewart.jpg", "ytid": "w46bWxS9IjY"}, {"no": 105, "title": "Hotel California", "artist": "Eagles", "year": null, "album": null, "thumb": "105_HotelCalifornia_Eagles.jpg", "ytid": "dLl4PZtxia8"}, {"no": 106, "title": "Open Arms", "artist": "Journey", "year": null, "album": null, "thumb": null, "ytid": "i5pUOVC50Y8"}, {"no": 107, "title": "Heart of Gold", "artist": "Neil Young", "year": "1972", "album": "Harvest", "thumb": "107_HeartofGold_NeilYoung.jpg", "ytid": "c7eB7Wns1-M"}, {"no": 108, "title": "Against the Wind", "artist": "Bob Seger & The Silver Bullet Band", "year": "1980", "album": "Greatest Hits", "thumb": "108_AgainsttheWind_BobSegertheSilverBulletBand.jpg", "ytid": "2vRsEC65NTA"}, {"no": 109, "title": "It's a Heartache", "artist": "Bonnie Tyler", "year": "1977", "album": "Natural Force", "thumb": "109_ItsaHeartache_BonnieTyler.jpg", "ytid": "bEOl38y8Nj8"}, {"no": 110, "title": "Desperado", "artist": "Linda Ronstadt", "year": "1973", "album": "Don't Cry Now", "thumb": "110_Desperado_LindaRonstadt.jpg", "ytid": "MeQyoTIQOOM"}, {"no": 111, "title": "There's a Kind of Hush", "artist": "Carpenters", "year": "1976", "album": "A Kind of Hush (Remastered)", "thumb": "111_TheresaKindofHush_Carpenters.jpg", "ytid": "8CX83EQA8dc"}, {"no": 112, "title": "Love of My Life", "artist": "Queen", "year": "1975", "album": "A Night at the Opera", "thumb": "112_LoveofMyLife_Queen.jpg", "ytid": "bX-aT6S8R58"}, {"no": 113, "title": "Let Me Be There", "artist": "Olivia Newton-John", "year": "1973", "album": "Music Makes My Day", "thumb": "113_LetMeBeThere_OliviaNewton-John.jpg", "ytid": "rR8hCFfvZPk"}, {"no": 114, "title": "Early in the Morning", "artist": "Cliff Richard", "year": "1970", "album": "Tracks 'N Grooves (Remastered)", "thumb": "114_EarlyintheMorning_CliffRichard.jpg", "ytid": "2xVdmSCuzI4"}, {"no": 115, "title": "Blue Jean Blues", "artist": "ZZ Top", "year": "1975", "album": "The ZZ Top Sixpack", "thumb": "115_BlueJeanBlues_ZZTop.jpg", "ytid": "tir5zIhAETY"}, {"no": 116, "title": "Try to Remember", "artist": "The Brothers Four", "year": "1965", "album": "Try to Remember", "thumb": "116_TrytoRemember_BrothersFour.jpg", "ytid": "LUZpjW7QHGo"}, {"no": 117, "title": "Evergreen", "artist": "Westlife", "year": "2001", "album": "World of Our Own (Expanded Edition)", "thumb": "117_Evergreen_Westlife.jpg", "ytid": "nfSaUZgGxMU"}, {"no": 118, "title": "Love Me Like There's No Tomorrow", "artist": "Freddie Mercury", "year": "1985", "album": "Mr. Bad Guy (Special Edition)", "thumb": "118_LoveMeLikeTheresNoTomorrow_FreddieMercury.jpg", "ytid": "H1Wbu_AF2e4"}, {"no": 119, "title": "You're So Vain", "artist": "Carly Simon", "year": null, "album": null, "thumb": "119_YoureSoVain_CarlySimon.jpg", "ytid": "j13oJajXx0M"}, {"no": 120, "title": "Best of My Love", "artist": "Eagles", "year": "1974", "album": "Their Greatest Hits 1971-1975", "thumb": "120_BestofMyLove_Eagles.jpg", "ytid": "7VDuTGJ_ZQI"}, {"no": 121, "title": "Hello Again", "artist": "Neil Diamond", "year": null, "album": null, "thumb": null, "ytid": "5O6KDuKJoB0"}, {"no": 122, "title": "Time in a Bottle", "artist": "Jim Croce", "year": null, "album": null, "thumb": "122_TimeinaBottle_JimCroce.jpg", "ytid": "Q29sOLG8xGE"}, {"no": 123, "title": "All Out of Love", "artist": "Air Supply", "year": null, "album": null, "thumb": "123_AllOutofLove_AirSupply.jpg", "ytid": "JWdZEumNRmI"}, {"no": 124, "title": "Tell Laura I Love Her", "artist": "Ray Peterson", "year": "1958", "album": "Nipper's Greatests Hits 60's, Vol. 1", "thumb": "124_TellLauraILoveHer_RayPeterson.jpg", "ytid": "pTjQgkHzbTk"}, {"no": 125, "title": "Rain and Tears", "artist": "Aphrodite's Child", "year": null, "album": null, "thumb": "125_RainandTears_AphroditesChild.jpg", "ytid": "2I7QG12ojg0"}, {"no": 126, "title": "The More We Try", "artist": "Kenny Loggins", "year": "1982", "album": "High Adventure", "thumb": "126_TheMoreWeTry_KennyLoggins.jpg", "ytid": "77uOjlAZL6M"}, {"no": 127, "title": "Ticket to the Tropics", "artist": "Gerard Joling", "year": "1985", "album": "Love Is In Your Eyes", "thumb": "127_TickettotheTropics_GerardJoling.jpg", "ytid": "0sAAA2IYv9E"}, {"no": 128, "title": "Wonderful Tonight", "artist": "Eric Clapton", "year": null, "album": null, "thumb": null, "ytid": "UprwkbzUX6g"}, {"no": 129, "title": "Handy Man", "artist": "James Taylor", "year": null, "album": null, "thumb": null, "ytid": "dXI43zGeyu4"}, {"no": 130, "title": "End of the Road", "artist": "Boyz II Men", "year": null, "album": null, "thumb": null, "ytid": "zDKO6XYXioc"}, {"no": 131, "title": "Midnight Blue", "artist": "E.L.O.", "year": null, "album": null, "thumb": "131_MidnightBlue_ELO.jpg", "ytid": "f38qG3Aeb-A"}, {"no": 132, "title": "Lady", "artist": "Kenny Rogers", "year": null, "album": null, "thumb": "132_Lady_KennyRogers.jpg", "ytid": "0T1J8JuTtR8"}, {"no": 133, "title": "Up Where We Belong", "artist": "Joe Cocker", "year": null, "album": null, "thumb": "133_UpWhereWeBelong_JoeCocker.jpg", "ytid": "bjrOcrisGyI"}, {"no": 134, "title": "Torn Between Two Lovers", "artist": "Mary MacGregor", "year": null, "album": null, "thumb": "134_TornBetweenTwoLovers_MaryMacGregor.jpg", "ytid": "dtBorKd8P6c"}, {"no": 135, "title": "Sea of Heartbreak", "artist": "Poco / Don Gibson 원곡", "year": null, "album": null, "thumb": null, "ytid": "A4bo4ByFhLM"}, {"no": 136, "title": "Bohemian Rhapsody", "artist": "Queen", "year": null, "album": null, "thumb": "136_BohemianRhapsody_Queen.jpg", "ytid": "fJ9rUzIMcZQ"}, {"no": 137, "title": "Take Me Home, Country Roads", "artist": "John Denver", "year": null, "album": null, "thumb": null, "ytid": "1vrEljMfXYo"}, {"no": 138, "title": "Take It Easy", "artist": "Eagles", "year": null, "album": null, "thumb": "138_TakeItEasy_Eagles.jpg", "ytid": "5igDtWadYms"}, {"no": 139, "title": "Why Worry", "artist": "Dire Straits", "year": null, "album": null, "thumb": null, "ytid": "YMh4jMVSO1Q"}, {"no": 140, "title": "If You Love Me (Let Me Know)", "artist": "Olivia Newton-John", "year": "1974", "album": "If You Love Me, Let Me Know", "thumb": "140_IfYouLoveMeLetMeKnow_OliviaNewton-John.jpg", "ytid": "dkMkHpKpLkM"}, {"no": 141, "title": "Born to Be Wild", "artist": "Steppenwolf", "year": null, "album": null, "thumb": "141_BorntoBeWild_Steppenwolf.jpg", "ytid": "igvP806798U"}, {"no": 142, "title": "Piano Man", "artist": "Billy Joel", "year": null, "album": null, "thumb": "142_PianoMan_BillyJoel.jpg", "ytid": "gxEPV4kolz0"}, {"no": 143, "title": "The Power of Love", "artist": "Jennifer Rush / Huey Lewis & the News", "year": null, "album": null, "thumb": "143_ThePowerofLove_JenniferRushHueyLewistheNews.jpg", "ytid": "wBl2QGAIx1s"}, {"no": 144, "title": "Eres Tú", "artist": "Mocedades", "year": null, "album": null, "thumb": null, "ytid": "A5vaIjBQnmk"}, {"no": 145, "title": "Sea of Love", "artist": "Honeydrippers", "year": null, "album": null, "thumb": null, "ytid": "2BoUzzFXuVU"}, {"no": 146, "title": "Angie", "artist": "Rolling Stones", "year": null, "album": null, "thumb": "146_Angie_RollingStones.jpg", "ytid": "oWRr03VcA-0"}];
+const STORIES = {"1": {"summary": "「그대에게 마지막 안녕」을 속삭이는 1993년의 어른스러운 작별 발라드.", "paragraphs": ["오스트레일리아 출신의 소프트·록 듀오 Air Supply가 1993년 앨범 《The Vanishing Race》에 수록한 곡. 1980년대를 풍미한 그들의 히트작과는 결을 달리하는, 한층 차분하고 절제된 후기 명곡이다.", "리드 보컬 러셀 히치콕의 호소력 있는 고음과 풍성한 화음 편곡이 만나, 떠나가는 사랑을 붙잡지 않고 조용히 보내주는 어른의 마음을 노래한다. 격정 대신 담담한 수용의 정서가 인상적.", "한국에서는 1990년대 중후반 라디오 심야방송과 음악다방의 단골 신청곡으로 자리잡았다. 80년대 Air Supply를 듣고 자란 세대가 30~40대가 되어 다시 만난 그들의 목소리, 그 시간의 두께가 곡에 그대로 배어 있다."]}, "2": {"summary": "「인생은 자꾸만 미끄러져 간다」 — 1977년 폴 사이먼의 어쿠스틱 우화.", "paragraphs": ["사이먼앤가펑클 시절의 절제된 서정에 컨트리·포크 색채를 더한 폴 사이먼 솔로 시기의 대표곡. 1977년 컴필레이션 《Greatest Hits, Etc.》에 새 곡으로 수록되었다.", "가까이 다가갈수록 인생의 정답은 미끄러져 사라진다는 우화적 가사가 인상적이다. 사이먼은 이 곡을 두고 “우리가 가까워졌다고 믿는 순간, 본질은 미끄러져 빠져나간다”고 설명했다.", "한국에서는 1980년대 청취자가 가장 좋아한 폴 사이먼 곡 중 하나로 꼽혔다. AFKN 라디오를 통해 먼저 알려져 DJ들이 즐겨 틀던 곡으로 기억되며, 7080세대의 음악 다방에서 빠지지 않던 레퍼토리였다."]}, "3": {"summary": "외로운 방랑자의 고백 — 하드록의 거장이 빚어낸 1974년의 어쿠스틱 명품 발라드.", "paragraphs": ["영국 하드록의 전설 Deep Purple이 1974년 앨범 《Stormbringer》에 수록한 어쿠스틱 발라드. 거친 록 사운드를 자랑하던 그들의 정반대 지점에 놓인 곡으로, 의외성 덕에 오히려 더 큰 사랑을 받았다.", "데이비드 커버데일의 호소력 있는 보컬과 리치 블랙모어의 절제된 어쿠스틱 기타가 만들어낸 쓸쓸한 정서가 압권. 가사는 운명의 군인처럼 떠도는 자신의 외로움을 고백하는 일종의 자전적 독백이다.", "한국에서는 록 매니아와 일반 팝송 팬을 가리지 않고 폭넓게 사랑받았다. 1970~80년대 한국 음악다방의 단골 메뉴이자, 라디오 신청곡 순위에 꾸준히 오르내리던 곡. 한국에서의 인기는 본고장 영국보다 훨씬 뜨거웠다는 평이 있을 정도."]}, "4": {"summary": "달빛 같은 속삭임 — 줄리 런던이 부른 영원의 재즈 스탠더드.", "paragraphs": ["1954년 바트 하워드가 작곡한 재즈 스탠더드(원제 〈In Other Words〉). 시나트라 버전이 가장 유명하지만, 줄리 런던의 1963년 앨범 《The End of the World》에 담긴 해석은 또 다른 정수로 평가받는다.", "줄리 런던 특유의 속삭이듯 부드럽고 관능적인 보컬, 잔잔한 피아노와 절제된 현악 반주가 만나 진정한 ‘문라이트 발라드’의 분위기를 완성했다. 같은 곡을 부른 다른 가수들과는 완전히 다른 색채의 매혹.", "한국에서는 영화·드라마 배경음악, 호텔 라운지, 클래식 라디오 프로그램 등에서 꾸준히 흘러나와 친숙한 곡. 재즈 발라드에 처음 입문하는 이들에게 가장 먼저 추천되는 ‘교과서’ 같은 트랙으로 자리잡았다."]}, "5": {"summary": "「인생의 다음 페이지로 나아가야 해」 — 1977년 ABBA의 따뜻한 인생 송가.", "paragraphs": ["스웨덴이 낳은 세계적 그룹 ABBA가 1977년 앨범 《The Album》에 수록한 곡. 그들 특유의 화려한 디스코·댄스팝과는 결이 다른, 인생의 흐름을 받아들이며 앞으로 나아가야 한다는 메시지의 잔잔한 곡이다.", "비욘 울베우스의 차분한 내레이션 같은 보컬이 곡을 이끌고, 안니프리드와 아그네타의 화음이 후렴을 감싸 안는다. 가사 “Life is a train that goes from cradle to grave”(인생은 요람에서 무덤으로 가는 기차)라는 구절이 특히 인상적.", "한국에서는 〈Dancing Queen〉이나 〈Mamma Mia〉만큼 대중적이지는 않지만, ABBA 매니아들이 손꼽는 숨은 명곡. 인생의 굽이를 지나온 이들에게 더 깊이 와닿는 곡으로, 어머니 세대의 ‘ABBA 컬렉션’에서 빠지지 않는 한 곡이다."]}};
+const THUMB_BASE = "thumbnails/";
+
+const esc = t => String(t).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+
+function thumbHTML(s){
+  if(s.thumb){
+    return `<img src="${THUMB_BASE}${s.thumb}" alt="${esc(s.title)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'${esc(s.title)}'}))">`;
+  }
+  return `<div class="ph">${esc(s.title)}</div>`;
+}
+
+function cardHTML(s){
+  return `
+    <button class="card" data-no="${s.no}" aria-label="${esc(s.title)} - ${esc(s.artist)}">
+      <div class="card-thumb">${thumbHTML(s)}</div>
+      <div class="card-body">
+        <h3 class="card-title">${esc(s.title)}</h3>
+        <p class="card-artist">${esc(s.artist)}</p>
+        ${s.year ? `<div class="card-year">${s.year}</div>` : ""}
+      </div>
+    </button>`;
+}
+
+const grid = document.getElementById("grid");
+const qInput = document.getElementById("q");
+const countEl = document.getElementById("count");
+let currentFilter = {era:"all", q:""};
+let currentList = SONGS;
+
+function applyFilter(){
+  let list = SONGS;
+  if(currentFilter.era !== "all"){
+    const era = parseInt(currentFilter.era);
+    list = list.filter(s => {
+      if(!s.year) return false;
+      const y = parseInt(s.year);
+      if(currentFilter.era === "1990") return y >= 1990;
+      return y >= era && y < era + 10;
+    });
+  }
+  if(currentFilter.q){
+    const k = currentFilter.q.toLowerCase();
+    list = list.filter(s =>
+      s.title.toLowerCase().includes(k) ||
+      s.artist.toLowerCase().includes(k) ||
+      (s.year && String(s.year).includes(k))
+    );
+  }
+  currentList = list;
+  if(list.length === 0){
+    grid.innerHTML = '<div class="empty"><b>찾는 노래가 없어요</b><span>다른 단어로 검색해 보세요</span></div>';
+  } else {
+    grid.innerHTML = list.map(cardHTML).join("");
+  }
+  countEl.textContent = list.length;
+}
+
+qInput.addEventListener("input", e => {
+  currentFilter.q = e.target.value.trim();
+  applyFilter();
+});
+
+document.getElementById("chips").addEventListener("click", e => {
+  const chip = e.target.closest(".chip");
+  if(!chip) return;
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+  chip.classList.add("active");
+  currentFilter.era = chip.dataset.era;
+  applyFilter();
+});
+
+applyFilter();
+
+// MODAL
+const modal = document.getElementById("modal");
+const sNum = document.getElementById("sNum");
+const sThumb = document.getElementById("sThumb");
+const sTitle = document.getElementById("sTitle");
+const sArtist = document.getElementById("sArtist");
+const sMeta = document.getElementById("sMeta");
+const sSummary = document.getElementById("sSummary");
+const sStory = document.getElementById("sStory");
+const moreBtn = document.getElementById("moreBtn");
+const moreText = document.getElementById("moreText");
+const ytLink = document.getElementById("ytLink");
+const ytWrap = document.getElementById("ytWrap");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+let currentNo = null;
+
+function openModal(no){
+  const s = SONGS.find(x => x.no === no);
+  if(!s) return;
+  currentNo = no;
+  const story = STORIES[String(s.no)] || {summary:"", paragraphs:[]};
+
+  sNum.textContent = s.no;
+  sThumb.innerHTML = thumbHTML(s);
+  sTitle.textContent = s.title;
+  sArtist.textContent = s.artist;
+
+  const metaParts = [];
+  if(s.year) metaParts.push(String(s.year));
+  if(s.album) metaParts.push(s.album);
+  sMeta.innerHTML = metaParts.length ? metaParts.map((p,i)=>(i>0?'<span class="dot"></span>':'')+esc(p)).join('') : '';
+  sMeta.style.display = metaParts.length ? '' : 'none';
+
+  sSummary.textContent = story.summary || `${s.artist}의 곡.`;
+
+  if(story.paragraphs && story.paragraphs.length){
+    sStory.innerHTML = `<div class="story-inner">${story.paragraphs.map(p=>`<p>${esc(p)}</p>`).join("")}</div>`;
+    moreBtn.style.display = "flex";
+  } else {
+    sStory.innerHTML = "";
+    moreBtn.style.display = "none";
+  }
+  sStory.classList.remove("open");
+  moreBtn.classList.remove("open");
+  moreText.textContent = "▼ 노래 이야기 더 자세히 보기";
+
+  const query = encodeURIComponent(`${s.title} ${s.artist}`);
+  ytLink.href = `https://www.youtube.com/results?search_query=${query}`;
+  if(s.ytid){
+    ytWrap.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${s.ytid}?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  } else {
+    ytWrap.innerHTML = `<div class="yt-pending">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/></svg>
+      <span>영상 준비 중입니다</span>
+      <small>아래 빨간 버튼을 누르면 유튜브에서 노래를 들으실 수 있어요</small>
+    </div>`;
+  }
+
+  // Prev/Next based on current filter
+  const idx = currentList.findIndex(x => x.no === no);
+  prevBtn.disabled = idx <= 0;
+  nextBtn.disabled = idx < 0 || idx >= currentList.length - 1;
+
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(){
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+  ytWrap.innerHTML = "";
+  currentNo = null;
+}
+
+grid.addEventListener("click", e => {
+  const card = e.target.closest(".card");
+  if(card) openModal(Number(card.dataset.no));
+});
+document.getElementById("closeBtn").addEventListener("click", closeModal);
+modal.addEventListener("click", e => { if(e.target === modal) closeModal(); });
+document.addEventListener("keydown", e => {
+  if(!modal.classList.contains("open")) return;
+  if(e.key === "Escape") closeModal();
+  if(e.key === "ArrowLeft" && !prevBtn.disabled) prevBtn.click();
+  if(e.key === "ArrowRight" && !nextBtn.disabled) nextBtn.click();
+});
+
+moreBtn.addEventListener("click", () => {
+  const open = sStory.classList.toggle("open");
+  moreBtn.classList.toggle("open", open);
+  moreText.textContent = open ? "▲ 접기" : "▼ 노래 이야기 더 자세히 보기";
+});
+
+prevBtn.addEventListener("click", () => {
+  const idx = currentList.findIndex(x => x.no === currentNo);
+  if(idx > 0){
+    const sheet = document.querySelector('.sheet');
+    if(sheet) sheet.scrollTop = 0;
+    openModal(currentList[idx - 1].no);
+  }
+});
+nextBtn.addEventListener("click", () => {
+  const idx = currentList.findIndex(x => x.no === currentNo);
+  if(idx >= 0 && idx < currentList.length - 1){
+    const sheet = document.querySelector('.sheet');
+    if(sheet) sheet.scrollTop = 0;
+    openModal(currentList[idx + 1].no);
+  }
+});
+
+document.getElementById("shareBtn").addEventListener("click", async () => {
+  const t = sTitle.textContent;
+  const a = sArtist.textContent;
+  const txt = `${t} — ${a}\n(최영숙의 올드팝 다이어리 中)`;
+  if(navigator.share){
+    try{ await navigator.share({title:"최영숙의 올드팝 다이어리", text: txt, url: location.href}); }catch(_){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(`${txt}\n${location.href}`);
+      const b = document.getElementById("shareBtn");
+      const orig = b.innerHTML;
+      b.innerHTML = "✓ 복사되었어요!";
+      setTimeout(()=>{b.innerHTML = orig}, 1800);
+    }catch(_){}
+  }
+});
+</script>
+</body>
+</html>
