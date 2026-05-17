@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>강남언니 입점 검토 · 메이드유의원 부평점</title>
+<meta name="description" content="강남언니 서비스 본질·입점 비용·법적 리스크·메이드유 부평점 적용 가능성 분석" />
+<style>
+:root {
+  --bg-white: #fbfbfd;
+  --bg-light: #f5f5f7;
+  --bg-dark: #1d1d1f;
+  --bg-black: #000000;
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --text-on-dark: #f5f5f7;
+  --blue: #0071e3;
+  --red: #ff3b30;
+  --green: #30d158;
+  --orange: #ff9500;
+  --purple: #bf5af2;
+  --pink: #ff375f;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --max: 980px;
+  --wide: 1200px;
+  --gutter: 22px;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg-white);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+.nav {
+  position: sticky;
+  top: 0;
+  height: 48px;
+  background: rgba(251, 251, 253, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+}
+.nav__logo { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); text-decoration: none; }
+.nav__links { display: flex; gap: 24px; font-size: 12px; color: var(--text-secondary); }
+.nav__links a { color: var(--text-secondary); text-decoration: none; transition: color 200ms var(--ease); }
+.nav__links a:hover { color: var(--text-primary); }
+@media (max-width: 640px) { .nav__links { display: none; } }
+
+/* Sections */
+.section { padding: clamp(80px, 12vw, 160px) var(--gutter); }
+.section--dark { background: var(--bg-black); color: var(--text-on-dark); }
+.section--light { background: var(--bg-white); color: var(--text-primary); }
+.section--gray { background: var(--bg-light); color: var(--text-primary); }
+.section--pink {
+  background: linear-gradient(135deg, #ff375f, #bf5af2);
+  color: var(--text-on-dark);
+}
+.section--compact { padding: clamp(60px, 8vw, 100px) var(--gutter); }
+.container { max-width: var(--max); margin: 0 auto; }
+.container--wide { max-width: var(--wide); margin: 0 auto; }
+
+/* Typography */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.section--dark .eyebrow, .section--pink .eyebrow { color: rgba(255,255,255,0.7); }
+.hero-title {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin-bottom: 18px;
+}
+.hero-sub {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 32px;
+  line-height: 1.35;
+}
+.headline {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  margin-bottom: 16px;
+}
+.subhead {
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+  line-height: 1.5;
+  max-width: 720px;
+}
+.section--dark .subhead, .section--pink .subhead { color: rgba(255,255,255,0.7); }
+
+/* Hero */
+.hero { text-align: center; padding-top: clamp(80px, 14vw, 180px); padding-bottom: clamp(60px, 10vw, 120px); }
+.hero__date { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.pills { display: flex; justify-content: center; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+.pill {
+  background: rgba(255,255,255,0.15);
+  border: 0.5px solid rgba(255,255,255,0.25);
+  padding: 10px 18px;
+  border-radius: 980px;
+  font-size: 13px;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Big Stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
+@media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+.stat { text-align: center; padding: 20px 12px; }
+.stat__num {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.section--dark .stat__num { color: var(--text-on-dark); }
+.section--pink .stat__num { color: #fff; }
+.stat__num--green { color: var(--green); }
+.stat__num--red { color: var(--red); }
+.stat__label { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
+.section--dark .stat__label { color: #a1a1a6; }
+.section--pink .stat__label { color: rgba(255,255,255,0.8); }
+
+/* Journey 8-step */
+.journey { margin-top: 56px; }
+.journey__row {
+  display: grid;
+  grid-template-columns: 60px 1fr 1.5fr 1fr;
+  align-items: center;
+  padding: 20px 24px;
+  background: var(--bg-light);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  gap: 16px;
+  transition: transform 300ms var(--ease-out);
+}
+.journey__row:hover { transform: translateX(4px); }
+.journey__step {
+  width: 44px;
+  height: 44px;
+  background: var(--purple);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+.journey__name { font-size: 16px; font-weight: 600; letter-spacing: -0.005em; }
+.journey__desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.journey__pay { font-size: 12px; color: var(--purple); font-weight: 600; text-align: right; letter-spacing: 0.04em; text-transform: uppercase; }
+@media (max-width: 768px) {
+  .journey__row { grid-template-columns: 44px 1fr; gap: 12px; padding: 16px; }
+  .journey__desc, .journey__pay { display: none; }
+}
+
+/* Pricing Tiers */
+.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 48px; }
+@media (max-width: 768px) { .tiers { grid-template-columns: 1fr 1fr; } }
+.tier {
+  background: var(--bg-light);
+  border-radius: 18px;
+  padding: 28px 22px;
+  text-align: center;
+}
+.tier--recommended {
+  background: linear-gradient(135deg, #ffffff, #fff0f5);
+  border: 2px solid var(--pink);
+  position: relative;
+}
+.tier__badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--pink);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 980px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tier__name { font-size: 13px; color: var(--text-tertiary); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+.tier__price { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; line-height: 1; }
+.tier__price-unit { font-size: 12px; color: var(--text-tertiary); margin-bottom: 16px; }
+.tier__desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+/* Legal Risk Cards */
+.legal-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 48px; }
+.legal-row {
+  background: var(--bg-light);
+  border-radius: 18px;
+  padding: 28px 32px;
+  border-left: 4px solid var(--red);
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 768px) { .legal-row { grid-template-columns: 1fr; gap: 12px; } }
+.legal-row__title { font-size: 18px; font-weight: 600; letter-spacing: -0.005em; line-height: 1.3; }
+.legal-row__law { font-size: 12px; color: var(--red); font-weight: 600; margin-top: 6px; letter-spacing: 0.04em; text-transform: uppercase; }
+.legal-row__body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.legal-row__body strong { color: var(--text-primary); }
+
+/* Verdict Cards */
+.verdict-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 48px; }
+@media (max-width: 768px) { .verdict-grid { grid-template-columns: 1fr; } }
+.verdict {
+  background: var(--bg-light);
+  border-radius: 18px;
+  padding: 36px 32px;
+  border-top: 4px solid;
+}
+.section--dark .verdict { background: #2d2d2f; }
+.verdict--go { border-color: var(--green); }
+.verdict--avoid { border-color: var(--red); }
+.verdict__title { font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; margin-bottom: 18px; }
+.verdict--go .verdict__title { color: var(--green); }
+.verdict--avoid .verdict__title { color: var(--red); }
+.verdict__list { list-style: none; padding: 0; }
+.verdict__list li { font-size: 15px; padding: 10px 0; padding-left: 24px; position: relative; line-height: 1.5; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+.verdict__list li:last-child { border-bottom: none; }
+.section--dark .verdict__list li { border-bottom-color: rgba(255,255,255,0.06); }
+.verdict--go .verdict__list li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+.verdict--avoid .verdict__list li::before { content: "✗"; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+/* ROI Table */
+.roi-table {
+  background: var(--bg-light);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+.roi-table__row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  font-size: 14px;
+}
+.roi-table__row:last-child { border-bottom: none; }
+.roi-table__row--header {
+  background: rgba(0,0,0,0.04);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.roi-table__cell--center { text-align: center; font-weight: 500; }
+.roi-table__score { display: inline-flex; gap: 2px; }
+.roi-table__star { color: var(--orange); font-size: 16px; }
+.roi-table__star--off { color: rgba(0,0,0,0.15); }
+@media (max-width: 768px) { .roi-table__row { grid-template-columns: 1fr 1fr; gap: 6px; font-size: 13px; padding: 14px 16px; } }
+
+/* Platform Comparison */
+.platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+@media (max-width: 768px) { .platforms { grid-template-columns: 1fr; } }
+.platform {
+  background: var(--bg-light);
+  border-radius: 18px;
+  padding: 32px 28px;
+}
+.platform__name { font-size: 22px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 6px; }
+.platform__operator { font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 18px; }
+.platform__stat { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+.platform__stat:last-child { border-bottom: none; }
+.platform__stat-key { color: var(--text-secondary); }
+.platform__stat-val { color: var(--text-primary); font-weight: 500; }
+.platform__fit { margin-top: 16px; text-align: center; font-size: 18px; color: var(--orange); }
+
+/* Big Quote */
+.quote-box {
+  margin: 56px auto 0;
+  max-width: 820px;
+  text-align: center;
+  padding: 48px 32px;
+  background: linear-gradient(135deg, rgba(191,90,242,0.06), rgba(255,55,95,0.06));
+  border-radius: 24px;
+  border: 0.5px solid rgba(191,90,242,0.15);
+}
+.section--dark .quote-box, .section--pink .quote-box {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+}
+.quote-box__text {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.quote-box__cite { margin-top: 18px; font-size: 14px; color: var(--text-secondary); letter-spacing: 0.04em; }
+.section--pink .quote-box__cite { color: rgba(255,255,255,0.7); }
+
+/* Footer */
+.footer { background: var(--bg-light); padding: 48px 24px; text-align: center; font-size: 12px; color: var(--text-tertiary); border-top: 0.5px solid rgba(0,0,0,0.08); }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer__nav { margin-top: 16px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#top" class="nav__logo">강남언니 입점 검토 · 메이드유 부평점</a>
+  <div class="nav__links">
+    <a href="#what">강남언니란?</a>
+    <a href="#journey">환자 여정</a>
+    <a href="#cost">입점 비용</a>
+    <a href="#legal">법적 리스크</a>
+    <a href="#verdict">최종 권고</a>
+    <a href="../20260517_hospital-marketing-analysis/">← 종합 진단</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="section section--pink hero" id="top">
+  <div class="container">
+    <div class="hero__date">2026.05.17 · 07 리서치</div>
+    <h1 class="hero-title">강남언니,<br/>입점해야 하는가.</h1>
+    <p class="hero-sub">미용의료 플랫폼 1위. 매출 530억. 기업가치 6,000억.<br/>그런데 메이드유 부평점에게 ROI가 나올까?</p>
+    <div class="pills">
+      <span class="pill">조건부 입점 권고</span>
+      <span class="pill">월 한도 150만</span>
+      <span class="pill">3개월 파일럿</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS IT -->
+<section class="section section--light" id="what">
+  <div class="container">
+    <div class="eyebrow reveal">강남언니란?</div>
+    <h2 class="headline reveal">단순 후기 앱이 아니다.<br/>양면시장 광고 플랫폼이다.</h2>
+    <p class="subhead reveal">사용자에게는 무료 정보(후기·가격·견적). 병원에게는 CPC/CPA 광고비. 가격 비교는 미끼, 수익원은 의료광고비.</p>
+
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="stat__num">₩530억</div>
+        <div class="stat__label">2024 매출<br/>(역대 최대)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">₩6,000억</div>
+        <div class="stat__label">기업가치<br/>(2025 시리즈C)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">550만</div>
+        <div class="stat__label">누적 가입자<br/>(글로벌)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">800곳</div>
+        <div class="stat__label">활성 입점 병원<br/>(유료 광고)</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 56px; padding: 32px; background: var(--bg-light); border-radius: 18px;">
+      <div style="font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-tertiary); font-weight: 600; margin-bottom: 16px;">운영사 힐링페이퍼</div>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 32px;">
+        <div><strong>설립:</strong> 2012년 7월 / 서비스 출시 2015년 1월</div>
+        <div><strong>대표:</strong> 홍승일 (연세대 의전원 출신)</div>
+        <div><strong>본사:</strong> 서울 (서초·강남권)</div>
+        <div><strong>일본 매출:</strong> 2024년 125억 (전체 30%)</div>
+        <div><strong>2023 영업이익:</strong> 122억</div>
+        <div><strong>2024 영업이익:</strong> 128억</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8-STEP JOURNEY -->
+<section class="section section--gray" id="journey">
+  <div class="container container--wide">
+    <div class="eyebrow reveal">환자 여정 8단계</div>
+    <h2 class="headline reveal">사용자가 강남언니로 병원을 고르는 과정</h2>
+    <p class="subhead reveal">각 단계에서 병원이 노출되는 위치와 과금 방식이 다릅니다. 어느 단계를 공략할지가 입점 전략의 핵심.</p>
+
+    <div class="journey reveal">
+      <div class="journey__row">
+        <div class="journey__step">1</div>
+        <div class="journey__name">발견</div>
+        <div class="journey__desc">지하철·구글·SNS 광고 → 강남언니 앱 다운로드</div>
+        <div class="journey__pay">노출 X</div>
+      </div>
+      <div class="journey__row">
+        <div class="journey__step">2</div>
+        <div class="journey__name">탐색</div>
+        <div class="journey__desc">"슈링크", "올리지오", "부평 피부과" 등 키워드 검색</div>
+        <div class="journey__pay">CPC (검색광고)</div>
+      </div>
+      <div class="journey__row">
+        <div class="journey__step">3</div>
+        <div class="journey__name">비교</div>
+        <div class="journey__desc">후기·평점·시술 사진·의사 이력 확인</div>
+        <div class="journey__pay">정액 (배너) + CPC (디스커버리)</div>
+      </div>
+      <div class="journey__row">
+        <div class="journey__step">4</div>
+        <div class="journey__name">견적 요청</div>
+        <div class="journey__desc">얼굴 사진 + 원하는 시술 등록 → 다수 병원 견적 수신</div>
+        <div class="journey__pay">CPA (견적 답변)</div>
+      </div>
+      <div class="journey__row">
+        <div class="journey__step">5</div>
+        <div class="journey__name">상담 신청</div>
+        <div class="journey__desc">관심 병원 채팅·전화 상담 신청</div>
+        <div class="journey__pay">CPA (상담건당) ★ 핵심</div>
+      </div>
+      <div class="journey__row">
+        <div class="journey__step">6</div>
+        <div class="journey__name">예약·결제</div>
+        <div class="journey__desc">강남언니 내 예약·일부 시술 "바로 구매" 선결제</div>
+        <div class="journey__pay">PG 수수료 2%대</div>
+      </div>
+      <div class="journey__row">
+        <div class="journey__step">7</div>
+        <div class="journey__name">내원·시술</div>
+        <div class="journey__desc">병원 방문 시술 → 카운터에서 강남언니 경로 확인</div>
+        <div class="journey__pay">무과금</div>
+      </div>
+      <div class="journey__row">
+        <div class="journey__step">8</div>
+        <div class="journey__name">후기 작성</div>
+        <div class="journey__desc">시술 후 후기 등록 → 영수증 인증 시 포인트 지급</div>
+        <div class="journey__pay">평점/후기 누적 → 노출 점수↑</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COST TIERS -->
+<section class="section section--light" id="cost">
+  <div class="container">
+    <div class="eyebrow reveal">입점 비용</div>
+    <h2 class="headline reveal">월 50만에서 1,500만+까지</h2>
+    <p class="subhead reveal">초기 충전금 220만원 별도. 운영 강도에 따라 4개 구간. <strong>메이드유 부평점은 "표준 운영" 구간이 적정.</strong></p>
+
+    <div class="tiers reveal">
+      <div class="tier">
+        <div class="tier__name">테스트</div>
+        <div class="tier__price">50~100만</div>
+        <div class="tier__price-unit">원 / 월</div>
+        <div class="tier__desc">키워드 1~2개 + 디스플레이 1개<br/>지방·동네 피부과 신규 입점</div>
+      </div>
+      <div class="tier tier--recommended">
+        <span class="tier__badge">권고</span>
+        <div class="tier__name">표준 운영</div>
+        <div class="tier__price">100~200만</div>
+        <div class="tier__price-unit">원 / 월</div>
+        <div class="tier__desc">키워드 3~5개 + 디스플레이 + CPA 일부<br/><strong style="color:var(--pink);">메이드유 부평점 권장</strong></div>
+      </div>
+      <div class="tier">
+        <div class="tier__name">공격적</div>
+        <div class="tier__price">300~500만</div>
+        <div class="tier__price-unit">원 / 월</div>
+        <div class="tier__desc">키워드 10+ + 프리미엄 배너<br/>강남권 중형 병원</div>
+      </div>
+      <div class="tier">
+        <div class="tier__name">헤비</div>
+        <div class="tier__price">500~1,500만+</div>
+        <div class="tier__price-unit">원 / 월</div>
+        <div class="tier__desc">풀 카테고리 + 배너 도배<br/>강남 대형 성형외과</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 56px; padding: 28px; background: var(--bg-light); border-radius: 14px;">
+      <div style="font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); font-weight: 600; margin-bottom: 12px;">CPC 입찰 단가</div>
+      <div style="font-size: 16px; line-height: 1.7;">
+        <strong>전체 범위:</strong> 550원 ~ 100,000원 (10원 단위)<br/>
+        <strong>강남 슈링크:</strong> 5,000~30,000원 추정<br/>
+        <strong style="color:var(--green)">부평 슈링크:</strong> 1,000~5,000원 추정 (강남의 1/3~1/5)<br/>
+        <strong style="color:var(--text-tertiary)">→ 비강남권은 동일 효율 대비 CPC 부담 훨씬 적음</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGAL RISK -->
+<section class="section section--dark" id="legal">
+  <div class="container">
+    <div class="eyebrow reveal">⚠️ 가장 중요한 영역</div>
+    <h2 class="headline reveal">법적 리스크 — 운영사 대표 유죄 이력</h2>
+    <p class="subhead reveal">2023년 7월, 강남언니 운영사 대표가 의료법 위반으로 항소심 유죄. 그 BM은 폐기됐지만 의료법 56조는 여전히 입점 병원에 책임 전가 가능.</p>
+
+    <div style="background: rgba(255,59,48,0.08); border: 0.5px solid rgba(255,59,48,0.3); border-radius: 18px; padding: 36px 32px; margin-top: 48px;">
+      <div style="font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); font-weight: 600; margin-bottom: 16px;">2023.07.06 항소심 판결</div>
+      <div style="font-size: 22px; font-weight: 600; line-height: 1.4; margin-bottom: 20px; color: #fff;">
+        홍승일 힐링페이퍼 대표,<br/>의료법 27조 위반 — 징역 8개월, 집행유예 2년
+      </div>
+      <div style="font-size: 14px; color: #a1a1a6; line-height: 1.7;">
+        <strong style="color:#fff;">위반 기간:</strong> 2015.09 ~ 2018.11<br/>
+        <strong style="color:#fff;">알선 규모:</strong> 71개 병원, 환자 9,215명, 수수료 약 1억 7,600만원<br/>
+        <strong style="color:#fff;">위반 메커니즘:</strong> 광고 계약으로 위장한 시술 쿠폰 판매 수수료 수취<br/>
+        <strong style="color:#fff;">현재:</strong> 쿠폰 BM 즉시 폐기, 광고비(CPC/CPA/정액)만 수취 — 현재 모델은 합법 구간
+      </div>
+    </div>
+
+    <div class="legal-grid">
+      <div class="legal-row" style="background:#2d2d2f;">
+        <div>
+          <div class="legal-row__title">영리 목적 환자 알선 금지</div>
+          <div class="legal-row__law">의료법 27조 3항</div>
+        </div>
+        <div class="legal-row__body" style="color:#a1a1a6;">
+          위반 시 <strong style="color:#fff;">3년 이하 징역 / 3,000만 원 이하 벌금 + 의사면허 정지 가능</strong>. 강남언니 자체는 광고매체이므로 광고비 지불은 합법이나, "상담→내원→시술 전 과정이 광고 노출에 따른 자발적 선택"으로 운영되어야 함.
+        </div>
+      </div>
+      <div class="legal-row" style="background:#2d2d2f;">
+        <div>
+          <div class="legal-row__title">치료 경험담 광고 금지</div>
+          <div class="legal-row__law">의료법 56조 2항</div>
+        </div>
+        <div class="legal-row__body" style="color:#a1a1a6;">
+          후기 형식 광고 시 위험. 자발적 후기는 회색지대. <strong style="color:#fff;">2024.12 후기 합법화 추진 보도 있으나 2025 기준 시범사업/시행령 개정 논의 단계</strong> — 완전 합법화 아님.
+        </div>
+      </div>
+      <div class="legal-row" style="background:#2d2d2f;">
+        <div>
+          <div class="legal-row__title">의료광고 사전심의 의무</div>
+          <div class="legal-row__law">의료법 56조 3항</div>
+        </div>
+        <div class="legal-row__body" style="color:#a1a1a6;">
+          강남언니 광고 등록 전 의무. 매월 약 3,000건 검수. 메이드유는 <strong style="color:#fff;">모든 이벤트·키워드 광고가 사전심의 통과 후에만 등록</strong> 필수.
+        </div>
+      </div>
+      <div class="legal-row" style="background:#2d2d2f;">
+        <div>
+          <div class="legal-row__title">"메쉬다 특허주사" 표현 주의</div>
+          <div class="legal-row__law">시행령 23조</div>
+        </div>
+        <div class="legal-row__body" style="color:#a1a1a6;">
+          신의료기술 미평가·과장 효과 광고 금지. <strong style="color:#fff;">"질병 치료에 반드시 효과 있다" 류 단정 표현 배제</strong>. "특허" 표기 자체는 합법이나 효능 단정 시 위험.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI BY TREATMENT -->
+<section class="section section--gray">
+  <div class="container">
+    <div class="eyebrow reveal">메이드유 적용</div>
+    <h2 class="headline reveal">메쉬다는 강남언니 검색량이 거의 0.</h2>
+    <p class="subhead reveal">메이드유의 가장 큰 차별점이 플랫폼에서 작동하지 않습니다. 상위 카테고리로 유입 후 상담 단계에서 차별화로 전환해야 합니다.</p>
+
+    <div class="roi-table reveal">
+      <div class="roi-table__row roi-table__row--header">
+        <div>시술</div>
+        <div class="roi-table__cell--center">부평 경쟁 강도</div>
+        <div class="roi-table__cell--center">CPC 단가 추정</div>
+        <div class="roi-table__cell--center">입점 효과</div>
+      </div>
+      <div class="roi-table__row">
+        <div><strong>리프팅 (슈링크/올리지오)</strong></div>
+        <div class="roi-table__cell--center">中</div>
+        <div class="roi-table__cell--center">1,000~5,000원</div>
+        <div class="roi-table__cell--center"><span class="roi-table__score"><span class="roi-table__star">★</span><span class="roi-table__star">★</span><span class="roi-table__star">★</span><span class="roi-table__star">★</span><span class="roi-table__star roi-table__star--off">★</span></span></div>
+      </div>
+      <div class="roi-table__row">
+        <div><strong>다이어트 주사</strong> (상위 카테고리)</div>
+        <div class="roi-table__cell--center">中</div>
+        <div class="roi-table__cell--center">800~3,000원</div>
+        <div class="roi-table__cell--center"><span class="roi-table__score"><span class="roi-table__star">★</span><span class="roi-table__star">★</span><span class="roi-table__star">★</span><span class="roi-table__star roi-table__star--off">★</span><span class="roi-table__star roi-table__star--off">★</span></span></div>
+      </div>
+      <div class="roi-table__row">
+        <div><strong>색소치료</strong> (기미·잡티)</div>
+        <div class="roi-table__cell--center">低</div>
+        <div class="roi-table__cell--center">500~2,000원</div>
+        <div class="roi-table__cell--center"><span class="roi-table__score"><span class="roi-table__star">★</span><span class="roi-table__star">★</span><span class="roi-table__star roi-table__star--off">★</span><span class="roi-table__star roi-table__star--off">★</span><span class="roi-table__star roi-table__star--off">★</span></span></div>
+      </div>
+      <div class="roi-table__row">
+        <div><strong>쁘띠 (필러·보톡스)</strong></div>
+        <div class="roi-table__cell--center">高</div>
+        <div class="roi-table__cell--center">1,500~6,000원</div>
+        <div class="roi-table__cell--center"><span class="roi-table__score"><span class="roi-table__star">★</span><span class="roi-table__star">★</span><span class="roi-table__star roi-table__star--off">★</span><span class="roi-table__star roi-table__star--off">★</span><span class="roi-table__star roi-table__star--off">★</span></span></div>
+      </div>
+      <div class="roi-table__row">
+        <div><strong>메쉬다 단독 키워드</strong></div>
+        <div class="roi-table__cell--center" style="color:var(--red)">검색량 ≈ 0</div>
+        <div class="roi-table__cell--center">—</div>
+        <div class="roi-table__cell--center"><span class="roi-table__score"><span class="roi-table__star">★</span><span class="roi-table__star roi-table__star--off">★</span><span class="roi-table__star roi-table__star--off">★</span><span class="roi-table__star roi-table__star--off">★</span><span class="roi-table__star roi-table__star--off">★</span></span></div>
+      </div>
+    </div>
+
+    <div class="quote-box reveal">
+      <div class="quote-box__text">"부평 슈링크·올리지오 키워드만 잘 잡으면<br/>월 150만원으로 강남 대비 우월한 ROI가 가능하다."</div>
+      <div class="quote-box__cite">— 비강남권 CPC가 강남의 1/3~1/5 수준</div>
+    </div>
+  </div>
+</section>
+
+<!-- VERDICT — GO vs AVOID -->
+<section class="section section--dark" id="verdict">
+  <div class="container">
+    <div class="eyebrow reveal">최종 권고</div>
+    <h2 class="headline reveal">조건부 입점.</h2>
+    <p class="subhead reveal">월 150만원 한도 + 3개월 파일럿. 강남 키워드는 회피. 자체 채널·기존 환자·강남언니 30:30:30 균형 유지.</p>
+
+    <div class="verdict-grid reveal">
+      <div class="verdict verdict--go">
+        <div class="verdict__title">✓ 할 것</div>
+        <ul class="verdict__list">
+          <li>월 광고비 한도 <strong>150만원</strong></li>
+          <li>3개월 파일럿 후 ROAS 측정</li>
+          <li>우선 키워드: 부평 슈링크·부평 올리지오·부평역 피부과·인천 리프팅·다이어트 주사</li>
+          <li>광고비 배분: 리프팅 70% / 다이어트 20% / 색소·쁘띠 10%</li>
+          <li>의료광고 사전심의 100% 통과 후에만 이벤트 등록</li>
+          <li>ROAS 300%+ 달성 시 → 월 250만 증액 + 여신티켓 병행 검토</li>
+        </ul>
+      </div>
+      <div class="verdict verdict--avoid">
+        <div class="verdict__title">✗ 하지 말 것</div>
+        <ul class="verdict__list">
+          <li><strong>강남 관련 키워드 일체</strong> (CPC 폭등 + 강남 대형과 경쟁 불가)</li>
+          <li>메쉬다 단독 키워드 광고 (검색량 0)</li>
+          <li>강남언니 의존도 50% 초과 (자체 채널 자산화 무력화)</li>
+          <li>"질병 치료에 반드시 효과" 류 단정 표현</li>
+          <li>후기 작성 강요·대리 작성 (의료법 56조 위반)</li>
+          <li>광고비 미끼 가격 → 내원 시 업셀링 (강남언니 페널티 + 후기 평점 하락)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM COMPARISON -->
+<section class="section section--light">
+  <div class="container container--wide">
+    <div class="eyebrow reveal">대안 비교</div>
+    <h2 class="headline reveal">강남언니 외 검토할 플랫폼</h2>
+    <p class="subhead reveal">메이드유 부평점 적합도 기준. ROAS 검증 후 여신티켓을 강력 추천.</p>
+
+    <div class="platforms reveal">
+      <div class="platform" style="border-top: 4px solid var(--pink);">
+        <div class="platform__name">강남언니</div>
+        <div class="platform__operator">힐링페이퍼 · 1위</div>
+        <div class="platform__stat"><span class="platform__stat-key">누적 가입자</span><span class="platform__stat-val">500만+</span></div>
+        <div class="platform__stat"><span class="platform__stat-key">매출 (2024)</span><span class="platform__stat-val">530억</span></div>
+        <div class="platform__stat"><span class="platform__stat-key">강점</span><span class="platform__stat-val">1위 인지도·글로벌</span></div>
+        <div class="platform__stat"><span class="platform__stat-key">약점</span><span class="platform__stat-val">강남 쏠림·과당경쟁</span></div>
+        <div class="platform__fit">★★★★☆ (4/5)</div>
+      </div>
+      <div class="platform" style="border-top: 4px solid var(--orange);">
+        <div class="platform__name">바비톡</div>
+        <div class="platform__operator">케어랩스</div>
+        <div class="platform__stat"><span class="platform__stat-key">누적 가입자</span><span class="platform__stat-val">약 700만</span></div>
+        <div class="platform__stat"><span class="platform__stat-key">강점</span><span class="platform__stat-val">커뮤니티 참여율</span></div>
+        <div class="platform__stat"><span class="platform__stat-key">약점</span><span class="platform__stat-val">광고 노출 비중 높음</span></div>
+        <div class="platform__fit">★★★★☆ (4/5)</div>
+      </div>
+      <div class="platform" style="border-top: 4px solid var(--green);">
+        <div class="platform__name">여신티켓</div>
+        <div class="platform__operator">패스트레인 · 피부 특화</div>
+        <div class="platform__stat"><span class="platform__stat-key">누적 가입자</span><span class="platform__stat-val">200만+</span></div>
+        <div class="platform__stat"><span class="platform__stat-key">강점</span><span class="platform__stat-val" style="color:var(--green);">피부시술 특화·가격 할인</span></div>
+        <div class="platform__stat"><span class="platform__stat-key">약점</span><span class="platform__stat-val">성형 약함·MAU 낮음</span></div>
+        <div class="platform__fit" style="color:var(--green);">★★★★★ (5/5)</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 24px; background: rgba(48,209,88,0.08); border-radius: 14px; border-left: 4px solid var(--green); font-size: 14px; color: var(--text-secondary); line-height: 1.6;">
+      <strong style="color:var(--text-primary);">💡 인사이트</strong><br/>
+      여신티켓은 피부시술 특화로 메이드유 부평점에 ★★★★★. 단, MAU가 낮아 단독 사용은 신환 유입량 부족 가능. <strong>강남언니 + 여신티켓 병행이 최적 조합</strong>이나 1차는 강남언니 파일럿으로 ROAS 측정 후 결정.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>07 리서치 · 강남언니 서비스 분석 · 입점 검토 · 2026.05.17</div>
+  <div style="margin-top: 8px;">A4 8~9장 · 출처 35+ 인용 · 메이드유의원 부평점 도입 검토용</div>
+  <div class="footer__nav">
+    <a href="../20260517_chatbot-solutions/">← 챗봇·알림톡 솔루션 비교</a>
+    <a href="../20260517_hospital-marketing-analysis/">종합 진단 →</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

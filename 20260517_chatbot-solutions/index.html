@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>카카오 챗봇·알림톡 솔루션 비교 · 메이크봇H vs 애프터닥</title>
+<meta name="description" content="메이드유의원 부평점 도입 검토 — 메이크봇H, 애프터닥, 채널톡, 알리고 4사 비교" />
+<style>
+:root {
+  --bg-white: #fbfbfd;
+  --bg-light: #f5f5f7;
+  --bg-dark: #1d1d1f;
+  --bg-black: #000000;
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --text-on-dark: #f5f5f7;
+  --link: #0066cc;
+  --link-hover: #0077ed;
+  --blue: #0071e3;
+  --red: #ff3b30;
+  --green: #30d158;
+  --orange: #ff9500;
+  --purple: #bf5af2;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --max: 980px;
+  --wide: 1200px;
+  --gutter: 22px;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg-white);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+.nav {
+  position: sticky;
+  top: 0;
+  height: 48px;
+  background: rgba(251, 251, 253, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+}
+.nav__logo {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.nav__links { display: flex; gap: 24px; font-size: 12px; color: var(--text-secondary); }
+.nav__links a { color: var(--text-secondary); text-decoration: none; transition: color 200ms var(--ease); }
+.nav__links a:hover { color: var(--text-primary); }
+@media (max-width: 640px) { .nav__links { display: none; } }
+
+/* Sections */
+.section { padding: clamp(80px, 12vw, 160px) var(--gutter); }
+.section--dark { background: var(--bg-black); color: var(--text-on-dark); }
+.section--light { background: var(--bg-white); color: var(--text-primary); }
+.section--gray { background: var(--bg-light); color: var(--text-primary); }
+.section--compact { padding: clamp(60px, 8vw, 100px) var(--gutter); }
+
+.container { max-width: var(--max); margin: 0 auto; }
+.container--wide { max-width: var(--wide); margin: 0 auto; }
+
+/* Typography */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.section--dark .eyebrow { color: #86868b; }
+
+.hero-title {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin-bottom: 18px;
+}
+.hero-sub {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 400;
+  color: #a1a1a6;
+  margin-bottom: 32px;
+  line-height: 1.35;
+}
+
+.headline {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  margin-bottom: 16px;
+}
+.subhead {
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+  line-height: 1.5;
+  max-width: 720px;
+}
+.section--dark .subhead { color: #a1a1a6; }
+
+/* Hero */
+.hero { text-align: center; padding-top: clamp(80px, 14vw, 180px); padding-bottom: clamp(60px, 10vw, 120px); }
+.hero__date { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #86868b; margin-bottom: 20px; }
+
+.pills { display: flex; justify-content: center; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+.pill {
+  background: rgba(255,255,255,0.08);
+  border: 0.5px solid rgba(255,255,255,0.18);
+  padding: 10px 18px;
+  border-radius: 980px;
+  font-size: 13px;
+  color: #f5f5f7;
+  font-weight: 500;
+}
+.pill--blue { background: rgba(0,113,227,0.18); border-color: rgba(0,113,227,0.4); color: #66b3ff; }
+.pill--green { background: rgba(48, 209, 88, 0.16); border-color: rgba(48, 209, 88, 0.4); color: #4ade80; }
+
+/* Big VS Comparison Cards */
+.vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 56px;
+  align-items: stretch;
+}
+@media (max-width: 768px) { .vs-grid { grid-template-columns: 1fr; } }
+
+.vs-card {
+  background: var(--bg-light);
+  border-radius: 24px;
+  padding: 48px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.vs-card--winner {
+  background: linear-gradient(135deg, #ffffff, #f0f7ff);
+  border: 2px solid var(--blue);
+  box-shadow: 0 20px 60px rgba(0, 113, 227, 0.12);
+}
+.vs-card__badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--blue);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 980px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.vs-card__logo {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+.vs-card__name {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.vs-card__tagline {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+.vs-card__metric {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 16px 0;
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+}
+.vs-card__metric:first-of-type { border-top: none; padding-top: 0; }
+.vs-card__metric-label {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  min-width: 100px;
+  letter-spacing: 0.02em;
+}
+.vs-card__metric-value {
+  font-size: 15px;
+  color: var(--text-primary);
+  font-weight: 500;
+  flex: 1;
+  text-align: right;
+}
+.vs-card__metric-value strong { color: var(--blue); font-weight: 600; }
+.vs-card__cta {
+  margin-top: 24px;
+  display: block;
+  text-align: center;
+  padding: 14px 24px;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 980px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 200ms var(--ease);
+}
+.vs-card__cta:hover { background: var(--link-hover); }
+.vs-card--alt .vs-card__cta {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+/* Comparison Table */
+.compare-table {
+  background: var(--bg-light);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+.compare-table__row {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.compare-table__row:last-child { border-bottom: none; }
+.compare-table__row--header {
+  background: rgba(0,0,0,0.04);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.compare-table__cell--center { text-align: center; }
+.compare-table__cell--green { color: var(--green); font-weight: 500; }
+.compare-table__cell--red { color: var(--red); font-weight: 500; }
+@media (max-width: 768px) {
+  .compare-table__row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 14px 16px;
+  }
+  .compare-table__cell--center { text-align: left; }
+  .compare-table__row--header { display: none; }
+  .compare-table__cell::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+  }
+}
+
+/* Reference Cases */
+.ref-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+@media (max-width: 768px) { .ref-grid { grid-template-columns: 1fr; } }
+.ref-card {
+  background: var(--bg-light);
+  border-radius: 18px;
+  padding: 32px 28px;
+  border-left: 4px solid var(--blue);
+}
+.section--dark .ref-card { background: #2d2d2f; }
+.ref-card__name {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.ref-card__scale {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.ref-card__effect {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
+@media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+.stat { text-align: center; padding: 20px 12px; }
+.stat__num {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.section--dark .stat__num { color: var(--text-on-dark); }
+.stat__num--green { color: var(--green); }
+.stat__num--blue { color: var(--blue); }
+.stat__label { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
+.section--dark .stat__label { color: #a1a1a6; }
+
+/* Pricing Table */
+.pricing {
+  background: var(--bg-light);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+.pricing__row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  font-size: 14px;
+}
+.pricing__row:last-child { border-bottom: none; }
+.pricing__row--header {
+  background: rgba(0,0,0,0.04);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.pricing__row--total {
+  background: rgba(0, 113, 227, 0.06);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--blue);
+}
+.pricing__cell--center { text-align: center; }
+.pricing__cell--right { text-align: right; font-weight: 500; }
+@media (max-width: 768px) {
+  .pricing__row { grid-template-columns: 1fr 1fr; gap: 8px; padding: 14px 18px; font-size: 13px; }
+  .pricing__row--header { display: none; }
+}
+
+/* Big Quote */
+.quote-box {
+  margin: 56px auto 0;
+  max-width: 820px;
+  text-align: center;
+  padding: 48px 32px;
+  background: linear-gradient(135deg, rgba(0,113,227,0.06), rgba(48,209,88,0.06));
+  border-radius: 24px;
+  border: 0.5px solid rgba(0,113,227,0.15);
+}
+.section--dark .quote-box {
+  background: linear-gradient(135deg, rgba(41,151,255,0.1), rgba(48,209,88,0.1));
+  border-color: rgba(255,255,255,0.1);
+}
+.quote-box__text {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.quote-box__cite { margin-top: 18px; font-size: 14px; color: var(--text-secondary); letter-spacing: 0.04em; }
+
+/* Timeline (4-week plan) */
+.timeline { margin-top: 56px; position: relative; }
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 12px; top: 12px; bottom: 12px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--green));
+  border-radius: 2px;
+}
+.timeline__item { padding-left: 44px; position: relative; margin-bottom: 36px; }
+.timeline__item:last-child { margin-bottom: 0; }
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  left: 6px; top: 8px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--bg-white);
+  border: 3px solid var(--blue);
+}
+.timeline__week {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.timeline__title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.timeline__list { list-style: none; padding: 0; }
+.timeline__list li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.5;
+}
+.timeline__list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--text-tertiary);
+}
+
+/* Footer */
+.footer {
+  background: var(--bg-light);
+  padding: 48px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+}
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer__nav { margin-top: 16px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#top" class="nav__logo">카카오 챗봇·알림톡 솔루션 비교</a>
+  <div class="nav__links">
+    <a href="#vs">메이크봇 vs 애프터닥</a>
+    <a href="#refs">레퍼런스</a>
+    <a href="#pricing">비용</a>
+    <a href="#plan">도입 절차</a>
+    <a href="../20260517_hospital-marketing-analysis/">← 종합 진단</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="section section--dark hero" id="top">
+  <div class="container">
+    <div class="hero__date">2026.05.17 · 06 리서치</div>
+    <h1 class="hero-title">메이크봇 H<br/>vs 애프터닥</h1>
+    <p class="hero-sub">메이드유의원 부평점 도입 검토.<br/>한국 의원급 카카오 챗봇·알림톡 4사 비교.</p>
+    <div class="pills">
+      <span class="pill pill--blue">의료 특화 SaaS</span>
+      <span class="pill pill--green">월 외주 100만 절감 가능</span>
+    </div>
+  </div>
+</section>
+
+<!-- WINNER VS -->
+<section class="section section--light" id="vs">
+  <div class="container">
+    <div class="eyebrow reveal">1차 권고</div>
+    <h2 class="headline reveal">애프터닥, 단독 도입.</h2>
+    <p class="subhead reveal">4대 시술 모두 시술 후 케어가 매출 핵심. 정량 효과가 검증된 유일한 솔루션입니다.</p>
+
+    <div class="vs-grid reveal">
+      <!-- WINNER: Afterdoc -->
+      <div class="vs-card vs-card--winner">
+        <span class="vs-card__badge">권고</span>
+        <div class="vs-card__logo">A F T E R D O C</div>
+        <div class="vs-card__name">애프터닥</div>
+        <div class="vs-card__tagline">시술 후 케어 자동화 + AI 환자관리. 의료 시술 후 재진율을 정량으로 끌어올린 유일 솔루션.</div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">운영사</div>
+          <div class="vs-card__metric-value">(주)메디팔</div>
+        </div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">핵심 효과</div>
+          <div class="vs-card__metric-value"><strong>재진율 +26%</strong>, 매출 +19.7%</div>
+        </div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">레퍼런스</div>
+          <div class="vs-card__metric-value">500+ 병원 / 150만 환자</div>
+        </div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">월 비용 추정</div>
+          <div class="vs-card__metric-value">35~95만원</div>
+        </div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">차별 기능</div>
+          <div class="vs-card__metric-value">AI 글로벌 코디네이터</div>
+        </div>
+        <a href="https://afterdoc.ai/" target="_blank" class="vs-card__cta">afterdoc.ai →</a>
+      </div>
+
+      <!-- ALT: Makebot H -->
+      <div class="vs-card vs-card--alt">
+        <div class="vs-card__logo">M A K E B O T  H</div>
+        <div class="vs-card__name">메이크봇 H</div>
+        <div class="vs-card__tagline">카카오 공식 파트너. EMR 직접 연동·예약 챗봇 강자. 대형 체인 검증 풍부.</div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">운영사</div>
+          <div class="vs-card__metric-value">(주)메이크봇</div>
+        </div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">핵심 효과</div>
+          <div class="vs-card__metric-value">인건비 50%↓, 예약 점유 75%</div>
+        </div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">레퍼런스</div>
+          <div class="vs-card__metric-value">메이퓨어 24지점·톡스앤필 35지점</div>
+        </div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">월 비용 추정</div>
+          <div class="vs-card__metric-value">10~30만 + 초기 800~1,500만</div>
+        </div>
+        <div class="vs-card__metric">
+          <div class="vs-card__metric-label">차별 기능</div>
+          <div class="vs-card__metric-value">EMR 연동(스마트닥터 등)</div>
+        </div>
+        <a href="https://h.makebot.ai/" target="_blank" class="vs-card__cta">h.makebot.ai →</a>
+      </div>
+    </div>
+
+    <div class="quote-box reveal">
+      <div class="quote-box__text">"부평점 4대 시술 모두 시술 후 케어가 매출 핵심.<br/>애프터닥이 정량 효과를 검증한 유일한 솔루션이다."</div>
+      <div class="quote-box__cite">— 의원급(80평·9명) 도입 ROI 비교 결론</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section section--dark section--compact">
+  <div class="container">
+    <div class="eyebrow reveal">애프터닥 검증 데이터</div>
+    <h2 class="headline reveal">500개 병원이 만든 숫자</h2>
+
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="stat__num stat__num--green">+26%</div>
+        <div class="stat__label">재진율 상승<br/>(시술 후 케어 자동화)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num stat__num--green">+19.7%</div>
+        <div class="stat__label">평균 매출 증가<br/>(애프터닥 도입 병원)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num stat__num--blue">2.8×</div>
+        <div class="stat__label">재내원율 배수<br/>(알림톡·CRM 도입)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">99%+</div>
+        <div class="stat__label">외국인 환자 번역률<br/>(AI 글로벌 코디네이터)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section class="section section--gray" id="refs">
+  <div class="container container--wide">
+    <div class="eyebrow reveal">검증된 도입 사례</div>
+    <h2 class="headline reveal">한국 의료기관 실제 도입</h2>
+    <p class="subhead reveal">대형 체인부터 종합병원까지. 정량 효과가 측정된 사례입니다.</p>
+
+    <div class="ref-grid reveal">
+      <div class="ref-card">
+        <div class="ref-card__name">메이퓨어 피부과</div>
+        <div class="ref-card__scale">24개 지점 · 메이크봇H</div>
+        <div class="ref-card__effect">24지점 실시간 예약 통합 연동. 매일 수백 건 카카오 챗봇 예약. EMR(스마트닥터) 자동 연동.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card__name">톡스앤필</div>
+        <div class="ref-card__scale">35개 지점 · 메이크봇H</div>
+        <div class="ref-card__effect">35개 전국 지점 카카오톡 챗봇 통합 예약. 시술 전/후 안내 자동화로 노쇼 감소.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card__name">누베베 한의원</div>
+        <div class="ref-card__scale">다이어트 한방 · 메이크봇H</div>
+        <div class="ref-card__effect">누적 26,042명 환자 챗봇 운영. 약 접수 문의 15,233건. <strong style="color:var(--green)">챗봇 예약 비중 70% 이상</strong>.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card__name">바노바기 성형외과</div>
+        <div class="ref-card__scale">강남 본점 · 메이크봇H</div>
+        <div class="ref-card__effect">2022년 AI 챗봇 '바노' 도입. 24시간 다국어 응대로 외국인 환자 응대 자동화.</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card__name">인천세종병원</div>
+        <div class="ref-card__scale">종합병원 · 애프터닥</div>
+        <div class="ref-card__effect">시술 후 환자 케어·재진 관리 시스템 도입. 다채널 통합(카톡+자체앱).</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card__name">H+양지병원</div>
+        <div class="ref-card__scale">종합병원 · 애프터닥</div>
+        <div class="ref-card__effect">시리즈A 50억(누적 70억) 투자받은 메디팔의 대표 종합병원 레퍼런스. 2026.04 흑자 전환.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section section--light" id="pricing">
+  <div class="container container--wide">
+    <div class="eyebrow reveal">비용 구조</div>
+    <h2 class="headline reveal">월 506만원에서 무엇이 빠지는가</h2>
+    <p class="subhead reveal">애프터닥 단독 도입 시 외주비 절감 시나리오. 알림톡 발송비는 카카오 표준 단가 기준입니다.</p>
+
+    <div class="pricing reveal">
+      <div class="pricing__row pricing__row--header">
+        <div>항목</div>
+        <div class="pricing__cell--center">현재 (외주)</div>
+        <div class="pricing__cell--center">애프터닥 도입 후</div>
+        <div class="pricing__cell--right">변동</div>
+      </div>
+      <div class="pricing__row">
+        <div>하룹 외주 (블로그+카페+플레이스)</div>
+        <div class="pricing__cell--center">506만</div>
+        <div class="pricing__cell--center">300~400만<br/><span style="font-size:11px;color:var(--text-tertiary)">(카페바이럴 중단·재협상)</span></div>
+        <div class="pricing__cell--right" style="color:var(--green)">-100~200만</div>
+      </div>
+      <div class="pricing__row">
+        <div>애프터닥 (시술 후 케어·재진)</div>
+        <div class="pricing__cell--center">0</div>
+        <div class="pricing__cell--center">35~95만</div>
+        <div class="pricing__cell--right" style="color:var(--red)">+35~95만</div>
+      </div>
+      <div class="pricing__row">
+        <div>카카오 알림톡 발송비<br/><span style="font-size:11px;color:var(--text-tertiary)">월 1,000~3,000건 추정</span></div>
+        <div class="pricing__cell--center">0</div>
+        <div class="pricing__cell--center">8~25만</div>
+        <div class="pricing__cell--right" style="color:var(--red)">+8~25만</div>
+      </div>
+      <div class="pricing__row pricing__row--total">
+        <div>합계 (월)</div>
+        <div class="pricing__cell--center">506만</div>
+        <div class="pricing__cell--center">343~520만</div>
+        <div class="pricing__cell--right" style="color:var(--green)">-약 100만 추정</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; padding: 24px; background: var(--bg-light); border-radius: 14px; font-size: 14px; color: var(--text-secondary); line-height: 1.6;">
+      <strong style="color:var(--text-primary);">💡 단가 참고</strong><br/>
+      카카오 알림톡: 8원/건 · 친구톡 텍스트: 15원/건 · 친구톡 이미지: 18원/건 · 와이드: 20원/건 (2026 기준)<br/>
+      양사 모두 <strong>가격 비공개</strong> — 도입 1주차에 동시 견적 요청 필수.
+    </div>
+  </div>
+</section>
+
+<!-- 4 SCENARIOS -->
+<section class="section section--gray">
+  <div class="container container--wide">
+    <div class="eyebrow reveal">시술별 알림톡 시나리오</div>
+    <h2 class="headline reveal">메이드유 4대 주력 시술 자동화 설계</h2>
+    <p class="subhead reveal">시술 직후부터 90일까지 자동 발송 시나리오. 의료법 통과 표현 사용.</p>
+
+    <div class="compare-table reveal">
+      <div class="compare-table__row compare-table__row--header">
+        <div>시술</div>
+        <div class="compare-table__cell--center">D+1</div>
+        <div class="compare-table__cell--center">D+7</div>
+        <div class="compare-table__cell--center">D+30</div>
+        <div class="compare-table__cell--center">D+90 (휴면)</div>
+      </div>
+      <div class="compare-table__row">
+        <div data-label="시술"><strong>다이어트 (메쉬다)</strong></div>
+        <div class="compare-table__cell--center" data-label="D+1">시술 부위 관리 안내</div>
+        <div class="compare-table__cell--center" data-label="D+7">중간 점검 권유</div>
+        <div class="compare-table__cell--center" data-label="D+30">다음 회차 예약 권유</div>
+        <div class="compare-table__cell--center" data-label="D+90">체형 변화 사진 권유</div>
+      </div>
+      <div class="compare-table__row">
+        <div data-label="시술"><strong>리프팅 (슈링크/올리지오)</strong></div>
+        <div class="compare-table__cell--center" data-label="D+1">홍반·붓기 케어법</div>
+        <div class="compare-table__cell--center" data-label="D+7">효과 발현 안내</div>
+        <div class="compare-table__cell--center" data-label="D+30">시너지 시술 안내</div>
+        <div class="compare-table__cell--center" data-label="D+90">재시술 권장 시점 안내</div>
+      </div>
+      <div class="compare-table__row">
+        <div data-label="시술"><strong>색소치료</strong></div>
+        <div class="compare-table__cell--center" data-label="D+1">자외선 차단 강조</div>
+        <div class="compare-table__cell--center" data-label="D+7">딱지 케어 방법</div>
+        <div class="compare-table__cell--center" data-label="D+30">결과 사진 비교 권유</div>
+        <div class="compare-table__cell--center" data-label="D+90">유지 관리 시술 안내</div>
+      </div>
+      <div class="compare-table__row">
+        <div data-label="시술"><strong>쁘띠 (필러)</strong></div>
+        <div class="compare-table__cell--center" data-label="D+1">마사지 금지 안내</div>
+        <div class="compare-table__cell--center" data-label="D+7">자리 안착 확인</div>
+        <div class="compare-table__cell--center" data-label="D+30">만족도 조사</div>
+        <div class="compare-table__cell--center" data-label="D+90">보톡스 병행 안내</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; padding: 24px; background: rgba(255,59,48,0.06); border-radius: 14px; border-left: 4px solid var(--red); font-size: 14px; color: var(--text-secondary); line-height: 1.6;">
+      <strong style="color:var(--red);">⚠️ 의료법 핵심 리스크</strong><br/>
+      "친구 데려오면 할인" 등 알선 유도 알림톡은 의료법 위반 (1년 이하 징역 or 1,000만원 벌금 + 업무정지). 알림톡 시나리오 검수 시 변호사 자문 권장.
+    </div>
+  </div>
+</section>
+
+<!-- 4-WEEK PLAN -->
+<section class="section section--light" id="plan">
+  <div class="container">
+    <div class="eyebrow reveal">도입 절차</div>
+    <h2 class="headline reveal">4주 안에 가동.</h2>
+    <p class="subhead reveal">견적 요청부터 첫 알림톡 발송까지.</p>
+
+    <div class="timeline reveal">
+      <div class="timeline__item">
+        <div class="timeline__week">Week 1 · 견적·계약</div>
+        <h3 class="timeline__title">메이크봇H · 애프터닥 동시 견적 요청</h3>
+        <ul class="timeline__list">
+          <li>양사 영업 미팅 + 데모 (가격·기능·EMR 연동 가능성)</li>
+          <li>NDA 체결 후 메이드유 데이터 구조 공유</li>
+          <li>최종 선택 + 계약서 검토 (해지 조항·데이터 소유권)</li>
+        </ul>
+      </div>
+      <div class="timeline__item">
+        <div class="timeline__week">Week 2 · 시나리오 설계</div>
+        <h3 class="timeline__title">4대 시술 케어 시나리오 + 의료법 검수</h3>
+        <ul class="timeline__list">
+          <li>다이어트·리프팅·색소·쁘띠 별 D+1~D+90 시나리오 작성</li>
+          <li>의료법 표현 검수 (변호사 자문 또는 의협 자율심의)</li>
+          <li>카카오 알림톡 템플릿 승인 신청 (영업일 3~5일)</li>
+        </ul>
+      </div>
+      <div class="timeline__item">
+        <div class="timeline__week">Week 3 · 시스템 연동</div>
+        <h3 class="timeline__title">CRM 연동 + 카카오 채널 세팅</h3>
+        <ul class="timeline__list">
+          <li>기존 CRM(셀프 접수 태블릿) → 솔루션 데이터 매핑</li>
+          <li>카카오 채널 개설 (이미 있으면 권한 위임)</li>
+          <li>직원 9명 사용 권한 부여 + 사내 교육 1회</li>
+        </ul>
+      </div>
+      <div class="timeline__item">
+        <div class="timeline__week">Week 4 · 가동·KPI 측정</div>
+        <h3 class="timeline__title">파일럿 발송 + 즉시 KPI 측정 시작</h3>
+        <ul class="timeline__list">
+          <li>주력 시술 1종(예: 슈링크)부터 D+1~D+30 시나리오 가동</li>
+          <li>KPI 측정: 발송 수 / 도달 / 클릭 / 재방문 전환</li>
+          <li>2주 후 효과 확인 → 나머지 3종 시술 확장</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>06 리서치 · 카카오 챗봇·알림톡 솔루션 비교 · 2026.05.17</div>
+  <div style="margin-top: 8px;">A4 9~10장 · 출처 30+ 인용 · 메이드유의원 부평점 도입 검토용</div>
+  <div class="footer__nav">
+    <a href="../20260517_hospital-marketing-analysis/">← 종합 진단 보고서</a>
+    <a href="../20260517_gangnam-unni-review/">강남언니 입점 검토 →</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
