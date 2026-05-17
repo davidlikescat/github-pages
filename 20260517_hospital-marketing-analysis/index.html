@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>메이드유의원 부평점 마케팅 진단 · 2026.05</title>
+<meta name="description" content="월 506만원 외주 마케팅 진단 + 한국 피부과 마케팅 시장 사례 + 1인 SaaS 사업 기회 분석" />
+<style>
+:root {
+  --bg-white: #fbfbfd;
+  --bg-light: #f5f5f7;
+  --bg-dark: #1d1d1f;
+  --bg-black: #000000;
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --text-on-dark: #f5f5f7;
+  --link: #0066cc;
+  --link-hover: #0077ed;
+  --blue: #0071e3;
+  --red: #ff3b30;
+  --green: #30d158;
+  --orange: #ff9500;
+  --purple: #bf5af2;
+  --gold: #f5d0a9;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --max: 980px;
+  --wide: 1200px;
+  --gutter: 22px;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg-white);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Nav ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  height: 48px;
+  background: rgba(251, 251, 253, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+}
+.nav__logo {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.nav__links {
+  display: flex;
+  gap: 24px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.nav__links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 200ms var(--ease);
+}
+.nav__links a:hover { color: var(--text-primary); }
+@media (max-width: 640px) {
+  .nav__links { display: none; }
+}
+
+/* ===== Sections ===== */
+.section {
+  padding: clamp(80px, 12vw, 160px) var(--gutter);
+}
+.section--dark {
+  background: var(--bg-black);
+  color: var(--text-on-dark);
+}
+.section--light {
+  background: var(--bg-white);
+  color: var(--text-primary);
+}
+.section--gray {
+  background: var(--bg-light);
+  color: var(--text-primary);
+}
+.section--compact {
+  padding: clamp(60px, 8vw, 100px) var(--gutter);
+}
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.container--wide {
+  max-width: var(--wide);
+  margin: 0 auto;
+}
+
+/* ===== Typography ===== */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.section--dark .eyebrow { color: #86868b; }
+
+.hero-title {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin-bottom: 18px;
+}
+.hero-sub {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-bottom: 32px;
+  line-height: 1.35;
+}
+.section--dark .hero-sub { color: #a1a1a6; }
+
+.headline {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  margin-bottom: 16px;
+}
+.subhead {
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+  line-height: 1.5;
+  max-width: 720px;
+}
+.section--dark .subhead { color: #a1a1a6; }
+
+.body { font-size: 17px; line-height: 1.6; color: var(--text-primary); }
+.section--dark .body { color: var(--text-on-dark); }
+
+/* ===== Hero ===== */
+.hero {
+  text-align: center;
+  padding-top: clamp(80px, 14vw, 180px);
+  padding-bottom: clamp(60px, 10vw, 120px);
+}
+.hero__date {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #86868b;
+  margin-bottom: 20px;
+}
+.hero__buttons {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.link-pill {
+  color: #2997ff;
+  font-size: 17px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 200ms var(--ease);
+}
+.link-pill:hover { opacity: 0.85; text-decoration: underline; }
+.link-pill::after { content: " ›"; }
+
+/* ===== Status Pills ===== */
+.pills {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 56px;
+  flex-wrap: wrap;
+}
+.pill {
+  background: rgba(255,255,255,0.08);
+  border: 0.5px solid rgba(255,255,255,0.18);
+  padding: 10px 18px;
+  border-radius: 980px;
+  font-size: 13px;
+  color: #f5f5f7;
+  font-weight: 500;
+}
+.pill--red { background: rgba(255, 59, 48, 0.18); border-color: rgba(255, 59, 48, 0.4); color: #ff6961; }
+.pill--green { background: rgba(48, 209, 88, 0.16); border-color: rgba(48, 209, 88, 0.4); color: #4ade80; }
+.pill--orange { background: rgba(255, 149, 0, 0.16); border-color: rgba(255, 149, 0, 0.4); color: #ffb84d; }
+
+/* ===== Big Stat ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+}
+@media (max-width: 768px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+.stat {
+  text-align: center;
+  padding: 20px 12px;
+}
+.stat__num {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+.section--dark .stat__num { color: var(--text-on-dark); }
+.stat__label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.section--dark .stat__label { color: #a1a1a6; }
+.stat__num--red { color: var(--red); }
+.stat__num--green { color: var(--green); }
+.stat__num--orange { color: var(--orange); }
+
+/* ===== Cards ===== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 56px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 56px;
+}
+@media (max-width: 768px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--bg-light);
+  border-radius: 18px;
+  padding: 40px 32px;
+  transition: transform 400ms var(--ease-out);
+}
+.section--dark .card {
+  background: #2d2d2f;
+  color: var(--text-on-dark);
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card__icon {
+  font-size: 32px;
+  margin-bottom: 18px;
+  display: block;
+}
+.card__title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.card__body {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.section--dark .card__body { color: #a1a1a6; }
+
+.card--accent-red { border-left: 4px solid var(--red); }
+.card--accent-green { border-left: 4px solid var(--green); }
+.card--accent-orange { border-left: 4px solid var(--orange); }
+.card--accent-blue { border-left: 4px solid var(--blue); }
+
+/* ===== Comparison Table ===== */
+.compare {
+  background: var(--bg-light);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+.section--dark .compare { background: #2d2d2f; }
+.compare__row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  align-items: center;
+  padding: 22px 28px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+  font-size: 15px;
+}
+.section--dark .compare__row { border-bottom-color: rgba(255,255,255,0.08); }
+.compare__row:last-child { border-bottom: none; }
+.compare__row--header {
+  background: rgba(0,0,0,0.04);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.section--dark .compare__row--header { background: rgba(255,255,255,0.04); }
+.compare__cell-right { text-align: right; font-weight: 500; }
+.compare__cell-red { color: var(--red); }
+.compare__cell-green { color: var(--green); }
+@media (max-width: 640px) {
+  .compare__row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 16px 20px;
+  }
+  .compare__cell-right { text-align: left; }
+}
+
+/* ===== Channel Matrix ===== */
+.matrix {
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  gap: 0;
+  margin-top: 48px;
+  background: var(--bg-light);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.matrix__cell {
+  padding: 18px 16px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  border-right: 0.5px solid rgba(0,0,0,0.06);
+  font-size: 14px;
+}
+.matrix__cell:nth-child(5n) { border-right: none; }
+.matrix__cell--head {
+  background: #ececef;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-align: center;
+}
+.matrix__cell--head:first-child { text-align: left; }
+.matrix__cell--center { text-align: center; }
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.dot--red { background: var(--red); }
+.dot--orange { background: var(--orange); }
+.dot--green { background: var(--green); }
+@media (max-width: 768px) {
+  .matrix { grid-template-columns: 1.6fr repeat(2, 1fr); font-size: 13px; }
+  .matrix__cell { padding: 12px 10px; }
+  .matrix__cell:nth-child(3n) { border-right: none; }
+  .matrix__cell:nth-child(5n) { border-right: 0.5px solid rgba(0,0,0,0.06); }
+  .matrix__hide-mobile { display: none; }
+}
+
+/* ===== Timeline ===== */
+.timeline {
+  margin-top: 56px;
+  position: relative;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--purple), var(--green));
+  border-radius: 2px;
+}
+.timeline__item {
+  padding-left: 44px;
+  position: relative;
+  margin-bottom: 36px;
+}
+.timeline__item:last-child { margin-bottom: 0; }
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg-white);
+  border: 3px solid var(--blue);
+}
+.timeline__item--phase2::before { border-color: var(--purple); }
+.timeline__item--phase3::before { border-color: var(--orange); }
+.timeline__item--phase4::before { border-color: var(--green); }
+.timeline__phase {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.timeline__item--phase2 .timeline__phase { color: var(--purple); }
+.timeline__item--phase3 .timeline__phase { color: var(--orange); }
+.timeline__item--phase4 .timeline__phase { color: var(--green); }
+.timeline__title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.timeline__list {
+  list-style: none;
+  padding: 0;
+}
+.timeline__list li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.5;
+}
+.timeline__list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--text-tertiary);
+}
+
+/* ===== Big Quote ===== */
+.quote-box {
+  margin: 56px auto 0;
+  max-width: 820px;
+  text-align: center;
+  padding: 48px 32px;
+  background: linear-gradient(135deg, rgba(0,113,227,0.06), rgba(191,90,242,0.06));
+  border-radius: 24px;
+  border: 0.5px solid rgba(0,113,227,0.15);
+}
+.section--dark .quote-box {
+  background: linear-gradient(135deg, rgba(41,151,255,0.1), rgba(191,90,242,0.1));
+  border-color: rgba(255,255,255,0.1);
+}
+.quote-box__text {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.quote-box__cite {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+}
+
+/* ===== SaaS Card ===== */
+.saas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  margin-top: 48px;
+  background: var(--bg-light);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.saas__cell {
+  padding: 16px 14px;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  border-right: 0.5px solid rgba(0,0,0,0.06);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.saas__cell:nth-child(5n) { border-right: none; }
+.saas__cell--head {
+  background: #ececef;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-align: center;
+}
+.saas__cell--head:first-child { text-align: left; }
+.saas__cell--center { text-align: center; font-weight: 500; }
+.score-bar {
+  display: inline-block;
+  width: 56px;
+  height: 6px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.score-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+}
+@media (max-width: 768px) {
+  .saas { grid-template-columns: 1.6fr 1fr 1fr; font-size: 13px; }
+  .saas__cell { padding: 12px 10px; }
+  .saas__cell:nth-child(3n) { border-right: none; }
+  .saas__cell:nth-child(5n) { border-right: 0.5px solid rgba(0,0,0,0.06); }
+  .saas__hide-mobile { display: none; }
+}
+
+/* ===== Big Number Display ===== */
+.big-display {
+  text-align: center;
+  margin-top: 56px;
+}
+.big-display__num {
+  font-size: clamp(72px, 14vw, 160px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #ffffff, #999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.big-display__label {
+  font-size: 18px;
+  color: #a1a1a6;
+  margin-top: 16px;
+  letter-spacing: 0.02em;
+}
+
+/* ===== Files Section ===== */
+.files {
+  margin-top: 56px;
+  display: grid;
+  gap: 12px;
+}
+.file-row {
+  background: var(--bg-light);
+  padding: 22px 28px;
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: center;
+  transition: transform 300ms var(--ease-out);
+}
+.file-row:hover { transform: translateX(4px); }
+.file-row__icon {
+  width: 40px;
+  height: 40px;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+.file-row__icon--purple { background: var(--purple); }
+.file-row__icon--green { background: var(--green); }
+.file-row__icon--orange { background: var(--orange); }
+.file-row__title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: -0.005em;
+}
+.file-row__desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.file-row__size {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--bg-light);
+  padding: 48px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+}
+.footer a { color: var(--text-secondary); text-decoration: none; }
+
+/* ===== Reveal Animation ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <a href="#top" class="nav__logo">메이드유의원 부평점 · 마케팅 진단</a>
+  <div class="nav__links">
+    <a href="#diagnosis">진단</a>
+    <a href="#market">시장</a>
+    <a href="#roadmap">로드맵</a>
+    <a href="#saas">SaaS 기회</a>
+    <a href="#files">자료</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="section section--dark hero" id="top">
+  <div class="container">
+    <div class="hero__date">2026.05.17 · 종합 진단 보고서</div>
+    <h1 class="hero-title">월 506만원,<br/>일하고 있는가.</h1>
+    <p class="hero-sub">인천 부평구 80평 피부과의 마케팅 외주를<br/>한국 시장 통계와 데이터로 재검토했습니다.</p>
+    <div class="hero__buttons">
+      <a href="#summary" class="link-pill">핵심 결론 보기</a>
+      <a href="#saas" class="link-pill">1인 SaaS 기회</a>
+    </div>
+    <div class="pills">
+      <span class="pill pill--red">의료법 위반 직격</span>
+      <span class="pill pill--orange">ROI 측정 불가</span>
+      <span class="pill pill--green">시장 차별화 기회</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUMMARY STATS ===== -->
+<section class="section section--light" id="summary">
+  <div class="container">
+    <div class="eyebrow reveal">한 페이지 결론</div>
+    <h2 class="headline reveal">숫자 4개로 보는 현 상황</h2>
+    <p class="subhead reveal">3개 영역 병렬 리서치 결과를 가장 짧게 압축한 데이터입니다.</p>
+
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="stat__num stat__num--red">65%</div>
+        <div class="stat__label">현재 외주 506만원 中<br/>매몰 비용 추정</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num stat__num--orange">10억</div>
+        <div class="stat__label">의료광고 위반 과징금<br/>상한 (5천만→10억 인상)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num stat__num--green">2.8×</div>
+        <div class="stat__label">알림톡·CRM 도입 시<br/>재내원율 상승 (애프터닥 50+ 병원)</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">54.8%</div>
+        <div class="stat__label">인천·경기 피부과 의원<br/>10년 증가율 (전국 1위)</div>
+      </div>
+    </div>
+
+    <div class="quote-box reveal">
+      <div class="quote-box__text">"한국에 피부과 환자 유입경로 공인 통계는 사실상 없다.<br/>메이드유 셀프 접수 태블릿이 한국에서 가장 정확한 자료가 된다."</div>
+      <div class="quote-box__cite">— 리서치 ② 결론, 보건복지부·HIRA·갤럽 전수 검토 결과</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIAGNOSIS: 외주 진단 ===== -->
+<section class="section section--gray" id="diagnosis">
+  <div class="container">
+    <div class="eyebrow reveal">진단</div>
+    <h2 class="headline reveal">현재 외주는 어디에<br/>506만원을 쓰고 있나</h2>
+    <p class="subhead reveal">㈜하룹과의 월 506만원 계약 — 3개 상품 + 8개 무료서비스. 2026년 시장 기준으로 재평가.</p>
+
+    <div class="compare reveal">
+      <div class="compare__row compare__row--header">
+        <div>외주 항목</div>
+        <div class="compare__cell-right">월 비용</div>
+        <div class="compare__cell-right">2026 효과 평가</div>
+      </div>
+      <div class="compare__row">
+        <div><strong>플레이스 상위노출</strong><br/><span style="color:var(--text-secondary);font-size:13px">"부평피부과" 키워드, 모바일 1페 보장</span></div>
+        <div class="compare__cell-right">264만원<br/><span style="color:var(--text-tertiary);font-size:12px">52% 비중</span></div>
+        <div class="compare__cell-right compare__cell-orange">🟡 中 — 단순 순위→행동지표 중심으로 알고리즘 변화</div>
+      </div>
+      <div class="compare__row">
+        <div><strong>블로그 관리 VIP</strong><br/><span style="color:var(--text-secondary);font-size:13px">월 12건 포스팅 (광고 8 + 정보 4)</span></div>
+        <div class="compare__cell-right">132만원<br/><span style="color:var(--text-tertiary);font-size:12px">26% 비중</span></div>
+        <div class="compare__cell-right compare__cell-red">🔴 매우 低 — C-Rank/DIA+ 신뢰도 강화로 양산형 진입 불가</div>
+      </div>
+      <div class="compare__row">
+        <div><strong>대형카페 침투 바이럴</strong><br/><span style="color:var(--text-secondary);font-size:13px">월 70건 (게시글 7 + 댓글 28 + 모니터링 35)</span></div>
+        <div class="compare__cell-right">110만원<br/><span style="color:var(--text-tertiary);font-size:12px">22% 비중</span></div>
+        <div class="compare__cell-right compare__cell-red">🔴 매우 低 — 의료법 56조 위반 직격 · 즉시 중단 권고</div>
+      </div>
+      <div class="compare__row" style="background: rgba(0,0,0,0.03); font-weight: 600;">
+        <div>총계 (VAT 포함)</div>
+        <div class="compare__cell-right">506만원 / 월</div>
+        <div class="compare__cell-right">연 6,072만원</div>
+      </div>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="card card--accent-red">
+        <span class="card__icon">⚠️</span>
+        <div class="card__title">의료법 56조 직격</div>
+        <p class="card__body">카페 댓글 "메이드유에서 효과 좋았어요"형 후기는 비의료인 치료경험담 광고. 보건복지부 2024년 366건 적발, 과징금 상한 5천만→10억 인상.</p>
+      </div>
+      <div class="card card--accent-orange">
+        <span class="card__icon">📉</span>
+        <div class="card__title">블로그 알고리즘 변곡점</div>
+        <p class="card__body">네이버 2025.12.11 적용 신뢰도 중심 통합 랭킹. C-Rank·D.I.A.+ 강화로 외주 양산형 글은 검색 1~2페이지 진입 자체가 불가.</p>
+      </div>
+      <div class="card card--accent-orange">
+        <span class="card__icon">🔍</span>
+        <div class="card__title">측정 불가 구조</div>
+        <p class="card__body">신환이 어느 채널로 들어왔는지 추적 자체가 안 됨. ROAS·CAC 산출 불가능. 외주 갱신 압박에 끌려다닐 수밖에 없는 구조.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARKET: 채널 매트릭스 ===== -->
+<section class="section section--light" id="market">
+  <div class="container container--wide">
+    <div class="eyebrow reveal">시장 매트릭스</div>
+    <h2 class="headline reveal">2026년 한국 피부과 채널 지형</h2>
+    <p class="subhead reveal">10개 핵심 채널을 효과·리스크·메이드유 적합도로 평가했습니다.</p>
+
+    <div class="matrix reveal">
+      <div class="matrix__cell matrix__cell--head">채널</div>
+      <div class="matrix__cell matrix__cell--head">2026 효과</div>
+      <div class="matrix__cell matrix__cell--head">의료법 리스크</div>
+      <div class="matrix__cell matrix__cell--head matrix__hide-mobile">시장가</div>
+      <div class="matrix__cell matrix__cell--head">메이드유 적합도</div>
+
+      <div class="matrix__cell"><strong>네이버 플레이스</strong> (행동지표)</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--orange"></span>中~高</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--green"></span>低</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">150~250만</div>
+      <div class="matrix__cell matrix__cell--center">★★★★★</div>
+
+      <div class="matrix__cell"><strong>블로그 외주</strong> (양산형)</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--red"></span>매우 低</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--orange"></span>中</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">50~120만</div>
+      <div class="matrix__cell matrix__cell--center">★</div>
+
+      <div class="matrix__cell"><strong>카페 바이럴</strong></div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--red"></span>매우 低</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--red"></span>매우 高</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">70~120만</div>
+      <div class="matrix__cell matrix__cell--center">❌</div>
+
+      <div class="matrix__cell"><strong>인스타 (원장 직접)</strong></div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--green"></span>高</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--orange"></span>中</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">직접/30~50만</div>
+      <div class="matrix__cell matrix__cell--center">★★★★★</div>
+
+      <div class="matrix__cell"><strong>유튜브·릴스·쇼츠</strong></div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--green"></span>매우 高</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--orange"></span>中</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">100~300만</div>
+      <div class="matrix__cell matrix__cell--center">★★★★</div>
+
+      <div class="matrix__cell"><strong>강남언니·바비톡</strong> (제한)</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--orange"></span>中~高</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--orange"></span>中</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">100~200만</div>
+      <div class="matrix__cell matrix__cell--center">★★★</div>
+
+      <div class="matrix__cell"><strong>카카오 챗봇·알림톡</strong></div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--green"></span>매우 高</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--green"></span>低</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">30~50만</div>
+      <div class="matrix__cell matrix__cell--center">★★★★★</div>
+
+      <div class="matrix__cell"><strong>모두닥 리뷰 관리</strong></div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--orange"></span>中</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--green"></span>低</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">무료/저가</div>
+      <div class="matrix__cell matrix__cell--center">★★★</div>
+
+      <div class="matrix__cell"><strong>당근 비즈프로필</strong></div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--orange"></span>中</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--green"></span>低</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">무료</div>
+      <div class="matrix__cell matrix__cell--center">★★</div>
+
+      <div class="matrix__cell"><strong>인플루언서 협찬</strong></div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--red"></span>低</div>
+      <div class="matrix__cell matrix__cell--center"><span class="dot dot--red"></span>매우 高</div>
+      <div class="matrix__cell matrix__cell--center matrix__hide-mobile">100~500만/건</div>
+      <div class="matrix__cell matrix__cell--center">❌</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Funnel — Patient Journey ===== -->
+<section class="section section--dark section--compact">
+  <div class="container">
+    <div class="eyebrow reveal">환자 의사결정 5단계</div>
+    <h2 class="headline reveal">현재 외주는 ②번만 만지고 있다.</h2>
+    <p class="subhead reveal">그 채널마저 효과가 무너졌다. ①④⑤는 전부 비어 있다.</p>
+
+    <div class="grid-3 reveal" style="grid-template-columns: repeat(5, 1fr); margin-top: 48px;">
+      <div class="card" style="text-align:center; padding: 28px 16px;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--red); margin-bottom: 6px;">①</div>
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">인지</div>
+        <div style="font-size: 12px; color: #a1a1a6;">인스타·유튜브·숏폼</div>
+        <div style="font-size: 11px; color: var(--red); margin-top: 8px;">현재: 비어 있음</div>
+      </div>
+      <div class="card" style="text-align:center; padding: 28px 16px;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--orange); margin-bottom: 6px;">②</div>
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">비교</div>
+        <div style="font-size: 12px; color: #a1a1a6;">블로그·카페·강남언니</div>
+        <div style="font-size: 11px; color: var(--orange); margin-top: 8px;">현재: 효과 무너짐</div>
+      </div>
+      <div class="card" style="text-align:center; padding: 28px 16px;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--orange); margin-bottom: 6px;">③</div>
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">결정</div>
+        <div style="font-size: 12px; color: #a1a1a6;">플레이스·리뷰·전문의</div>
+        <div style="font-size: 11px; color: var(--orange); margin-top: 8px;">현재: 단순 순위만</div>
+      </div>
+      <div class="card" style="text-align:center; padding: 28px 16px;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--red); margin-bottom: 6px;">④</div>
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">예약</div>
+        <div style="font-size: 12px; color: #a1a1a6;">카톡·전화·톡톡</div>
+        <div style="font-size: 11px; color: var(--red); margin-top: 8px;">현재: 비어 있음</div>
+      </div>
+      <div class="card" style="text-align:center; padding: 28px 16px;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--red); margin-bottom: 6px;">⑤</div>
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 6px;">재방문</div>
+        <div style="font-size: 12px; color: #a1a1a6;">알림톡·멤버십·CRM</div>
+        <div style="font-size: 11px; color: var(--red); margin-top: 8px;">현재: 비어 있음</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROADMAP — 90 DAYS ===== -->
+<section class="section section--light" id="roadmap">
+  <div class="container">
+    <div class="eyebrow reveal">90일 실행 로드맵</div>
+    <h2 class="headline reveal">무엇부터 할 것인가</h2>
+    <p class="subhead reveal">측정 안 하면 답이 없다. 3개월 데이터 누적 후 채널 재배분.</p>
+
+    <div class="timeline reveal">
+      <div class="timeline__item">
+        <div class="timeline__phase">Phase 1 · 이번 주 (비용 0원)</div>
+        <h3 class="timeline__title">Quick Win — 즉시 멈추고, 즉시 시작</h3>
+        <ul class="timeline__list">
+          <li>CRM 셀프 접수 태블릿 내원경로 옵션 10개 카테고리 표준화</li>
+          <li>카페 바이럴 외주 즉시 중단 통보 (의료법 리스크 회피)</li>
+          <li>카카오 채널 개설 + QR 카운터 배치</li>
+          <li>"부평피부과" 키워드 현 순위 직접 캡처 (PC/모바일)</li>
+        </ul>
+      </div>
+
+      <div class="timeline__item timeline__item--phase2">
+        <div class="timeline__phase">Phase 2 · 1개월 (Foundation)</div>
+        <h3 class="timeline__title">측정 인프라 + 락인 시스템 구축</h3>
+        <ul class="timeline__list">
+          <li>카카오 챗봇·알림톡 솔루션 도입 (메이크봇H 또는 애프터닥)</li>
+          <li>상담실장 KPI 재설계 — 전환율·객단가·재방문율 + 인센티브 연동</li>
+          <li>메쉬다 + 슈링크 패키지 상품 + VIP 멤버십 설계</li>
+          <li>하룹 재협상: 플레이스 240→180만 인하 + 성과 리포트 의무화</li>
+        </ul>
+      </div>
+
+      <div class="timeline__item timeline__item--phase3">
+        <div class="timeline__phase">Phase 3 · 3개월 (Asset Building)</div>
+        <h3 class="timeline__title">자체 채널 자산화 시작</h3>
+        <ul class="timeline__list">
+          <li>원장 인스타 직접 운영 시작 (주 2회 릴스)</li>
+          <li>자체 홈페이지(bp.madeu.co.kr) 4개 시술 랜딩 리뉴얼 + GA4</li>
+          <li>강남언니 "메쉬다 다이어트" 단일 키워드 한정 입점 (월 50~100만)</li>
+          <li>첫 3개월 CRM 채널·CPA 분석 → 채널 재배분</li>
+        </ul>
+      </div>
+
+      <div class="timeline__item timeline__item--phase4">
+        <div class="timeline__phase">Phase 4 · 6개월 (Lock-in 정착)</div>
+        <h3 class="timeline__title">외주 의존도 절반으로</h3>
+        <ul class="timeline__list">
+          <li>외주 마케팅비 506만 → 300만 이하로 단계 축소</li>
+          <li>휴면환자 부활 캠페인 1차 발송 (90일+ 미방문 대상)</li>
+          <li>원장 유튜브 채널 개설 (장기 12~18개월 자산화)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SaaS Opportunity ===== -->
+<section class="section section--dark" id="saas">
+  <div class="container">
+    <div class="eyebrow reveal">1인 SaaS Builder 관점</div>
+    <h2 class="headline reveal">메이드유 비용을 줄이며,<br/>나의 사업도 시작한다.</h2>
+    <p class="subhead reveal">메이드유 부평점을 첫 베타 고객(Lighthouse Customer)으로 → 3개월 무료 PoC + 케이스 스터디 확보 → 한국 1.5만 동네 의원으로 확장.</p>
+
+    <div class="saas reveal">
+      <div class="saas__cell saas__cell--head">솔루션</div>
+      <div class="saas__cell saas__cell--head">메이드유 절감</div>
+      <div class="saas__cell saas__cell--head saas__hide-mobile">시장 크기</div>
+      <div class="saas__cell saas__cell--head saas__hide-mobile">난이도</div>
+      <div class="saas__cell saas__cell--head">종합 점수</div>
+
+      <div class="saas__cell"><strong>① 알림톡 + 휴면환자 부활 자동화</strong><br/><span style="color:#a1a1a6;font-size:12px">시술별 시나리오 5종 + 카카오 API</span></div>
+      <div class="saas__cell saas__cell--center" style="color:var(--green)">신규 매출 +15~20%</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">1.5만 의원</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">中</div>
+      <div class="saas__cell saas__cell--center"><span class="score-bar"><span class="score-bar__fill" style="width:90%"></span></span>9/10</div>
+
+      <div class="saas__cell"><strong>② CRM 채널 추적 + KPI 대시보드</strong><br/><span style="color:#a1a1a6;font-size:12px">Streamlit MVP · 1주일 가능</span></div>
+      <div class="saas__cell saas__cell--center" style="color:var(--green)">월 100만↓</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">5천+ 의원</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">低</div>
+      <div class="saas__cell saas__cell--center"><span class="score-bar"><span class="score-bar__fill" style="width:80%"></span></span>8/10</div>
+
+      <div class="saas__cell"><strong>③ 의료법 컴플라이언스 체커 AI</strong><br/><span style="color:#a1a1a6;font-size:12px">LangChain + Claude · 의협 가이드 RAG</span></div>
+      <div class="saas__cell saas__cell--center" style="color:var(--green)">사전심의비 116만↓</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">대행사 300+</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">中</div>
+      <div class="saas__cell saas__cell--center"><span class="score-bar"><span class="score-bar__fill" style="width:80%"></span></span>8/10</div>
+
+      <div class="saas__cell"><strong>④ 플레이스 모니터링 + 인스타 콘텐츠 AI</strong><br/><span style="color:#a1a1a6;font-size:12px">스마트플레이스 + Claude 캡션 생성</span></div>
+      <div class="saas__cell saas__cell--center" style="color:var(--green)">월 90~110만↓</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">의원+자영업</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">中~高</div>
+      <div class="saas__cell saas__cell--center"><span class="score-bar"><span class="score-bar__fill" style="width:70%"></span></span>7/10</div>
+
+      <div class="saas__cell"><strong>⑤ 상담실장 KPI + 패키지 추천 엔진</strong><br/><span style="color:#a1a1a6;font-size:12px">EMR 연동 필요 · 장기 과제</span></div>
+      <div class="saas__cell saas__cell--center" style="color:var(--green)">매출 +30~50%</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">피부/치과/한의</div>
+      <div class="saas__cell saas__cell--center saas__hide-mobile">高</div>
+      <div class="saas__cell saas__cell--center"><span class="score-bar"><span class="score-bar__fill" style="width:60%"></span></span>6/10</div>
+    </div>
+
+    <div class="big-display reveal">
+      <div class="big-display__num">₩6억</div>
+      <div class="big-display__label">Year 2 말 예상 ARR · 1인 운영 가능 범위</div>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-top: 80px;">
+      <div class="card" style="background: #2d2d2f;">
+        <span class="card__icon">🚀</span>
+        <div class="card__title" style="color: var(--text-on-dark);">Year 1 Bootstrap</div>
+        <p class="card__body" style="color: #a1a1a6;">M3 메이드유 PoC → M6 5고객 MRR 100만 → M9 PH/디스콰이엇 출시 → M12 40고객 MRR 800만</p>
+      </div>
+      <div class="card" style="background: #2d2d2f;">
+        <span class="card__icon">📈</span>
+        <div class="card__title" style="color: var(--text-on-dark);">Year 2 Growth</div>
+        <p class="card__body" style="color: #a1a1a6;">M18 100고객 MRR 2,000만 → M24 250고객 MRR 5,000만. 의료광고 대행사 화이트라벨 1~2곳 확보.</p>
+      </div>
+      <div class="card" style="background: #2d2d2f;">
+        <span class="card__icon">🎯</span>
+        <div class="card__title" style="color: var(--text-on-dark);">메이드유 효과</div>
+        <p class="card__body" style="color: #a1a1a6;">마케팅비 506→340만 (-33%). 신규 매출 +50~100만/월. <strong style="color:var(--green)">순 효과 월 +220~270만</strong>.</p>
+      </div>
+    </div>
+
+    <div class="quote-box reveal" style="margin-top: 80px;">
+      <div class="quote-box__text">"3개월 무료 PoC로 외주 비용 월 170만원 절감 + 신규 매출 50만~100만 증가,<br/>그 대가로 케이스 스터디 사용 권리만 받습니다."</div>
+      <div class="quote-box__cite">— 메이드유 부평점에 제안할 한 줄</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Saas Risks ===== -->
+<section class="section section--light section--compact">
+  <div class="container">
+    <div class="eyebrow reveal">함정</div>
+    <h2 class="headline reveal">1인 개발자가 빠지기 쉬운 것</h2>
+    <p class="subhead reveal">의료 도메인은 IT보다 규제·신뢰가 무겁다. 미리 점검할 5가지.</p>
+
+    <div class="grid-2 reveal">
+      <div class="card card--accent-red">
+        <span class="card__icon">⚖️</span>
+        <div class="card__title">의료기기 인허가</div>
+        <p class="card__body">진단·치료 기능 포함 시 식약처 의료기기 등록 필요. MVP는 "행정·마케팅 보조"로만 한정 → 인허가 회피.</p>
+      </div>
+      <div class="card card--accent-red">
+        <span class="card__icon">🔒</span>
+        <div class="card__title">환자 개인정보</div>
+        <p class="card__body">의료법 21조 + 개인정보보호법 동시 적용. 익명화된 시술 이력·내원경로만 처리. 환자 식별 정보는 분리 저장.</p>
+      </div>
+      <div class="card card--accent-orange">
+        <span class="card__icon">💬</span>
+        <div class="card__title">카카오 알림톡 정책</div>
+        <p class="card__body">정보성/마케팅 구분 엄격. 광고성 오인 시 채널 정지 위험. 알리고·플레어레인 중개사 활용 권장.</p>
+      </div>
+      <div class="card card--accent-orange">
+        <span class="card__icon">📜</span>
+        <div class="card__title">법적 책임 회피</div>
+        <p class="card__body">AI 진단은 "참고용"으로 명시. 최종 책임은 병원·자문 변호사. 약관에 명확히 면책 조항 포함.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Files ===== -->
+<section class="section section--gray" id="files">
+  <div class="container">
+    <div class="eyebrow reveal">자료 패키지</div>
+    <h2 class="headline reveal">전체 보고서 6종</h2>
+    <p class="subhead reveal">로컬 폴더 <code>~/Documents/병원마케팅/분석결과/</code> 에 저장됨. 총 약 2,000줄, 137KB, 출처 100+ 인용.</p>
+
+    <div class="files reveal">
+      <div class="file-row">
+        <div class="file-row__icon">00</div>
+        <div>
+          <div class="file-row__title">종합보고서 · 경영진 요약</div>
+          <div class="file-row__desc">원장님 결재용 1페이지 요약 + 90일 로드맵</div>
+        </div>
+        <div class="file-row__size">194줄 · 11KB</div>
+      </div>
+      <div class="file-row">
+        <div class="file-row__icon file-row__icon--orange">01</div>
+        <div>
+          <div class="file-row__title">외주 계약 상세 진단 및 재협상 카드</div>
+          <div class="file-row__desc">리스크 12가지 · 재협상 체크리스트 · ROI 측정 · 동종업체 비교</div>
+        </div>
+        <div class="file-row__size">223줄 · 11KB</div>
+      </div>
+      <div class="file-row">
+        <div class="file-row__icon file-row__icon--purple">02</div>
+        <div>
+          <div class="file-row__title">리서치 — 채널 트렌드 · 규제 · 시장가</div>
+          <div class="file-row__desc">한국 마케팅 채널 트렌드 + 의료법 규제 + 시장 단가 (출처 50+)</div>
+        </div>
+        <div class="file-row__size">354줄 · 31KB</div>
+      </div>
+      <div class="file-row">
+        <div class="file-row__icon file-row__icon--purple">03</div>
+        <div>
+          <div class="file-row__title">리서치 — 환자 유입 경로 통계</div>
+          <div class="file-row__desc">환자 유입 통계 공백 + 의사결정 5단계 여정 (출처 60+)</div>
+        </div>
+        <div class="file-row__size">366줄 · 30KB</div>
+      </div>
+      <div class="file-row">
+        <div class="file-row__icon file-row__icon--purple">04</div>
+        <div>
+          <div class="file-row__title">리서치 — 신채널 · 세일즈 퍼널 사례</div>
+          <div class="file-row__desc">인스타·유튜브·강남언니·챗봇·VIP 멤버십 한국 사례 (출처 50+)</div>
+        </div>
+        <div class="file-row__size">434줄 · 31KB</div>
+      </div>
+      <div class="file-row">
+        <div class="file-row__icon file-row__icon--green">05</div>
+        <div>
+          <div class="file-row__title">1인 SaaS Builder 사업 기회 분석 🆕</div>
+          <div class="file-row__desc">5종 후보 솔루션 + 90일 PoC 로드맵 + Year 2 ARR 6억 시나리오</div>
+        </div>
+        <div class="file-row__size">428줄 · 21KB</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA / Next Steps ===== -->
+<section class="section section--dark section--compact">
+  <div class="container" style="text-align: center;">
+    <div class="eyebrow reveal">다음 단계</div>
+    <h2 class="headline reveal">선택할 수 있는 5가지 액션</h2>
+
+    <div class="grid-2 reveal" style="margin-top: 56px; max-width: 720px; margin-left: auto; margin-right: auto;">
+      <div class="card" style="background: #2d2d2f; text-align: left;">
+        <div class="card__title" style="color: var(--text-on-dark); font-size: 18px;">A. PoC 제안 슬라이드</div>
+        <p class="card__body" style="color: #a1a1a6; font-size: 14px;">원장님께 보낼 1페이지 슬라이드 작성</p>
+      </div>
+      <div class="card" style="background: #2d2d2f; text-align: left;">
+        <div class="card__title" style="color: var(--text-on-dark); font-size: 18px;">B. KPI 대시보드 MVP</div>
+        <p class="card__body" style="color: #a1a1a6; font-size: 14px;">후보 ② Streamlit 1차 코드 작성</p>
+      </div>
+      <div class="card" style="background: #2d2d2f; text-align: left;">
+        <div class="card__title" style="color: var(--text-on-dark); font-size: 18px;">C. 알림톡 시나리오 5종</div>
+        <p class="card__body" style="color: #a1a1a6; font-size: 14px;">시술별 의료법 통과 표현 초안</p>
+      </div>
+      <div class="card" style="background: #2d2d2f; text-align: left;">
+        <div class="card__title" style="color: var(--text-on-dark); font-size: 18px;">D. 카카오 알림톡 중개사 비교</div>
+        <p class="card__body" style="color: #a1a1a6; font-size: 14px;">알리고·플레어레인·메시지통 견적 가이드</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div>메이드유의원 부평점 마케팅 종합 진단 · 2026.05.17 작성</div>
+  <div style="margin-top: 8px;">3개 영역 병렬 리서치 · 출처 100+ 인용 · A4 약 50장 분량</div>
+  <div style="margin-top: 16px;">
+    <a href="https://github.com/davidlikescat/github-pages">davidlikescat / github-pages</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
