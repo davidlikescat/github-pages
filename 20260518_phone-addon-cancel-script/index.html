@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>휴대폰 부가서비스 해지 통화 스크립트</title>
+<style>
+:root {
+    --bg: #F5F5F7;
+    --card: #FFFFFF;
+    --text: #1D1D1F;
+    --text-secondary: #4D4D4F;
+    --text-muted: #6E6E73;
+    --accent: #0071E3;
+    --accent-soft: rgba(0,113,227,0.08);
+    --warn: #FF6B35;
+    --warn-soft: rgba(255,107,53,0.08);
+    --success: #34C759;
+    --border: #E5E5EA;
+    --border-light: #F2F2F7;
+    --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Apple SD Gothic Neo', sans-serif;
+    --radius: 20px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* ── Header Hero ── */
+.hero {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F7 100%);
+    padding: 64px 24px 48px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+.hero-badge {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 6px 16px;
+    border-radius: 980px;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+.hero h1 {
+    font-size: clamp(32px, 6vw, 44px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 14px;
+}
+.hero p {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* ── Container ── */
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+/* ── Notice Box ── */
+.notice {
+    background: var(--warn-soft);
+    border-left: 4px solid var(--warn);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    font-size: 17px;
+    line-height: 1.7;
+}
+.notice strong { color: var(--warn); font-weight: 700; }
+
+/* ── Step Section ── */
+.step {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+}
+.step-number {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #FFFFFF;
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.step-title {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    line-height: 1.25;
+}
+
+/* ── Carrier Phone Table ── */
+.phone-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.phone-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--border-light);
+    border-radius: 14px;
+    font-size: 20px;
+}
+.phone-carrier {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--text);
+}
+.phone-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.5px;
+}
+
+/* ── Tip / Hint Box ── */
+.hint {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--border-light);
+    border-radius: 12px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+.hint::before { content: "💡 "; margin-right: 4px; }
+
+/* ── Numbered Procedure (Step 2 ARS) ── */
+.proc-list { list-style: none; counter-reset: proc; }
+.proc-list li {
+    counter-increment: proc;
+    position: relative;
+    padding: 14px 0 14px 50px;
+    font-size: 20px;
+    line-height: 1.55;
+    border-bottom: 1px solid var(--border-light);
+}
+.proc-list li:last-child { border-bottom: none; }
+.proc-list li::before {
+    content: counter(proc);
+    position: absolute;
+    left: 0; top: 14px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.proc-list strong { color: var(--accent); font-weight: 700; }
+
+/* ── Script Block (the lines to read aloud) ── */
+.script-block {
+    margin: 24px 0;
+}
+.script-block + .script-block { margin-top: 28px; }
+.script-label {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 6px 14px;
+    border-radius: 980px;
+    margin-bottom: 14px;
+}
+.script-quote {
+    background: #FAFAFC;
+    border-left: 5px solid var(--accent);
+    border-radius: 12px;
+    padding: 22px 26px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.7;
+    letter-spacing: -0.2px;
+    color: var(--text);
+}
+.script-quote .blank { color: var(--warn); font-weight: 700; }
+.script-quote .lead { color: var(--accent); font-weight: 700; }
+
+/* ── Cancel List (7 items) ── */
+.cancel-list {
+    background: #FAFAFC;
+    border-left: 5px solid var(--accent);
+    border-radius: 12px;
+    padding: 22px 26px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 2;
+    color: var(--text);
+}
+.cancel-list .lead {
+    display: block;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.cancel-list .closing {
+    display: block;
+    margin-top: 12px;
+    font-weight: 700;
+}
+.cancel-item {
+    display: block;
+    padding-left: 8px;
+}
+.cancel-item .num {
+    display: inline-block;
+    min-width: 60px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* ── Question Quote (확인 질문) ── */
+.q-list { display: flex; flex-direction: column; gap: 14px; }
+.q-item {
+    background: #FAFAFC;
+    border-left: 5px solid var(--success);
+    border-radius: 12px;
+    padding: 18px 22px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--text);
+}
+
+/* ── Checklist (Prep) ── */
+.check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 20px;
+}
+.check-list li {
+    list-style: none;
+    padding: 14px 18px;
+    background: var(--border-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.check-list li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border: 2px solid var(--text-muted);
+    border-radius: 6px;
+    background: #FFFFFF;
+}
+
+/* ── Service Table ── */
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+}
+.service-table thead th {
+    background: var(--border-light);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border);
+}
+.service-table thead th:first-child { text-align: center; width: 60px; }
+.service-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-light);
+    line-height: 1.5;
+}
+.service-table td:first-child {
+    text-align: center;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 19px;
+}
+
+/* ── Tips list ── */
+.tip-list { display: flex; flex-direction: column; gap: 12px; }
+.tip-list li {
+    list-style: none;
+    padding: 16px 20px;
+    background: var(--border-light);
+    border-radius: 12px;
+    font-size: 18px;
+    line-height: 1.55;
+}
+.tip-list .tip-quote {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 4px 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* ── Footer ── */
+.footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-muted);
+    font-size: 14px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    body { font-size: 17px; }
+    .hero { padding: 40px 20px 32px; }
+    .container { padding: 24px 12px 48px; }
+    .step { padding: 24px 18px; border-radius: 16px; }
+    .step-number { width: 44px; height: 44px; font-size: 22px; }
+    .step-title { font-size: 22px; }
+    .script-quote { font-size: 20px; padding: 18px 20px; }
+    .cancel-list { font-size: 19px; padding: 18px 20px; }
+    .q-item { font-size: 19px; padding: 16px 18px; }
+    .phone-number { font-size: 24px; }
+    .phone-carrier { font-size: 20px; }
+}
+
+/* ── Print ── */
+@media print {
+    body { background: #FFFFFF; font-size: 14pt; }
+    .hero { padding: 24px 16px; background: #FFFFFF; }
+    .step { box-shadow: none; border: 1px solid var(--border); page-break-inside: avoid; }
+    .script-quote, .cancel-list, .q-item { background: #F5F5F7; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+    <span class="hero-badge">아버님 전용 통화 가이드</span>
+    <h1>휴대폰 부가서비스<br>해지 통화 스크립트</h1>
+    <p>천천히, 한 줄씩 또박또박 읽으시면 됩니다.<br>총 7개 서비스를 한 번에 해지할 수 있습니다.</p>
+</header>
+
+<main class="container">
+
+    <div class="notice">
+        <strong>사용 방법</strong> &nbsp;&middot;&nbsp; 전화를 거신 다음, <strong>파란색 박스 안의 문장</strong>을 그대로 읽으시면 됩니다.
+        빈칸(◯◯◯)은 미리 적어두세요.
+    </div>
+
+    <!-- STEP 1 -->
+    <section class="step">
+        <div class="step-header">
+            <div class="step-number">1</div>
+            <h2 class="step-title">통신사 고객센터로 전화</h2>
+        </div>
+        <div class="phone-list">
+            <div class="phone-row">
+                <span class="phone-carrier">SKT</span>
+                <span class="phone-number">114</span>
+            </div>
+            <div class="phone-row">
+                <span class="phone-carrier">KT</span>
+                <span class="phone-number">114</span>
+            </div>
+            <div class="phone-row">
+                <span class="phone-carrier">LG U+</span>
+                <span class="phone-number">114</span>
+            </div>
+        </div>
+        <div class="hint">본인 휴대폰에서 <strong>114</strong>만 누르시면, 사용 중인 통신사로 자동 연결됩니다.</div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="step">
+        <div class="step-header">
+            <div class="step-number">2</div>
+            <h2 class="step-title">상담사 연결하기</h2>
+        </div>
+        <ol class="proc-list">
+            <li>전화가 연결되면 <strong>안내 음성</strong>이 흘러나옵니다.</li>
+            <li>안내 도중에 <strong>"0번"</strong>을 누르세요. (상담사 연결)</li>
+            <li>생년월일 또는 주민번호 앞자리를 입력하라고 하면 그대로 입력하세요.</li>
+            <li>잠시 후 상담사가 전화를 받습니다.</li>
+        </ol>
+        <div class="hint">연결이 어려우면 그냥 <strong>"상담사 바꿔주세요"</strong> 라고 말씀하셔도 됩니다.</div>
+    </section>
+
+    <!-- STEP 3 — Main Script -->
+    <section class="step">
+        <div class="step-header">
+            <div class="step-number">3</div>
+            <h2 class="step-title">상담사와 통화 시작</h2>
+        </div>
+
+        <div class="script-block">
+            <div class="script-label">① 인사</div>
+            <div class="script-quote">
+                안녕하세요. 부가서비스 해지 좀 도와주세요.
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-label">② 본인 확인 (상담사가 물어보면)</div>
+            <div class="script-quote">
+                제 이름은 <span class="blank">◯◯◯</span> 입니다.<br><br>
+                생년월일은 <span class="blank">◯◯◯◯년 ◯월 ◯일</span> 입니다.<br><br>
+                제 휴대폰 번호는 <span class="blank">010-◯◯◯◯-◯◯◯◯</span> 입니다.
+            </div>
+            <div class="hint">빈칸은 미리 종이에 적어두시면 편합니다.</div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-label">③ 해지 요청 (천천히 읽어주세요)</div>
+            <div class="cancel-list">
+                <span class="lead">제가 가입되어 있는 부가서비스가 너무 많아서, 전부 해지하고 싶습니다.</span>
+                <span class="lead">제가 불러드릴 일곱 가지 서비스를 모두 해지해 주십시오.</span>
+
+                <span class="cancel-item"><span class="num">하나,</span> 휴대폰 번호 보호 서비스</span>
+                <span class="cancel-item"><span class="num">둘,</span> 휴대폰 분실 보호</span>
+                <span class="cancel-item"><span class="num">셋,</span> 휴대폰 가족 보호</span>
+                <span class="cancel-item"><span class="num">넷,</span> 쇼핑 로그인</span>
+                <span class="cancel-item"><span class="num">다섯,</span> 여가생활 안심 보호</span>
+                <span class="cancel-item"><span class="num">여섯,</span> 휴대폰 쿠폰 지갑</span>
+                <span class="cancel-item"><span class="num">일곱,</span> 주식 투자 노트</span>
+
+                <span class="closing">이상 일곱 가지 모두 해지해 주시기 바랍니다.</span>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-label">④ 확인 질문 (꼭 물어보세요)</div>
+            <div class="q-list">
+                <div class="q-item">해지하면 위약금이나 따로 내야 할 돈이 있습니까?</div>
+                <div class="q-item">오늘 바로 해지 처리되는 게 맞습니까?</div>
+                <div class="q-item">다음 달 요금에서 모두 빠지는 거 맞습니까?</div>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="script-label">⑤ 마무리</div>
+            <div class="script-quote">
+                네, 감사합니다. 수고하세요.
+            </div>
+        </div>
+    </section>
+
+    <!-- TIPS -->
+    <section class="step">
+        <div class="step-header">
+            <div class="step-number">4</div>
+            <h2 class="step-title">통화 팁</h2>
+        </div>
+        <ul class="tip-list">
+            <li>천천히 또박또박 말씀하시면 됩니다.</li>
+            <li>상담사가 너무 빨리 말하면<br><span class="tip-quote">"천천히 말씀해 주세요"</span></li>
+            <li>잘 안 들리면<br><span class="tip-quote">"한 번 더 말씀해 주세요"</span></li>
+            <li>메모할 종이와 펜을 옆에 두세요. (해지 확인 번호 등을 적어두기)</li>
+        </ul>
+    </section>
+
+    <!-- PREP -->
+    <section class="step">
+        <div class="step-header">
+            <div class="step-number">5</div>
+            <h2 class="step-title">통화 전 준비물</h2>
+        </div>
+        <ul class="check-list">
+            <li>본인 명의 휴대폰</li>
+            <li>종이와 펜</li>
+            <li>이 스크립트 (인쇄하거나 화면으로)</li>
+            <li>본인 이름 / 생년월일 / 휴대폰 번호 확인</li>
+        </ul>
+    </section>
+
+    <!-- SERVICE TABLE -->
+    <section class="step">
+        <div class="step-header">
+            <div class="step-number">6</div>
+            <h2 class="step-title">해지 요청 부가서비스 (총 7개)</h2>
+        </div>
+        <table class="service-table">
+            <thead>
+                <tr><th>#</th><th>서비스명</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>휴대폰번호 보호서비스 기본요금</td></tr>
+                <tr><td>2</td><td>휴대폰 분실보호 기본요금</td></tr>
+                <tr><td>3</td><td>휴대폰 가족보호 기본요금</td></tr>
+                <tr><td>4</td><td>쇼핑 로그인 기본요금</td></tr>
+                <tr><td>5</td><td>여가생활 안심보호 기본요금</td></tr>
+                <tr><td>6</td><td>휴대폰 쿠폰 지갑 기본요금</td></tr>
+                <tr><td>7</td><td>주식 투자노트 기본요금</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <span>작성일: 2026-05-18 &middot; 70대 부모님 전용 통화 가이드</span>
+</footer>
+
+</body>
+</html>
