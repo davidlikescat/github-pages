@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3C 분석 · 모두GA — 보험설계사 통합 전산 접속 솔루션</title>
+<meta name="description" content="모두GA(보험설계사 통합 전산 접속 솔루션)에 대한 3C(Customer·Competitor·Company) 전략 분석 리포트." />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.min.css" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f5f5f7;
+    --ink: #1d1d1f;
+    --ink-2: #515154;
+    --ink-3: #86868b;
+    --accent: #0071e3;
+    --accent-soft: #e8f1fd;
+    --line: #d2d2d7;
+    --line-soft: #e8e8ed;
+    --dark: #1d1d1f;
+    --good: #1a7f37;
+    --warn: #b8860b;
+    --bad: #c0392b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+                 "SF Pro Display", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    height: 52px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .nav-brand span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+  }
+  .nav-links a {
+    display: block;
+    padding: 6px 12px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    text-decoration: none;
+    border-radius: 980px;
+    transition: background .2s, color .2s;
+  }
+  .nav-links a:hover { color: var(--ink); background: var(--bg-alt); }
+  @media (max-width: 720px) {
+    .nav-links { gap: 0; }
+    .nav-links a { padding: 6px 8px; font-size: 12px; }
+    .nav-brand { font-size: 13px; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(165deg, #1d1d1f 0%, #2b2b2f 55%, #1a2a3a 100%);
+    color: #f5f5f7;
+    padding: 100px 24px 120px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #5ea0ee;
+  }
+  .hero h1 {
+    margin-top: 18px;
+    font-size: clamp(44px, 8vw, 88px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #ffffff 0%, #a9c7ec 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero .lead {
+    margin-top: 22px;
+    font-size: clamp(17px, 2.4vw, 22px);
+    color: #c7c7cc;
+    font-weight: 400;
+  }
+  .hero-meta {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-meta span {
+    font-size: 13px;
+    color: #d0d0d4;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.14);
+    padding: 6px 14px;
+    border-radius: 980px;
+  }
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip {
+    max-width: 1000px;
+    margin: -72px auto 0;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1px solid var(--line-soft);
+    border-radius: 20px;
+    padding: 26px 20px;
+    text-align: center;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.07);
+  }
+  .stat-card .num {
+    font-size: clamp(26px, 3.4vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .stat-card .num em {
+    font-style: normal;
+    font-size: 0.55em;
+    color: var(--ink-3);
+    font-weight: 700;
+  }
+  .stat-card .label {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 720px) {
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---------- Sections ---------- */
+  .section {
+    padding: 110px 24px;
+    scroll-margin-top: 52px;
+  }
+  .section.alt { background: var(--bg-alt); }
+  .section.dark { background: linear-gradient(165deg, #1d1d1f, #243447); color: #f5f5f7; }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; }
+
+  .sec-head { margin-bottom: 48px; }
+  .sec-head .kicker {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .section.dark .sec-head .kicker { color: #5ea0ee; }
+  .sec-head h2 {
+    margin-top: 12px;
+    font-size: clamp(30px, 4.6vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+  .sec-head p {
+    margin-top: 14px;
+    font-size: 18px;
+    color: var(--ink-2);
+    max-width: 680px;
+  }
+  .section.dark .sec-head p { color: #c7c7cc; }
+
+  h3.block-title {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 52px 0 18px;
+  }
+  h3.block-title:first-of-type { margin-top: 0; }
+
+  /* ---------- Reveal ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .7s cubic-bezier(.2,.6,.2,1), transform .7s cubic-bezier(.2,.6,.2,1);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ---------- Cards ---------- */
+  .card-grid {
+    display: grid;
+    gap: 18px;
+  }
+  .cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .cols-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 800px) {
+    .cols-3, .cols-2 { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--line-soft);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .section.alt .card { background: #fff; }
+  .card .idx {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .card h4 {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .card p {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+
+  /* ---------- Tables ---------- */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line-soft);
+    border-radius: 18px;
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    min-width: 560px;
+  }
+  thead th {
+    background: var(--dark);
+    color: #f5f5f7;
+    font-weight: 600;
+    text-align: left;
+    padding: 14px 16px;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 13px 16px;
+    border-top: 1px solid var(--line-soft);
+    color: var(--ink-2);
+    vertical-align: top;
+  }
+  tbody td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) { background: #fafafc; }
+  tr.highlight td { background: var(--accent-soft) !important; }
+  tr.highlight td:first-child { color: var(--accent); }
+  .col-self { color: var(--accent) !important; font-weight: 600; }
+
+  /* ---------- Pain / list items ---------- */
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .line-item {
+    background: #fff;
+    border: 1px solid var(--line-soft);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .line-item .marker {
+    flex-shrink: 0;
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .line-item .li-body strong {
+    display: block;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .line-item .li-body span {
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+
+  /* ---------- Callout ---------- */
+  .callout {
+    border-radius: 22px;
+    padding: 34px 36px;
+    margin: 28px 0;
+  }
+  .callout.accent {
+    background: var(--accent-soft);
+    border: 1px solid #cfe3fb;
+  }
+  .callout.accent .c-label {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .callout.accent .c-text {
+    margin-top: 10px; font-size: 19px; font-weight: 600;
+    letter-spacing: -0.02em; color: var(--ink); line-height: 1.5;
+  }
+
+  /* ---------- Sweet spot ---------- */
+  .sweetspot {
+    background: linear-gradient(150deg, #0a3d62 0%, #0071e3 100%);
+    border-radius: 26px;
+    padding: 44px 40px;
+    color: #fff;
+  }
+  .sweetspot .c-label {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #bcd9f7;
+  }
+  .sweetspot .ss-sentence {
+    margin-top: 14px;
+    font-size: clamp(19px, 2.6vw, 25px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+  }
+  .ss-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 800px) { .ss-grid { grid-template-columns: repeat(2,1fr); } }
+  .ss-item {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .ss-item .k {
+    font-size: 26px; font-weight: 800; color: #bcd9f7;
+  }
+  .ss-item .t { margin-top: 6px; font-size: 13px; font-weight: 700; color: #fff; }
+  .ss-item .d { margin-top: 4px; font-size: 13px; color: #d6e6f8; }
+
+  /* ---------- KSF ---------- */
+  .ksf-list { counter-reset: ksf; display: flex; flex-direction: column; gap: 12px; }
+  .ksf {
+    display: flex; gap: 18px; align-items: flex-start;
+    background: #fff; border: 1px solid var(--line-soft);
+    border-radius: 16px; padding: 20px 24px;
+  }
+  .ksf::before {
+    counter-increment: ksf;
+    content: counter(ksf);
+    flex-shrink: 0;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--dark); color: #fff;
+    font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ksf div strong { display:block; font-size: 16px; color: var(--ink); }
+  .ksf div span { font-size: 14.5px; color: var(--ink-2); }
+
+  /* ---------- Roadmap ---------- */
+  .roadmap { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+  @media (max-width: 800px) { .roadmap { grid-template-columns: 1fr; } }
+  .phase {
+    background: #fff; border: 1px solid var(--line-soft);
+    border-radius: 20px; padding: 26px; position: relative;
+  }
+  .phase .wk {
+    font-size: 13px; font-weight: 800; color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .phase h4 { margin-top: 8px; font-size: 17px; font-weight: 700; }
+  .phase ul { margin-top: 12px; padding-left: 18px; }
+  .phase li { font-size: 14px; color: var(--ink-2); margin-bottom: 6px; }
+
+  /* ---------- Risk ---------- */
+  .risk {
+    background: #fff; border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--warn);
+    border-radius: 12px; padding: 18px 22px; margin-bottom: 12px;
+  }
+  .risk .assume { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .risk .resp { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
+  .risk .resp b { color: var(--bad); font-weight: 700; }
+
+  /* ---------- Tag ---------- */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tag {
+    font-size: 13px; padding: 5px 12px; border-radius: 980px;
+    background: var(--bg-alt); color: var(--ink-2); border: 1px solid var(--line-soft);
+  }
+  .pri { font-weight: 800; letter-spacing: 0.1em; }
+  .pri.hi { color: var(--accent); }
+  .pri.lo { color: var(--ink-3); }
+
+  /* ---------- Appendix ---------- */
+  .src-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .src-list li {
+    font-size: 14px; padding: 12px 18px;
+    background: #fff; border: 1px solid var(--line-soft); border-radius: 12px;
+  }
+  .src-list a { color: var(--accent); text-decoration: none; word-break: break-all; }
+  .src-list a:hover { text-decoration: underline; }
+  .hyp-list { padding-left: 20px; }
+  .hyp-list li { font-size: 14.5px; color: var(--ink-2); margin-bottom: 9px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: #1d1d1f; color: #86868b;
+    padding: 48px 24px; text-align: center; font-size: 13px;
+  }
+  footer .disc {
+    max-width: 720px; margin: 0 auto 16px;
+    color: #a1a1a6; line-height: 1.7;
+  }
+  footer strong { color: #d0d0d4; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">3C 분석 · <span>모두GA</span></div>
+    <ul class="nav-links">
+      <li><a href="#summary">요약</a></li>
+      <li><a href="#customer">고객</a></li>
+      <li><a href="#competitor">경쟁사</a></li>
+      <li><a href="#company">자사</a></li>
+      <li><a href="#integration">통합 전략</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="eyebrow">3C Strategic Analysis</div>
+  <h1>모두GA</h1>
+  <p class="lead">보험설계사 통합 전산 접속 솔루션 — 고객·경쟁사·자사 통합 전략 분석</p>
+  <div class="hero-meta">
+    <span>작성일 2026.05.21</span>
+    <span>범용 B2B SaaS · 인슈어테크</span>
+    <span>프레임워크 Ohmae 3C</span>
+    <span>분석 주체 모두GA</span>
+  </div>
+</header>
+
+<!-- ===== STAT STRIP ===== -->
+<div class="stat-strip">
+  <div class="stat-card reveal">
+    <div class="num">30<em>개+</em></div>
+    <div class="label">통합 접속 보험사<br>(생보 20 · 손보 14+)</div>
+  </div>
+  <div class="stat-card reveal">
+    <div class="num">26,308<em>명</em></div>
+    <div class="label">활성 회원</div>
+  </div>
+  <div class="stat-card reveal">
+    <div class="num">754,907<em>회</em></div>
+    <div class="label">누적 이용 횟수</div>
+  </div>
+  <div class="stat-card reveal">
+    <div class="num">15<em>곳+</em></div>
+    <div class="label">제휴 금융회사</div>
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section class="section">
+  <div class="wrap-narrow">
+    <div class="sec-head reveal">
+      <div class="kicker">분석 대상</div>
+      <h2>모두GA는 무엇을 하는 회사인가</h2>
+      <p>보험설계사를 위한 <strong>통합 전산 접속 프로그램</strong>을 만드는 소프트웨어 회사다.
+         PC 한 대, 아이디·비밀번호 하나로 30개 이상 보험사 전산에 접속하게 해준다.</p>
+    </div>
+    <div class="card-grid cols-2 reveal">
+      <div class="card">
+        <div class="idx">CORE PRODUCT</div>
+        <h4>하나의 PC · 하나의 ID로 30+ 보험사 전산</h4>
+        <p>생명보험 20곳, 손해보험 14곳 이상의 원수사 시스템을 통합 관리한다.
+           Internet Explorer와 Chrome 충돌을 제거해 호환성을 확보한 것이 핵심 기술이다.
+           "원수사 통합 프로그램의 원조"로 업계에 인식돼 있다.</p>
+      </div>
+      <div class="card">
+        <div class="idx">BUSINESS MODEL</div>
+        <h4>연 단위 유료 구독</h4>
+        <p>개인 신규 연 55,000원(부가세 포함), 갱신 연 33,000원.
+           지점·지사 단체는 월 44,000원부터(30명 기준), 제휴사 할인가 연 33,000원.
+           "고객 개인정보를 일절 보관하지 않는다"는 보안 정책을 표방한다.</p>
+      </div>
+    </div>
+    <div class="tags reveal">
+      <span class="tag">운영사 추정 · 인스유틸</span>
+      <span class="tag">대표 · 윤영수</span>
+      <span class="tag">서울 영등포구 선유로</span>
+      <span class="tag">데스크톱 · 모바일 앱 제공</span>
+      <span class="tag">카카오톡 A/S 채널</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXECUTIVE SUMMARY ===== -->
+<section class="section alt" id="summary">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Executive Summary</div>
+      <h2>핵심 발견 3가지</h2>
+      <p>시장은 양극화됐고, 경쟁사는 모두 진영에 묶여 있으며, 모두GA의 수요는 이미 검증됐다.</p>
+    </div>
+    <div class="card-grid cols-3 reveal">
+      <div class="card">
+        <div class="idx">발견 01</div>
+        <h4>시장은 양극화됐다</h4>
+        <p>GA 소속 설계사는 32만 명을 넘겨 전속(20만)을 압도하지만, 그중
+           <strong>84.1%가 대형 GA 소속</strong>이며 자체·무료 플랫폼을 쓴다.
+           모두GA의 진짜 시장은 나머지 <strong>15.9% 중소·독립 설계사</strong>다.</p>
+      </div>
+      <div class="card">
+        <div class="idx">발견 02</div>
+        <h4>경쟁사는 모두 진영에 묶였다</h4>
+        <p>오렌지트리=한화 계열, 올리브G넷=에이플러스, 세일즈플러스·굿리치=대형 GA 자체.
+           <strong>진영 비종속 중립 통합 도구는 모두GA가 사실상 유일</strong>하다.</p>
+      </div>
+      <div class="card">
+        <div class="idx">발견 03</div>
+        <h4>수요는 이미 검증됐다</h4>
+        <p>활성 회원 26,308명, 누적 이용 754,907회. 과거 업계 기사 기준(활성 1,537명)
+           대비 약 17배 성장은 <strong>호환성 엔진이 실제 작동함</strong>을 입증한다.</p>
+      </div>
+    </div>
+
+    <div class="callout accent reveal">
+      <div class="c-label">권장 전략 · One Line</div>
+      <div class="c-text">대형 GA를 쫓지 말 것. 중소·독립 설계사와 지사 단위 단체영업에 집중하고,
+        브랜드를 "값싼 유틸리티"에서 <strong>"진영 중립·개인정보 무보관 전산 인프라"</strong>로 격상한다.</div>
+    </div>
+
+    <h3 class="block-title reveal">Next Action — 30일 내</h3>
+    <div class="stack reveal">
+      <div class="line-item">
+        <div class="marker">1</div>
+        <div class="li-body"><strong>활성 회원의 GA 규모별 분포 실측</strong>
+          <span>26,308명을 중소/대형 GA·독립으로 분류해 SAM(유효 시장)을 추정에서 실측으로 전환한다.</span></div>
+      </div>
+      <div class="line-item">
+        <div class="marker">2</div>
+        <div class="li-body"><strong>제휴사 대상 지사 단체계약 갱신·확대 캠페인</strong>
+          <span>영진에셋 등 15곳+ 제휴사와 미제휴 중소 GA를 지사 단위로 공략한다.</span></div>
+      </div>
+      <div class="line-item">
+        <div class="marker">3</div>
+        <div class="li-body"><strong>"48시간 내 호환 패치" SLA를 마케팅 전면화</strong>
+          <span>보험사 전산 변경 대응 속도를 공식 약속으로 명문화해 사이트·앱에 노출한다.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CUSTOMER ===== -->
+<section class="section" id="customer">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">1 · Customer</div>
+      <h2>고객 분석</h2>
+      <p>누가, 왜, 무엇을 위해 구매하는가 — 외부 환경부터 본다.</p>
+    </div>
+
+    <h3 class="block-title reveal">시장 규모와 성장</h3>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>구분</th><th>수치</th><th>근거 · 비고</th></tr></thead>
+        <tbody>
+          <tr><td>TAM (대상 모집단)</td><td>GA 소속 설계사 약 32만~33만 명</td>
+              <td>전속 설계사는 단일 보험사만 사용 → 통합 도구 불필요, TAM 제외</td></tr>
+          <tr><td>GA 수수료 규모</td><td>연 18.7조 원 (전년 대비 20%+ 성장)</td>
+              <td>시장 자체가 빠르게 커지는 성장 산업</td></tr>
+          <tr><td>SAM (유효 시장)</td><td>약 5만~8만 명 <em style="color:var(--warn);font-style:normal">(가설)</em></td>
+              <td>대형 GA 84.1%는 자체·무료 플랫폼 보유 → 중소·독립 설계사 중심</td></tr>
+          <tr class="highlight"><td>SOM (현재 확보)</td><td>활성 26,308명 · 누적 754,907회</td>
+              <td>modugap.com 게시 수치 (2026.05 기준)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-grid cols-3 reveal" style="margin-top:24px">
+      <div class="card">
+        <div class="idx">트렌드 01</div>
+        <h4>GA 채널의 구조적 우위</h4>
+        <p>GA 소속 설계사가 전속 대비 12만 명 이상 많고 전체의 44.8%. 통합 접속 수요의 모집단이 커진다.</p>
+      </div>
+      <div class="card">
+        <div class="idx">트렌드 02</div>
+        <h4>초대형 GA 집중 가속</h4>
+        <p>GA 수는 감소(4,288개), 설계사는 대형사로 쏠림. 중소 GA는 줄어도 수만 명이 "자체 IT 없는" 상태로 남는다.</p>
+      </div>
+      <div class="card">
+        <div class="idx">트렌드 03</div>
+        <h4>GA 업계 IT 투자 경쟁</h4>
+        <p>"낡은 전산으론 설계사 못 잡는다" — 영업지원 시스템이 인재 유치·유지의 핵심 경쟁력으로 부상.</p>
+      </div>
+    </div>
+
+    <h3 class="block-title reveal">고객 세그먼트</h3>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>세그먼트</th><th>추정 규모</th><th>특징</th><th>우선순위</th></tr></thead>
+        <tbody>
+          <tr><td>A. 중소형 GA 소속 설계사</td><td>수만 명</td>
+              <td>자체 IT 플랫폼 여력 없음. 30개사 개별 접속 페인 그대로 노출</td>
+              <td><span class="pri hi">★★★ 최우선</span></td></tr>
+          <tr><td>B. 1인·소형 대리점 / 독립 설계사</td><td>수만 명</td>
+              <td>어느 진영에도 비소속. 가격 민감하나 페인 강도 최고. 개인 유료회원 주력</td>
+              <td><span class="pri hi">★★★ 최우선</span></td></tr>
+          <tr><td>C. 지점·지사 단위 단체</td><td>30명+ 단위 다수</td>
+              <td>지사장이 일괄 도입 결정. 월 단체 과금 → 객단가·갱신율 안정적</td>
+              <td><span class="pri hi">★★★ 최우선</span></td></tr>
+          <tr><td>D. 대형 GA 소속 설계사</td><td>약 25만 명</td>
+              <td>오렌지트리·자체 플랫폼 이미 사용. 침투 난이도 매우 높음</td>
+              <td><span class="pri lo">★ 후순위</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="block-title reveal">핵심 Pain Point</h3>
+    <div class="callout accent reveal" style="margin-top:0">
+      <div class="c-label">근본 동기 · JTBD</div>
+      <div class="c-text">"보험사 전산을 다루는 데 쓰는 시간을 줄이고,
+        그 시간을 고객 상담·계약에 쓰고 싶다." — 설계사 소득은 계약 건수에 직결되므로 전산 마찰은 곧 소득 손실이다.</div>
+    </div>
+    <div class="stack reveal">
+      <div class="line-item">
+        <div class="marker">①</div>
+        <div class="li-body"><strong>30+ 보험사마다 다른 ID / PW / UI</strong>
+          <span>한 곳 적응에도 시간이 걸리는데 30곳 전산 구조를 모두 익혀야 한다.</span></div>
+      </div>
+      <div class="line-item">
+        <div class="marker">②</div>
+        <div class="li-body"><strong>브라우저 충돌 — IE · ActiveX 레거시</strong>
+          <span>IE 기반 구형 전산과 Chrome 환경의 보안모듈 충돌. IE 지원 종료 후에도 보험사 전산은 구형 기술에 의존.</span></div>
+      </div>
+      <div class="line-item">
+        <div class="marker">③</div>
+        <div class="li-body"><strong>보험사별 잦은 보안 업데이트</strong>
+          <span>각사가 제각각 보안모듈을 갱신해 설계사가 수시로 재설치·오류 대응에 시달린다.</span></div>
+      </div>
+      <div class="line-item">
+        <div class="marker">④</div>
+        <div class="li-body"><strong>PC · 장소 종속</strong>
+          <span>환경 설정이 깨지면 영업 현장에서 즉시 대응이 불가능하다.</span></div>
+      </div>
+    </div>
+
+    <h3 class="block-title reveal">구매 의사결정 (DMU · 단체계약 기준)</h3>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>역할</th><th>주체</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td>Decision-Maker</td><td>지사장 · 지점장</td><td>단체 도입 일괄 결정. 소속 설계사 생산성·이탈 방지 책임</td></tr>
+          <tr><td>User</td><td>소속 설계사</td><td>실사용자. 불편하면 갱신 거부로 이어짐</td></tr>
+          <tr><td>Influencer</td><td>동료 설계사 · 기존 사용자</td><td>입소문이 핵심 획득 채널. 활성 26,308명이 곧 영업망</td></tr>
+          <tr><td>Buyer</td><td>지사 총무 · 경리</td><td>월 단체 과금 집행</td></tr>
+          <tr><td>Gatekeeper</td><td>GA 본사 IT · 컴플라이언스</td><td>자체 플랫폼 보유 시 외부 도구 도입 차단 가능</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPETITOR ===== -->
+<section class="section alt" id="competitor">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">2 · Competitor</div>
+      <h2>경쟁사 분석</h2>
+      <p>누구와 싸우는가 — 그리고 그들 모두가 공유하는 한계는 무엇인가.</p>
+    </div>
+
+    <h3 class="block-title reveal">경쟁 구도</h3>
+    <div class="card-grid cols-3 reveal">
+      <div class="card">
+        <div class="idx">직접 경쟁</div>
+        <h4>진영별 통합 플랫폼</h4>
+        <p><strong>오렌지트리</strong> (한화생명금융서비스) · <strong>올리브 G넷</strong> (CJ올리브네트웍스 / 에이플러스에셋) ·
+           <strong>G-pass</strong> (보험오픈마켓 보가비)</p>
+      </div>
+      <div class="card">
+        <div class="idx">간접 경쟁</div>
+        <h4>대형 GA 자체 영업지원 플랫폼</h4>
+        <p><strong>세일즈플러스</strong> (에이플러스에셋) · <strong>굿리치플래너 + 이음</strong> (리치앤코).
+           통합 접속을 포함한 광범위한 영업지원 패키지.</p>
+      </div>
+      <div class="card">
+        <div class="idx">대체재</div>
+        <h4>"아무것도 안 함"</h4>
+        <p>보험사별 개별 접속(현 상태 유지). 모두GA의 진짜 경쟁자이자 SAM 전환 대상.</p>
+      </div>
+    </div>
+
+    <h3 class="block-title reveal">비교 매트릭스</h3>
+    <div class="table-wrap reveal">
+      <table style="min-width:760px">
+        <thead><tr>
+          <th>비교축</th><th>모두GA (자사)</th><th>오렌지트리 (한화)</th>
+          <th>올리브 G넷 (CJ/에이플러스)</th><th>대형 GA 자체 플랫폼</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>제품 · 기능</td><td class="col-self">순수 통합 접속·충돌 제거 특화, 경량</td>
+              <td>통합 접속 + 고객정보 연동 등 영업지원</td>
+              <td>통합 접속 중심, 투자 기반 고도화</td>
+              <td>통합 접속 + CRM·계약·수수료 풀패키지</td></tr>
+          <tr><td>가격 · BM</td><td class="col-self">유료 구독 (개인 연 3.3만~5.5만)</td>
+              <td>무료 (보험사 비용 부담)</td>
+              <td>현재 무료 (향후 유료화 검토)</td>
+              <td>무료 (소속 설계사 복지)</td></tr>
+          <tr><td>채널 · 영업</td><td class="col-self">제휴 GA·지사 단위 + 입소문</td>
+              <td>한화 계열 + 제휴 대형 GA 5개사</td>
+              <td>에이플러스에셋 채널</td>
+              <td>자사 설계사 내부 배포</td></tr>
+          <tr><td>브랜드 · 레퍼런스</td><td class="col-self">"원수사 통합 원조", 활성 26,308명</td>
+              <td>설계사 약 6만 명 사용 (보도)</td>
+              <td>에이플러스에셋 적용</td>
+              <td>각 대형 GA 수만 명</td></tr>
+          <tr><td>기술 · 자본력</td><td class="col-self">호환성 노하우 / 자본·인력 소규모 추정</td>
+              <td>대기업(한화) 자본</td>
+              <td>대기업(CJ) 자본, 수십억 투자</td>
+              <td>대형 GA 자본·IT 인력 확충</td></tr>
+          <tr class="highlight"><td>중립성</td><td>진영 비종속 — 보험사·GA 어디에도 안 묶임</td>
+              <td>한화 계열 종속</td>
+              <td>에이플러스에셋 종속</td>
+              <td>해당 GA 전속</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="block-title reveal">White Space — 빈틈</h3>
+    <div class="stack reveal">
+      <div class="line-item">
+        <div class="marker">A</div>
+        <div class="li-body"><strong>누구도 공략하지 않는 영역 — 중소·독립 설계사</strong>
+          <span>대기업·대형 GA 플랫폼은 자사 소속 설계사를 묶어두는 게 목적이라 외부 중소 사업자를 타깃할 유인이 없다.</span></div>
+      </div>
+      <div class="line-item">
+        <div class="marker">B</div>
+        <div class="li-body"><strong>모두가 공유하는 한계 — 진영 종속성</strong>
+          <span>경쟁 플랫폼은 전부 특정 보험사·대형 GA에 묶여 있다. 설계사가 소속을 옮기거나 겸업하면 플랫폼이 따라오지 못한다. "소속과 무관하게 평생 쓰는 중립 도구"는 모두GA만 가능.</span></div>
+      </div>
+      <div class="line-item">
+        <div class="marker">C</div>
+        <div class="li-body"><strong>보안 빈틈 — 개인정보 무보관 포지셔닝</strong>
+          <span>영업지원 플랫폼은 고객 데이터를 연동·축적해 유출 리스크에 노출된다. 모두GA의 무(無)보관 구조는 컴플라이언스 민감 설계사에게 신뢰 자산이다.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPANY ===== -->
+<section class="section" id="company">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">3 · Company</div>
+      <h2>자사 분석</h2>
+      <p>우리는 무엇으로, 왜 이길 수 있는가 — 강점은 근거와 함께, 약점은 솔직하게.</p>
+    </div>
+
+    <h3 class="block-title reveal">핵심 역량과 자산</h3>
+    <div class="card-grid cols-3 reveal">
+      <div class="card">
+        <div class="idx">ASSET</div>
+        <h4>검증된 호환성 엔진</h4>
+        <p>30+ 보험사 전산의 OS·브라우저·보안모듈 충돌을 제거하는 누적 노하우. 754,907회 이용이 작동을 입증.</p>
+      </div>
+      <div class="card">
+        <div class="idx">ASSET</div>
+        <h4>선발자 · 원조 브랜드</h4>
+        <p>"원수사 통합 프로그램의 원조"라는 업계 인식. 다수 업계 매체가 이 표현으로 지칭.</p>
+      </div>
+      <div class="card">
+        <div class="idx">ASSET</div>
+        <h4>고객 베이스 = 영업 채널</h4>
+        <p>활성 26,308명 + 제휴 금융회사 15곳+. 그 자체가 단체영업 채널이자 입소문 동력.</p>
+      </div>
+      <div class="card">
+        <div class="idx">ASSET</div>
+        <h4>진영 비종속 중립 포지션</h4>
+        <p>어떤 보험사·대형 GA에도 종속되지 않은 독립 사업자. 경쟁사 누구도 복제 불가능한 구조적 자산.</p>
+      </div>
+      <div class="card">
+        <div class="idx">ASSET</div>
+        <h4>개인정보 무보관 보안</h4>
+        <p>"고객 개인정보를 일절 보관하지 않는다" + DB 암호화 정책. (외부 검증 필요 — 가설)</p>
+      </div>
+      <div class="card">
+        <div class="idx">ASSET</div>
+        <h4>운영 인프라</h4>
+        <p>데스크톱·모바일 앱, 카카오톡 A/S 채널, 원격 설치 서비스로 진입·유지 장벽을 낮춤.</p>
+      </div>
+    </div>
+
+    <h3 class="block-title reveal">강점 / 약점</h3>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>구분</th><th>항목</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--good)">강점</td><td>검증된 다중 보험사 호환성</td><td>누적 754,907회 · 활성 26,308명 (modugap.com)</td></tr>
+          <tr><td style="color:var(--good)">강점</td><td>진영 비종속 중립성</td><td>경쟁 플랫폼은 전부 한화·에이플러스·리치앤코 계열 (업계 보도)</td></tr>
+          <tr><td style="color:var(--good)">강점</td><td>선발자 · 원조 브랜드</td><td>다수 업계 기사에서 "원수사 통합 원조"로 지칭</td></tr>
+          <tr><td style="color:var(--good)">강점</td><td>빠른 성장 모멘텀</td><td>과거 활성 1,537명 → 현재 26,308명 (보도 vs 현 사이트, 가설성 있음)</td></tr>
+          <tr><td style="color:var(--bad)">약점</td><td>자본 · 인력 열세</td><td>경쟁사는 한화·CJ 등 대기업. 소규모 체제 추정 (가설)</td></tr>
+          <tr><td style="color:var(--bad)">약점</td><td>단일 기능 의존</td><td>"통합 접속" 외 부가가치 없음 → 풀패키지 경쟁에서 기능 비교 시 열세</td></tr>
+          <tr><td style="color:var(--bad)">약점</td><td>유료 vs 무료 구도</td><td>경쟁사는 무료, 모두GA는 유료 → 가격 저항</td></tr>
+          <tr><td style="color:var(--bad)">약점</td><td>레거시 의존 가치 제안</td><td>IE·ActiveX 충돌 해소가 핵심 가치 → 보험사 전산 현대화 시 가치 희석</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="block-title reveal">현재 포지셔닝과 갭</h3>
+    <div class="card-grid cols-3 reveal">
+      <div class="card">
+        <div class="idx">현실 인식</div>
+        <h4>"값싼 유틸리티"</h4>
+        <p>중소 GA·개인 설계사가 쓰는 저렴하고 가벼운 통합 접속 유틸리티로 인식된다.</p>
+      </div>
+      <div class="card">
+        <div class="idx">목표 인식</div>
+        <h4>"중립 · 보안 인프라"</h4>
+        <p>소속·진영과 무관하게 모든 설계사가 평생 쓰는, 가장 안전하고 신뢰받는 중립 전산 인프라.</p>
+      </div>
+      <div class="card" style="border-color:#cfe3fb;background:var(--accent-soft)">
+        <div class="idx">갭</div>
+        <h4>의미 격상이 곧 방어력</h4>
+        <p>"유틸리티"로 남으면 무료 경쟁사 등장에 흔들린다. "독립성·중립·보안 인프라"로 격상해야 가격 정당성이 생긴다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTEGRATION ===== -->
+<section class="section dark" id="integration">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">4 · Integration</div>
+      <h2>3C 통합 분석</h2>
+      <p>앞 3단계가 정보 수집이라면, 여기는 의사결정이다. 세 분석이 교차하는 Sweet Spot을 찾는다.</p>
+    </div>
+
+    <div class="sweetspot reveal">
+      <div class="c-label">The Sweet Spot</div>
+      <div class="ss-sentence">검증된 호환성 엔진과 진영 중립성을 활용해, 자체 IT가 없는 중소·독립 설계사의
+        "30개 보험사 개별 접속" 페인을 해결한다 — 경쟁사가 모두 특정 진영에 묶여 들어올 수 없는 시장에서.</div>
+      <div class="ss-grid">
+        <div class="ss-item"><div class="k">X</div><div class="t">자사 자산</div>
+          <div class="d">검증된 호환성 엔진 + 진영 중립성 + 무보관 보안</div></div>
+        <div class="ss-item"><div class="k">Y</div><div class="t">고객 세그먼트</div>
+          <div class="d">중소형 GA · 1인 독립 설계사 · 지사 단체</div></div>
+        <div class="ss-item"><div class="k">Z</div><div class="t">해결할 Pain</div>
+          <div class="d">30+ 보험사 개별 접속 · 충돌 · 보안 업데이트</div></div>
+        <div class="ss-item"><div class="k">W</div><div class="t">경쟁 한계</div>
+          <div class="d">경쟁사의 진영 종속성 — 중립 시장 공략 불가</div></div>
+      </div>
+    </div>
+
+    <h3 class="block-title reveal" style="color:#f5f5f7">KSF — 핵심 성공 요인</h3>
+    <div class="ksf-list reveal">
+      <div class="ksf"><div><strong>호환 대응 속도</strong>
+        <span>보험사 전산이 보안·UI를 바꿨을 때 48시간 내 호환 패치 배포. 이 속도가 "원조"의 의미다.</span></div></div>
+      <div class="ksf"><div><strong>진영 중립성 유지</strong>
+        <span>특정 보험사·대형 GA의 인수·전속 제안을 받아도 중립을 지킨다. 중립성이 차별화의 원천.</span></div></div>
+      <div class="ksf"><div><strong>낮은 진입장벽</strong>
+        <span>설치·환경설정 무료 원격지원 + 연 3.3만 원대 갱신가로 "무료 대비 충분히 싸다"는 인식 확보.</span></div></div>
+      <div class="ksf"><div><strong>갱신율 방어</strong>
+        <span>단체계약 갱신율 85%+ 유지. 입소문(활성 회원=영업망)이 살아 있는 한 CAC는 낮다.</span></div></div>
+      <div class="ksf"><div><strong>보안 신뢰 입증</strong>
+        <span>"개인정보 무보관"을 구호가 아닌 외부 검증(인증·감사)으로 뒷받침한다.</span></div></div>
+    </div>
+
+    <h3 class="block-title reveal" style="color:#f5f5f7">전략 옵션 매트릭스</h3>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr>
+          <th>전략 옵션</th><th>고객 니즈 강도</th><th>자사 차별화</th><th>경쟁 진입 난이도</th><th>합계</th>
+        </tr></thead>
+        <tbody>
+          <tr class="highlight"><td>A. 중소·독립 설계사 + 지사 단체영업 집중</td>
+              <td>5</td><td>5</td><td>4</td><td><strong>14 · 채택</strong></td></tr>
+          <tr><td>B. 부가기능(CRM·설계지원) 확장 풀패키지화</td>
+              <td>4</td><td>2</td><td>2</td><td>8</td></tr>
+          <tr><td>C. 대형 GA 침투 (무료 플랫폼과 가격경쟁)</td>
+              <td>3</td><td>2</td><td>2</td><td>7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:#c7c7cc;font-size:14px;margin-top:12px">
+      옵션 B는 대기업 자본과 정면충돌하는 레드오션, C는 무료 vs 유료 구조상 불리하고 Gatekeeper에 차단된다.</p>
+
+    <h3 class="block-title reveal" style="color:#f5f5f7">권장 전략 — 옵션 A · "중립 인프라" 포지셔닝으로 공백 시장 장악</h3>
+    <div class="callout accent reveal" style="margin-top:0">
+      <div class="c-label">Why — 3C 근거</div>
+      <div class="c-text" style="font-size:16px;font-weight:500">
+        <strong>Customer:</strong> 중소·독립 설계사 수만 명이 페인을 안은 채 어떤 플랫폼에도 소외돼 있다. ·
+        <strong>Competitor:</strong> 모든 경쟁사가 진영에 묶여 이 시장을 공략할 유인이 없다 — 구조적 White Space. ·
+        <strong>Company:</strong> 호환성 엔진·원조 브랜드·중립성이 정확히 이 시장에 맞는 무기다.</div>
+    </div>
+
+    <h3 class="block-title reveal" style="color:#f5f5f7">How — 12주 로드맵</h3>
+    <div class="roadmap reveal">
+      <div class="phase">
+        <div class="wk">WEEK 1–4</div>
+        <h4>실측 · 정비</h4>
+        <ul>
+          <li>활성 26,308명 GA 규모별 분류 → SAM 실측</li>
+          <li>갱신율·이탈 사유 분석</li>
+          <li>"48시간 내 호환 패치" SLA 명문화 및 사이트·앱 전면 노출</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="wk">WEEK 5–8</div>
+        <h4>단체영업 드라이브</h4>
+        <ul>
+          <li>제휴사 15곳+ 및 미제휴 중소 GA 지사 단위 캠페인</li>
+          <li>추천 인센티브(추천 시 갱신가 할인) 도입</li>
+          <li>"개인정보 무보관" 보안 메시지를 지사장 대상 별도 소구</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="wk">WEEK 9–12</div>
+        <h4>포지셔닝 격상</h4>
+        <ul>
+          <li>"진영 중립 + 무보관 인프라" 브랜드 리뉴얼</li>
+          <li>보안 외부 검증(개인정보보호 인증·제3자 점검) 추진</li>
+          <li>업계 매체 기고·인터뷰로 "원조·중립" 내러티브 재점화</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="block-title reveal" style="color:#f5f5f7">주요 가정과 리스크</h3>
+    <div class="reveal">
+      <div class="risk">
+        <div class="assume">가정 1 — 중소·독립 설계사 SAM이 유료 모델을 지탱할 만큼 충분하다(5만+).</div>
+        <div class="resp"><b>깨지면:</b> 지사 단체계약 비중을 높여 개인 의존도를 낮추고, 객단가보다 규모(설계사 수) 기반 과금으로 전환.</div>
+      </div>
+      <div class="risk">
+        <div class="assume">가정 2 — 경쟁 플랫폼이 중립 시장으로 내려오지 않는다.</div>
+        <div class="resp"><b>깨지면:</b> 인수 제안 가능성 포함. 중립성·무보관·원조 브랜드를 협상 자산화하거나, 보험사 1~2곳과 비전속 제휴로 호환성 우위를 제도화.</div>
+      </div>
+      <div class="risk">
+        <div class="assume">가정 3 — 보험사 전산이 단기간에 현대화되지 않아 호환성 가치가 유지된다.</div>
+        <div class="resp"><b>깨지면:</b> 가치 제안을 "충돌 해소"에서 "단일 로그인·생산성·중립 데이터 보안"으로 이동. 30개사 통합 편의 자체는 전산 현대화 후에도 남는 가치.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPENDIX ===== -->
+<section class="section alt">
+  <div class="wrap-narrow">
+    <div class="sec-head reveal">
+      <div class="kicker">Appendix</div>
+      <h2>출처 · 가설</h2>
+    </div>
+
+    <h3 class="block-title reveal">A. 출처</h3>
+    <ul class="src-list reveal">
+      <li>모두GA 공식 사이트 — <a href="https://modugap.com/" target="_blank" rel="noopener">modugap.com</a> (회사정보·요금·이용현황, 2026.05 접속)</li>
+      <li>지에이월드 「GA 전용 보험사 통합 전산지원 프로그램이 봇물… 과연 승자는?」 — <a href="https://gaworld.kr/235/?bmode=view&idx=249234" target="_blank" rel="noopener">gaworld.kr</a></li>
+      <li>EBN 「어디서나 손쉽게…GA, 설계사 영업지원 플랫폼 '봇물'」 — <a href="https://www.ebn.co.kr/news/articleView.html?idxno=1550995" target="_blank" rel="noopener">ebn.co.kr</a></li>
+      <li>보험저널 「IT 인력 늘리는 GA업계…낡은 전산으론 설계사 못 잡는다」 — <a href="https://www.insjournal.co.kr/news/articleView.html?idxno=28097" target="_blank" rel="noopener">insjournal.co.kr</a></li>
+      <li>보험저널 「대리점 수는 줄고, 설계사는 늘고… GA업계 초대형 집중 가속화」 — <a href="https://www.insjournal.co.kr/news/articleView.html?idxno=28688" target="_blank" rel="noopener">insjournal.co.kr</a></li>
+      <li>보험매일 「설계사 30만명 시대 진입한 GA」 — <a href="https://www.fins.co.kr/news/articleView.html?idxno=108402" target="_blank" rel="noopener">fins.co.kr</a></li>
+      <li>한국보험신문 「몸집 18조 거인 된 GA, 질적 도약 승부수」 — <a href="https://www.insnews.co.kr/news/articleView.html?idxno=88677" target="_blank" rel="noopener">insnews.co.kr</a></li>
+      <li>한국경제 「한화금융서비스 오렌지트리 플랫폼, 대형GA도 사용한다」 — <a href="https://www.hankyung.com/article/2023062144085" target="_blank" rel="noopener">hankyung.com</a></li>
+      <li>머니S 「설계사 6만명에 뿌리내린 오렌지트리」 — <a href="https://www.moneys.co.kr/article/2023062113464447015" target="_blank" rel="noopener">moneys.co.kr</a></li>
+    </ul>
+
+    <h3 class="block-title reveal">B. 가설로 표시된 항목 (추후 검증 필요)</h3>
+    <ul class="hyp-list reveal">
+      <li><strong>SAM 5만~8만 명</strong> — 대형 GA 84.1% 집중 통계에서 역산한 추정치. 활성 회원의 실제 GA 규모별 분포 데이터로 검증 필요.</li>
+      <li><strong>운영사·체제(인스유틸/소규모 추정)</strong> — 업계 기사상 운영사명은 "인스유틸", 인력 규모는 미공개. "자본·인력 열세"는 정황 추정.</li>
+      <li><strong>회원 약 17배 성장</strong> — 지에이월드 기사(활성 1,537명)와 현 사이트(26,308명) 단순 비교. 집계 기준 시점이 다를 수 있어 참고치.</li>
+      <li><strong>연 매출 추정</strong> — 활성 26,308명 × 평균 객단가 ≈ 연 9억~12억 원대 추정. 단체 과금 비중 미상.</li>
+      <li><strong>개인정보 무보관</strong> — 자사 정책 선언. 실제 데이터 흐름·제3자 검증 여부는 미확인.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p class="disc">
+    본 분석은 <strong>2026년 5월 공개 웹 자료</strong>를 기반으로 작성된 전략 검토 문서입니다.
+    시장 규모(SAM)·매출 추정치 등 일부 항목은 가설이며, 모두GA의 공식 입장과 무관합니다.
+  </p>
+  <p>3C 분석 · 모두GA &nbsp;|&nbsp; 프레임워크: Kenichi Ohmae 3C &nbsp;|&nbsp; 작성일 2026.05.21</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
