@@ -12,9 +12,11 @@
     --bg-dark: #1d1d1f;
     --bg-black: #000;
     --text-primary: #1d1d1f;
-    --text-secondary: #6e6e73;
-    --text-tertiary: #86868b;
+    --text-secondary: #2c2c2e;
+    --text-tertiary: #3a3a3c;
     --text-on-dark: #f5f5f7;
+    --text-on-dark-secondary: rgba(245, 245, 247, 0.82);
+    --text-on-dark-tertiary: rgba(245, 245, 247, 0.6);
     --link: #0066cc;
     --link-hover: #0077ed;
     --blue: #0071e3;
@@ -112,7 +114,7 @@
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--text-tertiary);
+    color: var(--text-on-dark-tertiary);
     margin-bottom: 18px;
   }
   .hero h1 {
@@ -129,7 +131,7 @@
   .hero .subtitle {
     font-size: var(--subtitle-size);
     font-weight: 400;
-    color: var(--text-tertiary);
+    color: var(--text-on-dark-secondary);
     max-width: 720px;
     margin: 0 auto 40px;
   }
@@ -139,7 +141,7 @@
     gap: 32px;
     margin-top: 32px;
     font-size: 14px;
-    color: var(--text-tertiary);
+    color: var(--text-on-dark-tertiary);
     flex-wrap: wrap;
   }
   .hero .meta span strong { color: var(--text-on-dark); font-weight: 500; margin-left: 6px; }
@@ -170,7 +172,7 @@
     margin-bottom: 16px;
     text-align: center;
   }
-  section.dark .section-eyebrow, section.black .section-eyebrow { color: var(--text-tertiary); }
+  section.dark .section-eyebrow, section.black .section-eyebrow { color: var(--text-on-dark-tertiary); }
 
   h2.section-title {
     font-size: var(--headline-size);
@@ -189,7 +191,7 @@
     margin: 0 auto 64px;
     line-height: 1.4;
   }
-  section.dark p.section-lede, section.black p.section-lede { color: var(--text-tertiary); }
+  section.dark p.section-lede, section.black p.section-lede { color: var(--text-on-dark-secondary); }
 
   h3 {
     font-size: var(--title-size);
@@ -241,7 +243,7 @@
     margin-bottom: 6px;
     color: var(--text-on-dark);
   }
-  .pillar-card .desc { font-size: 14px; color: var(--text-tertiary); line-height: 1.5; }
+  .pillar-card .desc { font-size: 14px; color: var(--text-on-dark-secondary); line-height: 1.5; }
 
   /* ───────── CARD ───────── */
   .card {
@@ -282,7 +284,7 @@
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--text-tertiary);
+    color: var(--text-on-dark-tertiary);
     margin-bottom: 8px;
   }
   .phase-card .phase-title {
@@ -291,7 +293,7 @@
     color: var(--text-on-dark);
     margin-bottom: 4px;
   }
-  .phase-card .phase-range { font-size: 14px; color: var(--text-tertiary); margin-bottom: 24px; }
+  .phase-card .phase-range { font-size: 14px; color: var(--text-on-dark-tertiary); margin-bottom: 24px; }
   .phase-card ul { list-style: none; padding: 0; }
   .phase-card li {
     font-size: 15px;
@@ -564,7 +566,7 @@
     background: rgba(0,0,0,0.02);
   }
   section.dark .info-table th, section.black .info-table th {
-    color: var(--text-tertiary);
+    color: var(--text-on-dark-tertiary);
     background: rgba(255,255,255,0.04);
     border-bottom-color: rgba(255,255,255,0.08);
   }
@@ -576,13 +578,13 @@
   /* ───────── FOOTER ───────── */
   footer {
     background: var(--bg-black);
-    color: var(--text-tertiary);
+    color: var(--text-on-dark-tertiary);
     padding: 60px var(--gutter) 40px;
     text-align: center;
     font-size: 13px;
     line-height: 1.6;
   }
-  footer a { color: var(--text-tertiary); text-decoration: none; }
+  footer a { color: var(--text-on-dark-tertiary); text-decoration: none; }
   footer a:hover { color: var(--text-on-dark); }
 
   /* ───────── REVEAL ANIM ───────── */
@@ -641,7 +643,7 @@
 <section class="dark">
   <div class="container">
     <div class="section-eyebrow">Core Positioning</div>
-    <h2 class="section-title">"The only voice app that decides<br/><span style="color:var(--text-tertiary)">where your thought goes in Notion."</span></h2>
+    <h2 class="section-title">"The only voice app that decides<br/><span style="color:var(--text-on-dark-tertiary)">where your thought goes in Notion."</span></h2>
     <p class="section-lede"><em>AudioPen cleans your voice. JustBlurt routes it.</em></p>
 
     <div class="pillar-grid">
@@ -1695,7 +1697,7 @@ Beta if you're curious: [link]
             <tr><td><strong>합계</strong></td><td><strong>14h/주 · 약 2h/일</strong></td></tr>
           </tbody>
         </table>
-        <p style="font-size:14px; color:var(--text-tertiary); margin-top:16px;">새벽 1.5시간 + 출퇴근 30분으로 충당 가능.</p>
+        <p style="font-size:14px; color:var(--text-on-dark-tertiary); margin-top:16px;">새벽 1.5시간 + 출퇴근 30분으로 충당 가능.</p>
       </div>
       <div>
         <h3>월간 도구 비용</h3>
@@ -1712,7 +1714,7 @@ Beta if you're curious: [link]
             <tr><td><strong>합계</strong></td><td><strong>~$100/월</strong></td></tr>
           </tbody>
         </table>
-        <p style="font-size:14px; color:var(--text-tertiary); margin-top:16px;">90일 총 ~$300. 영미권 인디 빌더 표준 대비 합리적.</p>
+        <p style="font-size:14px; color:var(--text-on-dark-tertiary); margin-top:16px;">90일 총 ~$300. 영미권 인디 빌더 표준 대비 합리적.</p>
       </div>
     </div>
   </div>
